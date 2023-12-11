@@ -23,9 +23,9 @@ function Read() {
     }, [slug])
 
     return (
-        <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
+        <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col px-4'>
             {post && (
-                <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-32 items-center'>
+                <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
                     {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
                     <div className='flex flex-col gap-1'>
                         <Link href='/reads'>
@@ -71,7 +71,7 @@ function Read() {
                         <div className='flex flex-col md:flex-row gap-4 justify-between w-full text-[--uss-black]'>
                             <div className='flex flex-col gap-2'>
                                 <span className='text-[--uss-black]'>Etiquetas</span>
-                                <div className='flex flex-row gap-2'>
+                                <div className='flex flex-row gap-2 flex-wrap'>
                                     {post.tags.map((item, index) => (
                                         <span key={index} className='text-[--uss-black] font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item}</span>
                                     ))}
