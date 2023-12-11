@@ -1,6 +1,7 @@
 'use client';
 import { Post } from '@/services/home';
 import React, { useRef } from 'react'
+import Link from 'next/link';
 
 interface CardArticleProps extends Post {
     type?: 'middle' | 'default' | 'editorial';
@@ -14,6 +15,7 @@ export default function CardArticle({
     title,
     description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis mollitia illum accusantium corporis non nulla',
     image,
+    slug = '',
     authorImage,
     author,
     className,
@@ -28,7 +30,9 @@ export default function CardArticle({
                 <img src={image} alt="" className={`w-full ${type === 'middle' ? 'h-2/4 object-cover' : ''}`} />
             )}
             <div>
-                <h1 className={`${type !== 'default' ? 'text-3xl lg:text-5xl font-base' : 'text-xl lg:text-2xl font-thin break-words'} my-3 `}>{title}</h1>
+                <Link href={slug}>
+                    <h1 className={`${type !== 'default' ? 'text-3xl lg:text-5xl font-base' : 'text-xl lg:text-2xl font-thin break-words'} my-3 `}>{title}</h1>
+                </Link>
                 <p className={`${type === 'middle' ? 'text-base' : 'text-xs'}text-base text-[--uss_gray_50] my-5`}>{description}</p>
                 <div className='flex flex-row gap-2 items-center'>
                     {authorImage && (

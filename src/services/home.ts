@@ -31,7 +31,7 @@ export enum Category {
     EduBits = "edu-bits",
     EduNews = "edu-news",
     EduReads = "edu-reads",
-    EduTube = "edu-tube",
+    EduTube = "edu-tubes",
     Podcast = 'edutrendspodcast',
     Editorial = "editorial",
 }

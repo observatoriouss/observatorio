@@ -1,0 +1,32 @@
+.content p {
+    margin: 0;
+    padding: 1rem;
+    text-align: justify;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.content .tags {
+    display: none;
+}
+
+.content .author-info {
+    display: none;
+}
+
+.content .share-box {
+    display: none;
+}
+
+.content .notecc {
+    display: none;
+}
+
+.content .wpulike-heart {
+    display: none;
+}
+
+.content .fila-relacionado {
+    display: none;
+}
