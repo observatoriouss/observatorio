@@ -32,6 +32,7 @@ export default async function Home() {
                 authorImage={top[0].authorImage}
                 category={top[0].category}
                 description=''
+                slug={`news/${top[0].slug}`}
               />
             </div>
 
@@ -44,6 +45,7 @@ export default async function Home() {
                 author={top[1].author}
                 authorImage={top[1].authorImage}
                 category={top[1].category}
+                slug={`news/${top[1].slug}`}
               />
             </div>
 
@@ -56,15 +58,17 @@ export default async function Home() {
                 authorImage={top[2].authorImage}
                 category={top[2].category}
                 description=''
+                slug={`news/${top[2].slug}`}
               />
               {/* --------------------------------------------- */}
               <CardArticle
                 title={top[3].title}
                 image={top[3].image}
-                author={top[4].author}
+                author={top[3].author}
                 authorImage={top[3].authorImage}
                 category={top[3].category}
                 description=''
+                slug={`news/${top[3].slug}`}
               />
 
             </div>
@@ -119,6 +123,7 @@ export default async function Home() {
               authorImage={extras[0].authorImage}
               category={extras[0].category}
               description=''
+              slug={`news/${extras[0].slug}`}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
@@ -129,6 +134,7 @@ export default async function Home() {
               authorImage={extras[1].authorImage}
               category={extras[1].category}
               description=''
+              slug={`news/${extras[1].slug}`}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
@@ -139,6 +145,7 @@ export default async function Home() {
               authorImage={extras[2].authorImage}
               category={extras[2].category}
               description=''
+              slug={`news/${extras[2].slug}`}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
@@ -149,6 +156,7 @@ export default async function Home() {
               authorImage={extras[3].authorImage}
               category={extras[3].category}
               description=''
+              slug={`news/${extras[3].slug}`}
             />
           </div>
         </div>
@@ -170,6 +178,7 @@ export default async function Home() {
                   author={tubes[0].author}
                   authorImage={tubes[0].authorImage}
                   category={tubes[0].category}
+                  slug={`tube/${tubes[0].slug}`}
                 />
               </div>
               <div className='w-full md:w-1/2 p-1'>
@@ -180,6 +189,7 @@ export default async function Home() {
                   author={tubes[1].author}
                   authorImage={tubes[1].authorImage}
                   category={tubes[1].category}
+                  slug={`tube/${tubes[1].slug}`}
                 />
               </div>
             </div>
@@ -194,6 +204,7 @@ export default async function Home() {
                   author={tubes[2].author}
                   authorImage={tubes[2].authorImage}
                   category={tubes[2].category}
+                  slug={`tube/${tubes[2].slug}`}
                   type='small'
                 />
               </div>
@@ -204,6 +215,7 @@ export default async function Home() {
                   author={tubes[3].author}
                   authorImage={tubes[3].authorImage}
                   category={tubes[3].category}
+                  slug={`tube/${tubes[3].slug}`}
                   type='small'
                 />
               </div>
@@ -214,6 +226,7 @@ export default async function Home() {
                   author={tubes[4].author}
                   authorImage={tubes[4].authorImage}
                   category={tubes[4].category}
+                  slug={`tube/${tubes[4].slug}`}
                   type='small'
                 />
               </div>
@@ -224,6 +237,7 @@ export default async function Home() {
                   author={tubes[5].author}
                   authorImage={tubes[5].authorImage}
                   category={tubes[5].category}
+                  slug={`tube/${tubes[5].slug}`}
                   type='small'
                 />
               </div>
@@ -250,6 +264,7 @@ export default async function Home() {
                   category={reads[0].category}
                   author={reads[0].author}
                   authorImage={reads[0].authorImage}
+                  slug={`reads/${reads[0].slug}`}
                 />
               </div>
               <div className='w-full md:w-1/2 p-1'>
@@ -259,6 +274,7 @@ export default async function Home() {
                   category={reads[1].category}
                   author={reads[1].author}
                   authorImage={reads[1].authorImage}
+                  slug={`reads/${reads[1].slug}`}
                 />
               </div>
             </div>

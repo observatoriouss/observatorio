@@ -1,4 +1,5 @@
 import { Post } from '@/services/home';
+import Link from 'next/link';
 import React from 'react'
 
 interface CardVideoProps extends Post {
@@ -7,7 +8,7 @@ interface CardVideoProps extends Post {
     className?: string;
 }
 export default function CardVideo(
-    { type = 'default', title, description, image, category }: CardVideoProps
+    { type = 'default', title, description, image, category, slug = '' }: CardVideoProps
 ) {
     return (
         <div className={`w-full flex flex-col ${type==='small' ? '' : 'lg:flex-row'} gap-4`}>
@@ -23,7 +24,9 @@ export default function CardVideo(
             </div>
             <div className={`w-full ${type==='small' ? '' : 'lg:w-1/2'} flex flex-col gap-2`}>
                 <span className='text-[--uss-black] text-sm'>{category}</span>
-                <h1 className='text-[--uss-black] font-bold'>{title}</h1>
+                <Link href={slug}>
+                    <h1 className='text-[--uss-black] font-bold'>{title}</h1>
+                </Link>
                 <p className='text-[--uss-black] text-sm font-thin'>
                     {description}
                 </p>
