@@ -35,7 +35,7 @@ function Read() {
                     </div>
                     <div className='w-full flex justify-center'>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img className='rounded-xl w-1/2' src={post.image} loading="lazy"></img>
+                        <img className='rounded-xl w-1/2' src={post.image} loading="lazy" alt='' />
                     </div>
                     {/* informacion de fecha y author */}
                     <div className='flex flex-col md:flex-row gap-4 justify-between w-full text-[--uss-black]'>

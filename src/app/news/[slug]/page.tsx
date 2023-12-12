@@ -25,7 +25,7 @@ function New() {
     return (
         <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col px-4'>
             {post && (
-                <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-32 items-center'>
+                <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
                     {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
                     <div className='flex flex-col gap-1'>
                         <Link href='/news'>
