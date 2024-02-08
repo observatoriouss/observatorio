@@ -1,20 +1,20 @@
-import { Post } from '@/services/home';
+import { Post } from '@/services/posts';
 import Link from 'next/link';
 import React from 'react'
 
 interface CardReadProps extends Post {
     type?: 'small' | 'default';
-    description?: string;
+    // description?: string;
     className?: string;
 }
 export default function CardRead(
-    { type = 'default', title, description, image, category, slug = '' }: CardReadProps
+    { type = 'default', title, description, imageUrl, category, slug = '' }: CardReadProps
 ) {
     return (
         <div className={`w-full flex flex-col gap-4`}>
             <div className={`w-full relative flex`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={image} alt="" className='w-full rounded-xl' />
+                <img src={imageUrl || ''} alt="" className='w-full rounded-xl' />
             </div>
             <div className={`w-full flex flex-col gap-2`}>
                 <Link href={slug}>

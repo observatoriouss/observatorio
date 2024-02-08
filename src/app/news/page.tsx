@@ -47,12 +47,11 @@ function News() {
                         <div key={item.slug + index} className="w-full md:w-1/2 lg:w-1/4 p-1">
                             <CardArticle
                                 title={item.title}
-                                image={item.image}
-                                author={item.author}
-                                authorImage={item.authorImage}
+                                imageUrl={item.imageUrl}
+                                user={item.user}
                                 category={item.category}
                                 description=''
-                                slug={'news/'+item.slug}
+                                slug={'news/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
                             />
                         </div>
                     ))}

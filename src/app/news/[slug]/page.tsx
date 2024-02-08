@@ -36,14 +36,14 @@ function New() {
                     </div>
                     <div className='w-full'>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img className='rounded-xl' src={post.image} width="100%" loading="lazy"></img>
+                        <img className='rounded-xl' src={post.imageUrl || ''} width="100%" loading="lazy"></img>
                         <p className='text-[--uss-black] font-thin text-sm py-2 text-right'>{post.imageDescription}</p>
                     </div>
                     {/* informacion de fecha y author */}
                     <div className='flex flex-col md:flex-row gap-4 justify-between w-full text-[--uss-black]'>
                         <div className='flex flex-col gap-2'>
-                            <span className='text-[--uss-black]'>Publicado el {post.date}</span>
-                            <span className='text-[--uss-black] font-bold'>Por {post.author}</span>
+                            <span className='text-[--uss-black]'>Publicado el {post.createdAt}</span>
+                            <span className='text-[--uss-black] font-bold'>Por {post.user?.name}</span>
                         </div>
                         <div className='flex flex-col gap-2 justify-center text-center'>
                             <span className='text-[--uss-black]'>Duración</span>
@@ -56,7 +56,7 @@ function New() {
                     </div>
 
                     {/* contenido incrustado html */}
-                    <div className='max-w-3xl content w-full' dangerouslySetInnerHTML={{ __html: post.content }}>
+                    <div className='max-w-3xl content w-full' dangerouslySetInnerHTML={{ __html: post.content! }}>
                     </div>
 
                     {/* tags */}
@@ -64,8 +64,8 @@ function New() {
                         <div className='flex flex-col gap-2'>
                             <span className='text-[--uss-black]'>Etiquetas</span>
                             <div className='flex flex-row flex-wrap gap-2'>
-                                {post.tags.map((item, index) => (
-                                    <span key={index} className='text-[--uss-black] font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item}</span>
+                                {post.tags?.map((item, index) => (
+                                    <span key={index} className='text-[--uss-black] font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item.name}</span>
                                 ))}
                             </div>
                         </div>

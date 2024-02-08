@@ -4,7 +4,7 @@ import { Post, getReads } from '@/services/posts';
 import React, { useEffect, useState } from 'react'
 
 function Reads() {
-  const [posts, setPosts] = useState<Post[]>([]);
+    const [posts, setPosts] = useState<Post[]>([]);
     const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         async function getData() {
@@ -47,13 +47,11 @@ function Reads() {
                         <div key={item.slug + index} className="w-full md:w-1/2 lg:w-1/4 p-1">
                             <CardArticle
                                 title={item.title}
-                                image={item.image}
-                                author={item.author}
-                                authorImage={item.authorImage}
+                                imageUrl={item.imageUrl}
+                                user={item.user}
                                 category={item.category}
                                 description=''
-                                slug={'reads/'+item.slug}
-                            />
+                                slug={'reads/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
                         </div>
                     ))}
                 </div>

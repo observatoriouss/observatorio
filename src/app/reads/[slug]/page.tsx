@@ -35,13 +35,13 @@ function Read() {
                     </div>
                     <div className='w-full flex justify-center'>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img className='rounded-xl w-1/2' src={post.image} loading="lazy" alt='' />
+                        <img className='rounded-xl w-1/2' src={post.imageUrl || ''} loading="lazy" alt='' />
                     </div>
                     {/* informacion de fecha y author */}
                     <div className='flex flex-col md:flex-row gap-4 justify-between w-full text-[--uss-black]'>
                         <div className='flex flex-col gap-2'>
-                            <span className='text-[--uss-black]'>Publicado el {post.date}</span>
-                            <span className='text-[--uss-black] font-bold'>Por {post.author}</span>
+                            <span className='text-[--uss-black]'>Publicado el {post.createdAt}</span>
+                            <span className='text-[--uss-black] font-bold'>Por {post.user?.name}</span>
                         </div>
                         <div className='flex flex-col gap-2 justify-center text-center'>
                             <span className='text-[--uss-black]'>Duración</span>
@@ -54,14 +54,14 @@ function Read() {
                     </div>
 
                     {/* contenido incrustado html */}
-                    <div className='max-w-3xl content w-full' dangerouslySetInnerHTML={{ __html: post.content }}>
+                    <div className='max-w-3xl content w-full' dangerouslySetInnerHTML={{ __html: post.content! }}>
                     </div>
 
                     {/* botón para descargar el recurso */}
-                    {post.resource && (
+                    {post.attachments && (
                         <div className='flex flex-col md:flex-row gap-4 justify-center w-full text-[--uss-black]'>
                             <div className='flex flex-col gap-2'>
-                                <a href={post.resource} target='_blank' rel='noreferrer' className='text-[--uss-black] font-bold text-xl bg-[--uss-green-10] p-4 px-12 rounded-md'>Descargar</a>
+                                <a href={post.attachments[0]} target='_blank' rel='noreferrer' className='text-[--uss-black] font-bold text-xl bg-[--uss-green-10] p-4 px-12 rounded-md'>Descargar</a>
                             </div>
                         </div>
                     )}
@@ -72,8 +72,8 @@ function Read() {
                             <div className='flex flex-col gap-2'>
                                 <span className='text-[--uss-black]'>Etiquetas</span>
                                 <div className='flex flex-row gap-2 flex-wrap'>
-                                    {post.tags.map((item, index) => (
-                                        <span key={index} className='text-[--uss-black] font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item}</span>
+                                    {post.tags?.map((item, index) => (
+                                        <span key={index} className='text-[--uss-black] font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item.name}</span>
                                     ))}
                                 </div>
                             </div>

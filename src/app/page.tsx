@@ -20,20 +20,16 @@ export default async function Home() {
                 type='editorial'
                 title='Estamos en constante evolución: ¡cuéntanos lo que piensas!'
                 description='En el Observatorio estamos preparando algunas novedades para el 2024.'
-                author='Observatorio USS'
-                authorImage='https://observatorio.tec.mx/wp-content/uploads/2023/09/Karina-Fuerte-2-150x150.jpg'
-                category={Category.Editorial}
-              />
+                user={{ name: 'Karina Fuerte', image: 'https://observatorio.tec.mx/wp-content/uploads/2023/09/Karina-Fuerte-2-150x150.jpg', email: '', id: 0, role: '', isActive: true }}
+                category={Category.Editorial} id={0} slug={''} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
               {/* --------------------------------------------- */}
               <CardArticle
                 title={top[0].title}
-                image={top[0].image}
-                author={top[0].author}
-                authorImage={top[0].authorImage}
+                imageUrl={top[0].imageUrl}
+                user={top[0].user}
                 category={top[0].category}
                 description=''
-                slug={`news/${top[0].slug}`}
-              />
+                slug={`news/${top[0].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
             </div>
 
             {/* CENTER COLUMN */}
@@ -41,35 +37,29 @@ export default async function Home() {
               <CardArticle
                 type='middle'
                 title={top[1].title}
-                image={top[1].image}
-                author={top[1].author}
-                authorImage={top[1].authorImage}
+                imageUrl={top[1].imageUrl}
+                user={top[1].user}
                 category={top[1].category}
-                slug={`news/${top[1].slug}`}
-              />
+                slug={`news/${top[1].slug}`} id={0} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
             </div>
 
             {/* RIGHT COLUMN */}
             <div className='w-full md:w-1/4 flex flex-col gap-4'>
               <CardArticle
                 title={top[2].title}
-                image={top[2].image}
-                author={top[2].author}
-                authorImage={top[2].authorImage}
+                imageUrl={top[2].imageUrl}
+                user={top[2].user}
                 category={top[2].category}
                 description=''
-                slug={`news/${top[2].slug}`}
-              />
+                slug={`news/${top[2].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
               {/* --------------------------------------------- */}
               <CardArticle
                 title={top[3].title}
-                image={top[3].image}
-                author={top[3].author}
-                authorImage={top[3].authorImage}
+                imageUrl={top[3].imageUrl}
+                user={top[3].user}
                 category={top[3].category}
                 description=''
-                slug={`news/${top[3].slug}`}
-              />
+                slug={`news/${top[3].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
 
             </div>
           </div>
@@ -84,29 +74,27 @@ export default async function Home() {
           <div className='w-full lg:w-1/2 p-1'>
             <CardArticle
               title={secondary[0].title}
-              image={secondary[0].image}
-              author={secondary[0].author}
-              authorImage={secondary[0].authorImage}
+              imageUrl={secondary[0].imageUrl}
+              user={secondary[0].user}
               category={secondary[0].category}
-              spaces={2}
-            />
+              spaces={1} id={0} slug={''} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
           </div>
           <div className='w-full lg:w-1/4 p-1'>
             <CardArticle
               title={secondary[1].title}
-              image={secondary[1].image}
-              author={secondary[1].author}
-              authorImage={secondary[1].authorImage}
+              imageUrl={secondary[1].imageUrl}
+              user={secondary[1].user}
               category={secondary[1].category}
+              spaces={1} id={0} slug={''} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className='w-full lg:w-1/4 p-1'>
             <CardArticle
               title={secondary[2].title}
-              image={secondary[2].image}
-              author={secondary[2].author}
-              authorImage={secondary[2].authorImage}
+              imageUrl={secondary[2].imageUrl}
+              user={secondary[2].user}
               category={secondary[2].category}
+              spaces={1} id={0} slug={''} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
         </div>
@@ -118,45 +106,45 @@ export default async function Home() {
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
             <CardArticle
               title={extras[0].title}
-              image={extras[0].image}
-              author={extras[0].author}
-              authorImage={extras[0].authorImage}
+              imageUrl={extras[0].imageUrl}
+              user={extras[0].user}
               category={extras[0].category}
               description=''
               slug={`news/${extras[0].slug}`}
+              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
             <CardArticle
               title={extras[1].title}
-              image={extras[1].image}
-              author={extras[1].author}
-              authorImage={extras[1].authorImage}
+              imageUrl={extras[1].imageUrl}
+              user={extras[1].user}
               category={extras[1].category}
               description=''
               slug={`news/${extras[1].slug}`}
+              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
             <CardArticle
               title={extras[2].title}
-              image={extras[2].image}
-              author={extras[2].author}
-              authorImage={extras[2].authorImage}
+              imageUrl={extras[2].imageUrl}
+              user={extras[2].user}
               category={extras[2].category}
               description=''
               slug={`news/${extras[2].slug}`}
+              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
             <CardArticle
               title={extras[3].title}
-              image={extras[3].image}
-              author={extras[3].author}
-              authorImage={extras[3].authorImage}
+              imageUrl={extras[3].imageUrl}
+              user={extras[3].user}
               category={extras[3].category}
               description=''
               slug={`news/${extras[3].slug}`}
+              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
         </div>
@@ -174,22 +162,20 @@ export default async function Home() {
                 <CardVideo
                   title={tubes[0].title}
                   description='loremp ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
-                  image={tubes[0].image}
-                  author={tubes[0].author}
-                  authorImage={tubes[0].authorImage}
+                  imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
+                  user={tubes[0].user}
                   category={tubes[0].category}
-                  slug={`tube/${tubes[0].slug}`}
+                  slug={`tube/${tubes[0].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
                 />
               </div>
               <div className='w-full md:w-1/2 p-1'>
                 <CardVideo
                   title={tubes[1].title}
                   description='loremp ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
-                  image={tubes[1].image}
-                  author={tubes[1].author}
-                  authorImage={tubes[1].authorImage}
+                  imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
+                  user={tubes[1].user}
                   category={tubes[1].category}
-                  slug={`tube/${tubes[1].slug}`}
+                  slug={`tube/${tubes[1].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
                 />
               </div>
             </div>
@@ -200,46 +186,38 @@ export default async function Home() {
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
                 <CardVideo
                   title={tubes[2].title}
-                  image={tubes[2].image}
-                  author={tubes[2].author}
-                  authorImage={tubes[2].authorImage}
+                  imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
+                  user={tubes[2].user}
                   category={tubes[2].category}
-                  slug={`tube/${tubes[2].slug}`}
-                  type='small'
-                />
+                  slug={`tube/${tubes[2].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  type='small' description={null} />
               </div>
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
                 <CardVideo
                   title={tubes[3].title}
-                  image={tubes[3].image}
-                  author={tubes[3].author}
-                  authorImage={tubes[3].authorImage}
+                  imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
+                  user={tubes[3].user}
                   category={tubes[3].category}
-                  slug={`tube/${tubes[3].slug}`}
-                  type='small'
-                />
+                  slug={`tube/${tubes[3].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  type='small' description={null} />
               </div>
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
                 <CardVideo
                   title={tubes[4].title}
-                  image={tubes[4].image}
-                  author={tubes[4].author}
-                  authorImage={tubes[4].authorImage}
+                  imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
+                  user={tubes[4].user}
                   category={tubes[4].category}
-                  slug={`tube/${tubes[4].slug}`}
-                  type='small'
-                />
+                  slug={`tube/${tubes[4].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  type='small' description={null} />
               </div>
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
                 <CardVideo
                   title={tubes[5].title}
-                  image={tubes[5].image}
-                  author={tubes[5].author}
-                  authorImage={tubes[5].authorImage}
+                  imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
+                  user={tubes[5].user}
                   category={tubes[5].category}
-                  slug={`tube/${tubes[5].slug}`}
-                  type='small'
-                />
+                  slug={`tube/${tubes[5].slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  type='small' description={null} />
               </div>
             </div>
 
@@ -260,22 +238,18 @@ export default async function Home() {
               <div className='w-full md:w-1/2 p-1'>
                 <CardRead
                   title={reads[0].title}
-                  image={reads[0].image}
                   category={reads[0].category}
-                  author={reads[0].author}
-                  authorImage={reads[0].authorImage}
-                  slug={`reads/${reads[0].slug}`}
-                />
+                  imageUrl={reads[0].imageUrl}
+                  user={reads[0].user}
+                  slug={`reads/${reads[0].slug}`} id={0} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
               </div>
               <div className='w-full md:w-1/2 p-1'>
-              <CardRead
+                <CardRead
                   title={reads[1].title}
-                  image={reads[1].image}
                   category={reads[1].category}
-                  author={reads[1].author}
-                  authorImage={reads[1].authorImage}
-                  slug={`reads/${reads[1].slug}`}
-                />
+                  imageUrl={reads[1].imageUrl}
+                  user={reads[1].user}
+                  slug={`reads/${reads[1].slug}`} id={0} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
               </div>
             </div>
           </div>
