@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import styles from '@/styles/home.module.css';
-import { CardArticle, CardRead, CardVideo } from '@/components';
+import { CardArticle, CardRead, CardVideo, ParticlesBackground } from '@/components';
 import { getHomeData } from '@/services';
 import { Category } from '@/services/home';
 
@@ -8,7 +7,7 @@ export default async function Home() {
   const { top, secondary, extras, tubes, reads } = await getHomeData();
   return (
     <main className={"flex min-h-screen flex-col items-center justify-between"}>
-
+      <ParticlesBackground />
       {/* Section Principal */}
       <section className={styles.container}>
         <div className='max-w-xs md:max-w-2xl lg:max-w-7xl w-full flex bg-transparent'>
