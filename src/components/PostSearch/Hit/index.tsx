@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { HeaderContext } from "@/components/Header/header.context";
 import { cn } from "@/lib/cn";

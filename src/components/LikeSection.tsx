@@ -24,7 +24,7 @@ function LikeSection({ id, slug }: { id: string, slug: string }) {
     }
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [fetchData])
 
     const handleLikeButton = async () => {
         try {
