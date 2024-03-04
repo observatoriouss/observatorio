@@ -18,10 +18,10 @@ export default function CardRead(
             </div>
             <div className={`w-full flex flex-col gap-2`}>
                 <Link href={slug}>
-                    <h1 className='text-[--uss-black] font-base text-2xl'>{title}</h1>
+                    <h1 className='text-uss-black font-base text-2xl'>{title}</h1>
                 </Link>
-                <span className='text-[--uss-black] text-sm'>{category}</span>
-                <p className='text-[--uss-black] text-sm font-thin'>
+                <span className='text-uss-black text-sm'>{category}</span>
+                <p className='text-uss-black text-sm font-thin'>
                     {description}
                 </p>
             </div>

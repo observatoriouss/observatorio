@@ -5,7 +5,7 @@ import React from 'react'
 export default function Header() {
   return (
     <header className='flex justify-center absolute top-0 w-full pb-4'>
-      <div className='max-w-xs md:max-w-2xl lg:max-w-7xl flex flex-col md:flex-row justify-between w-full items-center p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
+      <div className='container flex flex-col md:flex-row justify-between w-full items-center p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <Link href='/'>
@@ -13,10 +13,10 @@ export default function Header() {
           </Link>
         </div>
         <nav className='flex gap-2 md:gap-4'>
-          <Link href='/news'>News</Link>
-          <Link href='/educating'>Educating</Link>
-          <Link href='/tube'>Tube</Link>
-          <Link href='/reads'>Reads</Link>
+          <Link href='/news'>Noticias</Link>
+          <Link href='/educating'>Educando</Link>
+          <Link href='/tube'>AudioVisual</Link>
+          <Link href='/reads'>Lecturas</Link>
           <Link href='/podcast'>Podcast</Link>
         </nav>
       </div>

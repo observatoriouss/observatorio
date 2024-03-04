@@ -23,11 +23,11 @@ export default function CardVideo(
 
             </div>
             <div className={`w-full ${type==='small' ? '' : 'lg:w-1/2'} flex flex-col gap-2`}>
-                <span className='text-[--uss-black] text-sm'>{category}</span>
+                <span className='text-uss-black text-sm'>{category}</span>
                 <Link href={slug}>
-                    <h1 className='text-[--uss-black] font-bold'>{title}</h1>
+                    <h1 className='text-uss-black font-bold'>{title}</h1>
                 </Link>
-                <p className='text-[--uss-black] text-sm font-thin'>
+                <p className='text-uss-black text-sm font-thin'>
                     {description}
                 </p>
             </div>
