@@ -1,3 +1,4 @@
+import { categoryMapper } from '@/services/home';
 import { Post } from '@/services/posts';
 import Link from 'next/link';
 import React from 'react'
@@ -23,7 +24,7 @@ export default function CardVideo(
 
             </div>
             <div className={`w-full ${type==='small' ? '' : 'lg:w-1/2'} flex flex-col gap-2`}>
-                <span className='text-uss-black text-sm'>{category}</span>
+                <span className='text-uss-black text-sm'>{categoryMapper[category]}</span>
                 <Link href={slug}>
                     <h1 className='text-uss-black font-bold'>{title}</h1>
                 </Link>

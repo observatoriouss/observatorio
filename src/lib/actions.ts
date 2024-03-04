@@ -1,5 +1,6 @@
 "use server";
 
+// import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function getIsLikeToPost(slug: string) {
@@ -75,6 +76,9 @@ export async function setLikesToPost(slug: string) {
       return { likes: number };
     }
   }
+
+  // TODO: aplicar revalidatePath a la ruta actual
+  // revalidatePath(``)
 
   return { likes: 0 };
 }

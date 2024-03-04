@@ -1,3 +1,4 @@
+import { categoryMapper } from '@/services/home';
 import { Post } from '@/services/posts';
 import Link from 'next/link';
 import React from 'react'
@@ -20,7 +21,7 @@ export default function CardRead(
                 <Link href={slug}>
                     <h1 className='text-uss-black font-base text-2xl'>{title}</h1>
                 </Link>
-                <span className='text-uss-black text-sm'>{category}</span>
+                <span className='text-uss-black text-sm'>{categoryMapper[category]}</span>
                 <p className='text-uss-black text-sm font-thin'>
                     {description}
                 </p>

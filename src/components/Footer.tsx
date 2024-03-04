@@ -1,3 +1,4 @@
+import { Category, categoryMapper } from '@/services/home'
 import Link from 'next/link'
 import React from 'react'
 
@@ -41,11 +42,11 @@ export default function Footer({ alternative = false }: FooterProps) {
         <div className='w-full md:w-2/8 pb-2 md:pb-0 items-center md:items-start flex flex-col gap-1 md:gap-8'>
           <p className={`font-bold ${alternative ? 'text-uss-black' : 'text-uss-black'}`}>Sitemap</p>
           <div className='flex flex-col gap-1 text-uss-black text-center md:text-left'>
-            <Link href='/news' className='hover:text-white transition duration-100 ease-in-out'>Noticias</Link>
-            <Link href='/educating' className='hover:text-white transition duration-100 ease-in-out'>Educando</Link>
-            <Link href='/tube' className='hover:text-white transition duration-100 ease-in-out'>AudioVisual</Link>
-            <Link href='/reads' className='hover:text-white transition duration-100 ease-in-out'>Lecturas</Link>
-            <Link href='/podcast' className='hover:text-white transition duration-100 ease-in-out'>Podcast</Link>
+            <Link href='/news' className='hover:text-white transition duration-100 ease-in-out'>{categoryMapper[Category.NEWS]}</Link>
+            <Link href='/educating' className='hover:text-white transition duration-100 ease-in-out'>{categoryMapper[Category.BITS]}</Link>
+            <Link href='/tube' className='hover:text-white transition duration-100 ease-in-out'>{categoryMapper[Category.TUBES]}</Link>
+            <Link href='/reads' className='hover:text-white transition duration-100 ease-in-out'>{categoryMapper[Category.READS]}</Link>
+            <Link href='/podcast' className='hover:text-white transition duration-100 ease-in-out'>{categoryMapper[Category.PODCAST]}</Link>
           </div>
         </div>
         <div className='w-full md:w-2/8 pb-2 md:pb-0 items-center md:items-start flex flex-col gap-1 md:gap-8'>

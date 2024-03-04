@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import SplashScreen from '@/components/SplashScreen';
 import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
+import { Category, categoryMapper } from '@/services/home';
 async function getData(slug: string) {
     const res = await getPostBySlug(slug)
     return res
@@ -16,7 +17,7 @@ async function Post({ slug }: { slug: string }) {
         <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
             <div className='flex flex-col gap-1'>
                 <Link href='/tube'>
-                    <span className='text-uss-black font-thin'>Regresar a TUBES</span>
+                <span className='text-uss-black font-thin'>Regresar a <b className='font-bold'>{categoryMapper[Category.TUBES]}</b> </span>
                 </Link>
                 <h1 className=' text-4xl md:text-6xl font-normal text-uss-black'>{post.title}</h1>
             </div>

@@ -3,6 +3,7 @@
 import React, { useRef } from 'react'
 import Link from 'next/link';
 import { Post } from '@/services/posts';
+import { categoryMapper } from '@/services/home';
 
 interface CardArticleProps extends Post {
     type?: 'middle' | 'default' | 'editorial';
@@ -40,7 +41,7 @@ export default function CardArticle({
                         <img src={user?.image || ''} alt="" className='w-12 h-12 rounded-full' />
                     )}
                     <div className='flex flex-col gap-0'>
-                        <h3 className='text-sm p-0 m-0'>{category}</h3>
+                        <h3 className='text-sm p-0 m-0'>{categoryMapper[category]}</h3>
                         <h3 className='text-sm p-0 m-0'>{user?.name}</h3>
                     </div>
                 </div>
