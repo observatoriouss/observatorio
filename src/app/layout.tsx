@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components'
+import { PostSearch } from '@/components/PostSearch/InstantSearch'
 
 
 export const metadata: Metadata = {
@@ -45,6 +46,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
+        <div className="w-full">
+          <PostSearch />
+        </div>
         {children}
         <Footer />
       </body>
