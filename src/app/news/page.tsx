@@ -4,6 +4,7 @@ import SplashScreen from '@/components/SplashScreen';
 import { getNews } from '@/services/posts'
 import { Suspense } from 'react';
 
+export const dynamic = 'force-dynamic';
 async function getData() {
     const res = await getNews()
     return res

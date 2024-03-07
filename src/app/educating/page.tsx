@@ -4,6 +4,8 @@ import SplashScreen from '@/components/SplashScreen';
 import { getEducatings } from '@/services/posts';
 import { Suspense } from 'react'
 
+export const dynamic = 'force-dynamic';
+
 async function getData() {
     const res = await getEducatings()
     return res
@@ -27,7 +29,6 @@ async function Educating() {
     )
 }
 function EducatingPage() {
-
     return (
         <Suspense fallback={<SplashScreen />}>
             <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>

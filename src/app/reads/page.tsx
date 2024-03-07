@@ -3,6 +3,7 @@ import HeroSection from '@/components/HeroSection';
 import SplashScreen from '@/components/SplashScreen';
 import { getReads } from '@/services/posts';
 import { Suspense } from 'react';
+export const dynamic = 'force-dynamic';
 async function getData() {
     const res = await getReads()
     return res

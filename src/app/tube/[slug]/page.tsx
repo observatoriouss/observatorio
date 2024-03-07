@@ -7,6 +7,8 @@ import SplashScreen from '@/components/SplashScreen';
 import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
 import { Category, categoryMapper } from '@/services/home';
+
+export const dynamic = 'force-dynamic';
 async function getData(slug: string) {
     const res = await getPostBySlug(slug)
     return res

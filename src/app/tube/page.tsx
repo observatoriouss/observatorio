@@ -3,6 +3,8 @@ import HeroSection from '@/components/HeroSection';
 import SplashScreen from '@/components/SplashScreen';
 import { getTubes } from '@/services/posts';
 import { Suspense } from 'react'
+
+export const dynamic = 'force-dynamic';
 async function getData() {
     const res = await getTubes()
     return res
