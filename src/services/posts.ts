@@ -56,7 +56,7 @@ export interface Post {
   attachments: string[];
   createdAt: string;
   updatedAt: string;
-  tags?: Tag[];
+  tags?: string[];
 }
 export interface User {
   id:       number;

@@ -65,7 +65,7 @@ async function Post({ slug }: { slug: string }) {
                         <span className='text-uss-black'>Etiquetas</span>
                         <div className='flex flex-row gap-2 flex-wrap'>
                             {post.tags?.map((item, index) => (
-                                <span key={index} className='text-uss-black font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item.name}</span>
+                                <span key={index} className='text-uss-black font-bold text-sm bg-[--uss-green-10] p-2 rounded-md'>{item}</span>
                             ))}
                         </div>
                     </div>
