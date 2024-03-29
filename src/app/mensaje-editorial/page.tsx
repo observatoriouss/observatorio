@@ -4,7 +4,7 @@ import { getEditorials } from '@/services/posts';
 import Link from 'next/link';
 import React from 'react'
 
-export const dymamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';
 async function fetchData() {
     try {
         const editorials = await getEditorials()
