@@ -35,7 +35,7 @@ async function AutoridadesPage() {
                     .sort((a, b) => a.hierachy - b.hierachy)
                     .map((authority, i) => (
                         <div className='w-full md:w-[300px]' key={i}>
-                            <img src={authority.imageUrl} className='w-full object-cover aspect-square filter hue-rotate-60' alt="" />
+                            <img src={authority.imageUrl} className='w-full object-cover aspect-square' alt="" />
                             <h3 className='font-semibold'>{authority.name}</h3>
                             <p>{authority.position}</p>
                         </div>
