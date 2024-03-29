@@ -31,6 +31,12 @@ export async function getPodcasts(): Promise<Post[]> {
   return data;
 }
 
+export async function getEditorials(): Promise<Post[]> {
+  const response = await fetch(`${API_URL}/posts?category=${Category.EDITORIAL}`);
+  const data = await response.json();
+  return data;
+}
+
 export async function getPostBySlug(slug: string): Promise<Post> {
   const response = await fetch(`${API_URL}/posts/${slug}`);
   const data = await response.json();

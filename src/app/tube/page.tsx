@@ -1,4 +1,4 @@
-import { CardArticle } from '@/components';
+import { CardArticle, CardVideo } from '@/components';
 import HeroSection from '@/components/HeroSection';
 import SplashScreen from '@/components/SplashScreen';
 import { getTubes } from '@/services/posts';
@@ -15,13 +15,14 @@ async function Tubes() {
         <div className="flex flex-col md:flex-row container mx-auto flex-nowrap md:flex-wrap w-full">
             {tubes && tubes.map((item, index) => (
                 <div key={item.slug + index} className="w-full md:w-1/2 lg:w-1/4 p-1">
-                    <CardArticle
+                    <CardVideo
                         title={item.title}
                         imageUrl={item.imageUrl}
                         user={item.user}
                         category={item.category}
                         description=''
-                        slug={'tube/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                        type='small'
+                        slug={'tube/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={item.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
                 </div>
             ))}
         </div>

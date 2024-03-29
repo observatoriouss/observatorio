@@ -1,4 +1,6 @@
 import { Footer, Header } from "@/components";
+import SplashScreen from "@/components/SplashScreen";
+import { Suspense } from "react";
 
 export default function ContainerLayout({
   children,
@@ -7,7 +9,9 @@ export default function ContainerLayout({
 }>) {
   return (
     <main className="mx-auto container pt-[180px] md:pt-[145px]">
-      {children}
+      <Suspense fallback={<SplashScreen />}>
+        {children}
+      </Suspense>
     </main>
   );
 }

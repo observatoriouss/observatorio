@@ -1,8 +1,21 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import { getEditorials } from '@/services/posts';
+import Link from 'next/link';
 import React from 'react'
 
-function EditorialMessagePage() {
+export const dymamic = 'force-dynamic';
+async function fetchData() {
+    try {
+        const editorials = await getEditorials()
+        return { editorials }
+    } catch (error) {
+        console.error(error)
+        return { editorials: [] }
+    }
+}
+async function EditorialMessagePage() {
+    const { editorials } = await fetchData()
     return (
         <div className='pt-3 md:pt-14 pb-12 flex flex-col gap-8'>
             <div className='flex flex-col gap-4'>
@@ -12,18 +25,22 @@ function EditorialMessagePage() {
 
             <div className='w-full flex flex-col items-center'>
                 <div className='flex flex-wrap justify-start w-full gap-4'>
-                    {Array(6).fill(0).map((_, i) => (
-                        <div
-                            className='w-full md:w-[312px] lg:w-[312px] xl:w-[300px] flex flex-col gap-4'
-                            key={i + 1}
-                        >
-                            <img src="https://via.placeholder.com/150" className='w-full object-cover aspect-video filter hue-rotate-60' alt="" />
-                            <div>
-                                <h3 className='font-light text-2xl'>Título del mensaje editorial</h3>
-                                <p className='text-sm'>Por <span className='font-semibold'>Nombre Autor</span></p>
-                                <p className='text-xs'>MENSAJE <span className='font-semibold'>EDITORIAL</span></p>
+                    {editorials.map((editorial, i) => (
+                        <Link href={`/news/${editorial.slug}`} key={i}>
+                            <div
+                                className='w-full md:w-[312px] lg:w-[312px] xl:w-[300px] flex flex-col gap-4 cursor-pointer'
+                                key={i + 1}
+                            >
+                                <img src={editorial.imageUrl ||
+                                    'https://res.cloudinary.com/uss/image/upload/v1634563284/uss-education/hero/hero-edu-news.png'
+                                } className='w-full object-cover aspect-video ' alt="" />
+                                <div>
+                                    <h3 className='font-light text-2xl'>{editorial.title}</h3>
+                                    <p className='text-sm'>Por <span className='font-semibold'>{editorial.user.name}</span></p>
+                                    <p className='text-xs'>MENSAJE <span className='font-semibold'>EDITORIAL</span></p>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
