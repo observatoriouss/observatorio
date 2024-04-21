@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components'
+import { API_URL } from '../config/api';
 
 
 export const metadata: Metadata = {
@@ -45,6 +46,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
+        {process.env.API_URL}
+        {process.env.NODE_ENV}
         {children}
         <Footer />
       </body>
