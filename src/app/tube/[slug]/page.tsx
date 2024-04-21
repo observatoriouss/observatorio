@@ -25,7 +25,6 @@ async function Post({ slug }: { slug: string }) {
             </div>
             <div className='w-full'>
                 <iframe className='rounded-xl w-full' height="500" src={post.videoUrl || ''} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-                {post.videoUrl}
             </div>
             <LikeSection id={post.id.toString()} slug={post.slug} />
             {/* informacion de fecha y author */}
