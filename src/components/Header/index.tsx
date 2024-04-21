@@ -7,6 +7,7 @@ import { cn } from '@/lib/cn';
 import { PostSearch } from '@/components/PostSearch/InstantSearch'
 import { Category, categoryMapper } from '@/services/home';
 import { HeaderContext, HeaderProvider } from './header.context';
+import Image from 'next/image';
 
 const variants: Variants = {
   open: {
@@ -48,11 +49,21 @@ function ContentHeader() {
         isOpenSearch ? 'z-10' : 'z-20'
       )}>
         <div className='container flex flex-col md:flex-row justify-between w-full items-center p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
-          <div>
+          <div className='flex flex-row gap-1 md:gap-3 items-center justify-center'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <Link href='/'>
-              <img src="/img/logo_gray.png" alt="Logo USS" className='w-40' />
+              <Image
+                src="/img/logo_gray.png"
+                alt="Logo USS"
+                className='w-40'
+                width={160}
+                height={40}
+              />
             </Link>
+            <div className='w-[2px] h-8 bg-black'></div>
+            <div>
+              <h1 className='text-sm md:text-xl font-medium'>Observatorio Educativo</h1>
+            </div>
           </div>
           <nav className='flex gap-2 md:gap-4'>
             <Link href='/news'>{categoryMapper[Category.NEWS]}</Link>
