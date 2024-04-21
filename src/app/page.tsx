@@ -40,14 +40,14 @@ async function HomeGrid() {
                   description='En el Observatorio estamos preparando algunas novedades para el 2024.'
                   user={{ name: 'Karina Fuerte', image: 'https://observatorio.tec.mx/wp-content/uploads/2023/09/Karina-Fuerte-2-150x150.jpg', email: '', id: 0, role: '', isActive: true }}
                   category={Category.EDITORIAL} id={0} slug={''} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} /> */}
-              <CardArticle
+              {<CardArticle
                 type='editorial'
                 title={editorial[0].post.title}
                 imageUrl={null}
                 user={editorial[0].post.user}
                 category={editorial[0].post.category}
                 description={editorial[0].post.description}
-                slug={`news/${editorial[0].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                slug={`news/${editorial[0].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />}
               {/* --------------------------------------------- */}
               <CardArticle
                 title={top[0].post.title}

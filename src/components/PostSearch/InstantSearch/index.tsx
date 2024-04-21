@@ -7,13 +7,15 @@ import { Hit } from "../Hit";
 import { useContext } from "react";
 import { HeaderContext } from "@/components/Header/header.context";
 
-const algoliaAppId = process.env.ALGOLIA_APP_ID || '';
-const algoliaApiKey = process.env.ALGOLIA_API_KEY || '';
-const algoliaIndexName = process.env.ALGOLIA_INDEX_NAME || ''
+const algoliaAppId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '';
+const algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || '';
+const algoliaIndexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || '';
 
 const searchClient = algoliasearch(algoliaAppId, algoliaApiKey);
 
 export const PostSearch = () => {
+
+  console.log(searchClient);
 
   const { showHits, setShowHits } = useContext(HeaderContext);
 
