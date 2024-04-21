@@ -17,6 +17,7 @@
     "@tsparticles/slim": "^3.3.0",
     "algoliasearch": "^4.22.1",
     "clsx": "^2.1.0",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.0.8",
     "instantsearch.css": "^8.1.0",
     "luxon": "^3.4.4",
