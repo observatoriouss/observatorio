@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Header, Footer } from '@/components'
-import { API_URL } from '../config/api';
+import Script from 'next/script'
 
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   }],
   applicationName: 'Observatorio tecnológico - USS',
   robots: 'index, follow',
-  creator: 'Ing. Renatto Perleche Alvitez',
+  creator: 'DDA - USS',
   openGraph: {
     description: 'Somos una unidad de prospectiva educativa y tecnológica, que busca generar conocimiento y desarrollar capacidades para la toma de decisiones en el ámbito de la educación y la tecnología.',
     title: 'Observatorio tecnológico - USS',
@@ -45,6 +45,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-8NFR32HVCJ"></Script>
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8NFR32HVCJ');
+          `}
+        </Script>
         <Header />
         {process.env.API_URL}
         {process.env.NODE_ENV}

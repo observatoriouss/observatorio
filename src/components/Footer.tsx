@@ -36,7 +36,7 @@ export default function Footer({ alternative = false }: FooterProps) {
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/autoridades'>Observatorio | USS</Link>
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/mensaje-editorial'>Mensaje Editorial</Link>
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/innovacion-educativa'>¿Qué es innovación educativa?</Link>
-            <Link className='hover:text-white transition duration-100 ease-in-out' href='/'>Glosario de Innovación Educativa</Link>
+            <Link className='hover:text-white transition duration-100 ease-in-out' href='/reads/glosario-de-innovacion-educativa'>Glosario de Innovación Educativa</Link>
           </div>
         </div>
         <div className='w-full md:w-2/8 pb-2 md:pb-0 items-center md:items-start flex flex-col gap-1 md:gap-8'>
