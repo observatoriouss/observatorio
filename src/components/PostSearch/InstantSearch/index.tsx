@@ -6,11 +6,13 @@ import { Hits, InstantSearch, SearchBox, Configure } from "react-instantsearch";
 import { Hit } from "../Hit";
 import { useContext, useRef } from "react";
 import { HeaderContext } from "@/components/Header/header.context";
-import { algoliaApiKey, algoliaAppId, algoliaIndexName, API_URL } from "@/config/api";
+import { API_URL } from '@/config/api';
+import {config} from '@/config/app';
 
 
 export const PostSearch = () => {
 
+  const { algoliaAppId, algoliaApiKey, algoliaIndexName } = config;
   console.log({API_URL, algoliaAppId, algoliaApiKey, algoliaIndexName})
 
   const searchClient = useRef(algoliasearch(algoliaAppId, algoliaApiKey));
