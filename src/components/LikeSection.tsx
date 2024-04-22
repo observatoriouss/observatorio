@@ -9,6 +9,8 @@ function LikeSection({ id, slug }: { id: string, slug: string }) {
     const [isLike, setIsLike] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     async function fetchData() {
+        if (!id) return
+        if (!slug) return
         try {
             setIsLoading(true)
             const [{ likes }, isLike] = await Promise.all([getPostBySlug(slug), getIsLikeToPost(id)])
