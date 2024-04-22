@@ -1,2 +1,1 @@
-
-export const API_URL = 'https://observatorio-uss.azurewebsites.net/api';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;

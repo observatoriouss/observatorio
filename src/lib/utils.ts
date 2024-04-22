@@ -14,7 +14,6 @@ export function getYoutubeId(url: string): string | null {
   const match = url.match(regex);
 
   // Si hay coincidencias, retornar el ID
-  console.log({match})
   if (match) {
     return match[1];
   } else {

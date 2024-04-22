@@ -45,14 +45,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-8NFR32HVCJ"></Script>
+        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}></Script>
         <Script id="google-analytics">
-          {`
+          {process.env.NODE_ENV === 'production' && `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            gtag('config', 'G-8NFR32HVCJ');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
           `}
         </Script>
         <Header />
