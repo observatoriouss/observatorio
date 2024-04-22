@@ -4,28 +4,22 @@ import "instantsearch.css/themes/satellite.css";
 import './styles.css'
 import { Hits, InstantSearch, SearchBox, Configure } from "react-instantsearch";
 import { Hit } from "../Hit";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { HeaderContext } from "@/components/Header/header.context";
+import { algoliaApiKey, algoliaAppId, algoliaIndexName, API_URL } from "@/config/api";
 
-const algoliaAppId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '';
-const algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || '';
-const algoliaIndexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || '';
-
-const searchClient = algoliasearch(algoliaAppId, algoliaApiKey);
 
 export const PostSearch = () => {
 
-  console.log({
-    algoliaAppId,
-    algoliaApiKey,
-    algoliaIndexName
-  });
+  console.log({API_URL, algoliaAppId, algoliaApiKey, algoliaIndexName})
+
+  const searchClient = useRef(algoliasearch(algoliaAppId, algoliaApiKey));
 
   const { showHits, setShowHits } = useContext(HeaderContext);
 
   return (
     <InstantSearch
-      searchClient={searchClient}
+      searchClient={searchClient.current}
       indexName={algoliaIndexName}
     >
       <Configure hitsPerPage={5} />
