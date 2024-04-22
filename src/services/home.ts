@@ -52,6 +52,14 @@ export const categoryMapper = {
   [Category.PODCAST]: "Podcast",
   [Category.EDITORIAL]: "Mensaje Editorial",
 };
+export const categoryMapperLink: any = {
+  [Category.NEWS]: "news",
+  [Category.BITS]: "educating",
+  [Category.READS]: "reads",
+  [Category.TUBES]: "tube",
+  [Category.PODCAST]: "podcast",
+  [Category.EDITORIAL]: "news",
+};
 
 export type HomeSection =
   | "section-1"

@@ -7,11 +7,39 @@ import SplashScreen from '@/components/SplashScreen';
 import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
 import { Category, categoryMapper } from '@/services/home';
+import { Metadata, ResolvingMetadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 async function getData(slug: string) {
     const res = await getPostBySlug(slug)
     return res
+}
+type Props = {
+    params: { slug: string }
+    // searchParams: { [key: string]: string | string[] | undefined }
+}
+export async function generateMetadata(
+    { params }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    // read route params
+    const slug = params.slug
+
+    // fetch data
+    const post = await getData(slug)
+
+    // optionally access and extend (rather than replace) parent metadata
+    const previousImages = (await parent).openGraph?.images || []
+    const previusKeywords = (await parent).keywords || []
+
+    return {
+        title: post.title,
+        description: post.description,
+        keywords: [...post.tags ?? [], ...previusKeywords],
+        openGraph: {
+            images: [post.imageUrl ?? '', ...previousImages],
+        },
+    }
 }
 async function Post({ slug }: { slug: string }) {
     const post = await getData(slug)

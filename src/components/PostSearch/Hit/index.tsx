@@ -2,6 +2,7 @@
 'use client';
 import { HeaderContext } from "@/components/Header/header.context";
 import { cn } from "@/lib/cn";
+import { categoryMapperLink } from "@/services/home";
 import Link from "next/link";
 import { useContext } from "react";
 import { Highlight } from "react-instantsearch";
@@ -10,7 +11,7 @@ export const Hit = ({ hit }: any) => {
   const { setShowHits, setIsOpenSearch } = useContext(HeaderContext);
   console.log({hit})
   return (
-    <Link href={`/news/${hit.slug}`} onClick={() => {
+    <Link href={`/${categoryMapperLink[hit.category] || 'news'}/${hit.slug}`} onClick={() => {
       setShowHits(false);
       setIsOpenSearch(false);
     }}>

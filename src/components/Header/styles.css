@@ -1,0 +1,33 @@
+@media (prefers-reduced-motion: no-preference) {
+    #search-icon {
+        stroke: rgb(68, 165, 4);
+        /* Initial fill color (green) */
+        stroke-dasharray: 1300;
+        /* Length of the stroke path */
+        stroke-dashoffset: 1300;
+        /* Initial offset of the dash */
+        animation: dash 2s ease-in infinite;
+        /* Animation duration and timing */
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-width: 1;
+            stroke: red;
+            /* Initial stroke width */
+        }
+
+        70% {
+            stroke-width: 1;
+            stroke: red;
+            /* Maintain stroke width during opacity change */
+        }
+
+        100% {
+            stroke-dashoffset: 0;
+            /* Complete animation cycle */
+            stroke-width: 2;
+            /* Final stroke width for emphasis */
+        }
+    }
+}

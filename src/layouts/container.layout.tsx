@@ -1,4 +1,3 @@
-import { Footer, Header } from "@/components";
 import SplashScreen from "@/components/SplashScreen";
 import { Suspense } from "react";
 
