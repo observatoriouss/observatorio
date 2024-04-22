@@ -11,17 +11,15 @@ const algoliaAppId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '';
 const algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || '';
 const algoliaIndexName = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || '';
 
-console.log({
-  algoliaAppId,
-  algoliaApiKey,
-  algoliaIndexName
-});
-
 const searchClient = algoliasearch(algoliaAppId, algoliaApiKey);
 
 export const PostSearch = () => {
 
-  console.log(searchClient);
+  console.log({
+    algoliaAppId,
+    algoliaApiKey,
+    algoliaIndexName
+  });
 
   const { showHits, setShowHits } = useContext(HeaderContext);
 
