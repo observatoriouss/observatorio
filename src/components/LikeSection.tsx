@@ -10,12 +10,11 @@ function LikeSection({ id, slug }: { id: string, slug: string }) {
     const [isLoading, setIsLoading] = useState(true)
     async function fetchData() {
         console.log({ id, slug })
-        if (!id) return
-        if (!slug) return
         try {
             setIsLoading(true)
-            const [{ likes }, isLike] = await Promise.all([getPostBySlug(slug), getIsLikeToPost(id)])
-            setLikesInView(likes)
+            const [post, isLike] = await Promise.all([getPostBySlug(slug), getIsLikeToPost(id)])
+            console.log({ post, isLike })
+            setLikesInView(post.likes)
             setIsLike(isLike)
         } catch (error) {
             console.error(error)
@@ -34,6 +33,7 @@ function LikeSection({ id, slug }: { id: string, slug: string }) {
             setIsLoading(true)
             setIsLike(!isLike)
             const { likes } = await setLikesToPost(id)
+            console.log({ handleLikeButtonLikes: likes })
             setLikesInView(likes)
         } catch (error) {
             console.error(error)
