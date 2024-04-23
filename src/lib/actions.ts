@@ -1,5 +1,6 @@
 "use server";
 
+import { API_URL } from "@/config/api";
 // import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -16,7 +17,7 @@ export async function setLikesToPost(slug: string) {
   const hasCookie = cookiesStore.has(slug);
   if (!hasCookie) {
     const likes = await fetch(
-      `https://observatorio-uss.azurewebsites.net/api/posts/${slug}/likes`,
+      `${API_URL}/posts/${slug}/likes`,
       {
         method: "POST",
         headers: {
@@ -38,7 +39,7 @@ export async function setLikesToPost(slug: string) {
   if (hasCookie) {
     if (cookiesStore.get(slug)?.value === "on") {
       const likes = await fetch(
-        `https://observatorio-uss.azurewebsites.net/api/posts/${slug}/likes`,
+        `${API_URL}/posts/${slug}/likes`,
         {
           method: "POST",
           headers: {
@@ -57,7 +58,7 @@ export async function setLikesToPost(slug: string) {
       return { likes: number };
     } else {
       const likes = await fetch(
-        `https://observatorio-uss.azurewebsites.net/api/posts/${slug}/likes`,
+        `${API_URL}/posts/${slug}/likes`,
         {
           method: "POST",
           headers: {
