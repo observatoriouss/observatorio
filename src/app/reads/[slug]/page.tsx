@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { getPostBySlug } from '@/services/posts'
+import { getPostBySlug, getReactCachedPost } from '@/services/posts'
 import './styles.css';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -10,10 +10,7 @@ import { Category, categoryMapper } from '@/services/home';
 import { Metadata, ResolvingMetadata } from 'next';
 
 export const dynamic = 'force-dynamic';
-async function getData(slug: string) {
-    const res = await getPostBySlug(slug)
-    return res
-}
+
 type Props = {
     params: { slug: string }
     // searchParams: { [key: string]: string | string[] | undefined }
@@ -26,7 +23,7 @@ export async function generateMetadata(
     const slug = params.slug
 
     // fetch data
-    const post = await getData(slug)
+    const post = await getReactCachedPost(slug)
 
     // optionally access and extend (rather than replace) parent metadata
     const previousImages = (await parent).openGraph?.images || []
@@ -42,7 +39,10 @@ export async function generateMetadata(
     }
 }
 async function Post({ slug }: { slug: string }) {
-    const post = await getData(slug)
+    const post = await getReactCachedPost(slug)
+    console.log({post})
+    console.log(post.slug)
+    console.log('hola')
     return (
         <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
             {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
@@ -56,7 +56,7 @@ async function Post({ slug }: { slug: string }) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className='rounded-xl w-1/2' src={post.imageUrl || ''} loading="lazy" alt='' />
             </div>
-            <LikeSection id={post.id.toString()} slug={post.slug} />
+            <LikeSection id={post.id} likes={post.likes}/>
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>

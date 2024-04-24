@@ -12,6 +12,7 @@
     "node": "18.17.1"
   },
   "dependencies": {
+    "@react-spring/types": "^9.7.3",
     "@tsparticles/engine": "^3.3.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.3.0",

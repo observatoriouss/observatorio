@@ -22,7 +22,7 @@ async function Tubes() {
                         category={item.category}
                         description=''
                         type='small'
-                        slug={'tube/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={item.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                        slug={'tube/' + item.slug} id={'0'} subCategory={null} readingTime={0} videoUrl={item.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
                 </div>
             ))}
         </div>

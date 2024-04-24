@@ -1,20 +1,19 @@
 'use client'
 import { getIsLikeToPost, setLikesToPost } from '@/lib/actions'
 import { cn } from '@/lib/cn'
-import { getPostBySlug } from '@/services/posts'
 import React, { useEffect, useState } from 'react'
 
-function LikeSection({ id, slug }: { id: string, slug: string }) {
-    const [likesInView, setLikesInView] = useState(0)
+function LikeSection({ id, likes }: { id: string, likes: number }) {
+
+    console.log({likesa: likes})
+    const [likesInView, setLikesInView] = useState(likes)
     const [isLike, setIsLike] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+
     async function fetchData() {
-        console.log({ id, slug })
         try {
             setIsLoading(true)
-            const [post, isLike] = await Promise.all([getPostBySlug(slug), getIsLikeToPost(id)])
-            console.log({ post, isLike })
-            setLikesInView(post.likes)
+            const isLike = await getIsLikeToPost(id)
             setIsLike(isLike)
         } catch (error) {
             console.error(error)
@@ -24,15 +23,16 @@ function LikeSection({ id, slug }: { id: string, slug: string }) {
             setIsLoading(false)
         }
     }
+
     useEffect(() => {
         fetchData()
-    }, [id, slug])
+    }, [id])
 
     const handleLikeButton = async () => {
         try {
             setIsLoading(true)
             setIsLike(!isLike)
-            const { likes } = await setLikesToPost(id)
+            const { likes } = await setLikesToPost({id})
             console.log({ handleLikeButtonLikes: likes })
             setLikesInView(likes)
         } catch (error) {

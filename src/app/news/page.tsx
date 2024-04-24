@@ -21,7 +21,7 @@ async function Posts() {
                         user={item.user}
                         category={item.category}
                         description=''
-                        slug={'news/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                        slug={'news/' + item.slug} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                     />
                 </div>
             ))}

@@ -39,7 +39,7 @@ async function HomeGrid() {
                   title='Estamos en constante evolución: ¡cuéntanos lo que piensas!'
                   description='En el Observatorio estamos preparando algunas novedades para el 2024.'
                   user={{ name: 'Karina Fuerte', image: 'https://observatorio.tec.mx/wp-content/uploads/2023/09/Karina-Fuerte-2-150x150.jpg', email: '', id: 0, role: '', isActive: true }}
-                  category={Category.EDITORIAL} id={0} slug={''} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} /> */}
+                  category={Category.EDITORIAL} id={'0'} slug={''} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} /> */}
               {<CardArticle
                 type='editorial'
                 title={editorial[0].post.title}
@@ -47,7 +47,7 @@ async function HomeGrid() {
                 user={editorial[0].post.user}
                 category={editorial[0].post.category}
                 description={editorial[0].post.description}
-                slug={`news/${editorial[0].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />}
+                slug={`news/${editorial[0].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />}
               {/* --------------------------------------------- */}
               <CardArticle
                 title={top[0].post.title}
@@ -55,7 +55,7 @@ async function HomeGrid() {
                 user={top[0].post.user}
                 category={top[0].post.category}
                 description=''
-                slug={`news/${top[0].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                slug={`news/${top[0].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
             </div>
 
             {/* CENTER COLUMN */}
@@ -66,7 +66,7 @@ async function HomeGrid() {
                 imageUrl={top[1].post.imageUrl}
                 user={top[1].post.user}
                 category={top[1].post.category}
-                slug={`news/${top[1].post.slug}`} id={0} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                slug={`news/${top[1].post.slug}`} id={'0'} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
             </div>
 
             {/* RIGHT COLUMN */}
@@ -77,7 +77,7 @@ async function HomeGrid() {
                 user={top[2].post.user}
                 category={top[2].post.category}
                 description=''
-                slug={`news/${top[2].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                slug={`news/${top[2].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
               {/* --------------------------------------------- */}
               <CardArticle
                 title={top[3].post.title}
@@ -85,7 +85,7 @@ async function HomeGrid() {
                 user={top[3].post.user}
                 category={top[3].post.category}
                 description=''
-                slug={`news/${top[3].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                slug={`news/${top[3].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
 
             </div>
           </div>
@@ -103,7 +103,7 @@ async function HomeGrid() {
               imageUrl={secondary[0].post.imageUrl}
               user={secondary[0].post.user}
               category={secondary[0].post.category}
-              spaces={1} id={0} slug={`news/${secondary[0].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+              spaces={1} id={'0'} slug={`news/${secondary[0].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
           </div>
           <div className='w-full lg:w-1/4 p-1'>
             <CardArticle
@@ -111,7 +111,7 @@ async function HomeGrid() {
               imageUrl={secondary[1].post.imageUrl}
               user={secondary[1].post.user}
               category={secondary[1].post.category}
-              spaces={1} id={0} slug={`news/${secondary[1].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+              spaces={1} id={'0'} slug={`news/${secondary[1].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className='w-full lg:w-1/4 p-1'>
@@ -120,7 +120,7 @@ async function HomeGrid() {
               imageUrl={secondary[2].post.imageUrl}
               user={secondary[2].post.user}
               category={secondary[2].post.category}
-              spaces={1} id={0} slug={`news/${secondary[2].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+              spaces={1} id={'0'} slug={`news/${secondary[2].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
         </div>
@@ -137,7 +137,7 @@ async function HomeGrid() {
               category={secondary[3].post.category}
               description=''
               slug={`news/${secondary[3].post.slug}`}
-              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+              id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
@@ -148,7 +148,7 @@ async function HomeGrid() {
               category={secondary[4].post.category}
               description=''
               slug={`news/${secondary[4].post.slug}`}
-              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+              id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
@@ -159,7 +159,7 @@ async function HomeGrid() {
               category={secondary[5].post.category}
               description=''
               slug={`news/${secondary[5].post.slug}`}
-              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+              id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
           <div className="w-full md:w-1/2 lg:w-1/4 p-1">
@@ -170,7 +170,7 @@ async function HomeGrid() {
               category={secondary[6].post.category}
               description=''
               slug={`news/${secondary[6].post.slug}`}
-              id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+              id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
           </div>
         </div>
@@ -191,7 +191,7 @@ async function HomeGrid() {
                   imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
                   user={tubes[0].post.user}
                   category={tubes[0].post.category}
-                  slug={`tube/${tubes[0].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={tubes[0].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  slug={`tube/${tubes[0].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={tubes[0].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                 />
               </div>
               <div className='w-full md:w-1/2 p-1'>
@@ -201,7 +201,7 @@ async function HomeGrid() {
                   imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
                   user={tubes[1].post.user}
                   category={tubes[1].post.category}
-                  slug={`tube/${tubes[1].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={tubes[1].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  slug={`tube/${tubes[1].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={tubes[1].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                 />
               </div>
             </div>
@@ -215,7 +215,7 @@ async function HomeGrid() {
                   imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
                   user={tubes[2].post.user}
                   category={tubes[2].post.category}
-                  slug={`tube/${tubes[2].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={tubes[2].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  slug={`tube/${tubes[2].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={tubes[2].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                   type='small' description={null} />
               </div>
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
@@ -224,7 +224,7 @@ async function HomeGrid() {
                   imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
                   user={tubes[3].post.user}
                   category={tubes[3].post.category}
-                  slug={`tube/${tubes[3].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={tubes[3].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  slug={`tube/${tubes[3].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={tubes[3].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                   type='small' description={null} />
               </div>
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
@@ -233,7 +233,7 @@ async function HomeGrid() {
                   imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
                   user={tubes[4].post.user}
                   category={tubes[4].post.category}
-                  slug={`tube/${tubes[4].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={tubes[4].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  slug={`tube/${tubes[4].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={tubes[4].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                   type='small' description={null} />
               </div>
               <div className="w-full md:w-1/2 lg:w-1/4 p-1 lg:p-3">
@@ -242,7 +242,7 @@ async function HomeGrid() {
                   imageUrl={'https://res.cloudinary.com/dndpjrsa5/image/upload/v1707415170/gwyaoqzuwkam0iznnlm7.svg'}
                   user={tubes[5].post.user}
                   category={tubes[5].post.category}
-                  slug={`tube/${tubes[5].post.slug}`} id={0} subCategory={null} readingTime={0} videoUrl={tubes[5].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''}
+                  slug={`tube/${tubes[5].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={tubes[5].post.videoUrl} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
                   type='small' description={null} />
               </div>
             </div>
@@ -267,7 +267,7 @@ async function HomeGrid() {
                   category={reads[0].post.category}
                   imageUrl={reads[0].post.imageUrl}
                   user={reads[0].post.user}
-                  slug={`reads/${reads[0].post.slug}`} id={0} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                  slug={`reads/${reads[0].post.slug}`} id={'0'} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
               </div>
               <div className='w-full md:w-1/2 p-1'>
                 <CardRead
@@ -275,7 +275,7 @@ async function HomeGrid() {
                   category={reads[1].post.category}
                   imageUrl={reads[1].post.imageUrl}
                   user={reads[1].post.user}
-                  slug={`reads/${reads[1].post.slug}`} id={0} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                  slug={`reads/${reads[1].post.slug}`} id={'0'} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
               </div>
             </div>
           </div>
@@ -287,11 +287,11 @@ async function HomeGrid() {
 
 export default async function Home() {
   return (
-    <Suspense fallback={<SplashScreen />}>
+    // <Suspense fallback={<SplashScreen />}>
       <main className={"flex min-h-screen flex-col items-center justify-between"}>
         <ParticlesBackground />
         <HomeGrid />
       </main>
-    </Suspense>
+    // </Suspense>
   )
 }

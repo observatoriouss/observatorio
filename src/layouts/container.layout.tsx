@@ -1,6 +1,3 @@
-import SplashScreen from "@/components/SplashScreen";
-import { Suspense } from "react";
-
 export default function ContainerLayout({
   children,
 }: Readonly<{
@@ -8,9 +5,7 @@ export default function ContainerLayout({
 }>) {
   return (
     <main className="mx-auto container pt-[180px] md:pt-[145px]">
-      <Suspense fallback={<SplashScreen />}>
         {children}
-      </Suspense>
     </main>
   );
 }

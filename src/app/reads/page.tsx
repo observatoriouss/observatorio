@@ -20,7 +20,7 @@ async function Reads() {
                         user={item.user}
                         category={item.category}
                         description=''
-                        slug={'reads/' + item.slug} id={0} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={0} attachments={[]} createdAt={''} updatedAt={''} />
+                        slug={'reads/' + item.slug} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
                 </div>
             ))}
         </div>

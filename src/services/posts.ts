@@ -1,5 +1,6 @@
 import { API_URL } from "@/config/api";
 import { Category } from "./home";
+import { cache } from "react";
 
 export async function getNews(): Promise<Post[]> {
   const response = await fetch(`${API_URL}/posts?category=${Category.NEWS}`);
@@ -43,8 +44,16 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   return data;
 }
 
+export const getReactCachedPost = cache(async (slug: string) => {
+  const startDate = new Date()
+  const res = await getPostBySlug(slug)
+  const endDate = new Date()
+  console.log('Time to fetch data', endDate.getTime() - startDate.getTime())
+  return res
+});
+
 export interface Post {
-  id: number;
+  id: string;
   title: string;
   slug: string;
   category: Category;
@@ -57,7 +66,7 @@ export interface Post {
   imageUrl: null | string;
   imageDescription: null | string;
   likes: number;
-  userId: number;
+  userId: string;
   user: User;
   attachments: string[];
   createdAt: string;
