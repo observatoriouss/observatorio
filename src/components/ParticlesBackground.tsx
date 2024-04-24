@@ -17,7 +17,6 @@ function ParticlesBackground() {
         });
     }, []);
     const particlesLoaded = async (container?: Container | undefined): Promise<void> => {
-        console.log(container);
     };
     if (init) {
         return (

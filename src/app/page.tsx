@@ -1,7 +1,5 @@
 import styles from '@/styles/home.module.css';
 import { CardArticle, CardRead, CardVideo, ParticlesBackground } from '@/components';
-import SplashScreen from '@/components/SplashScreen';
-import { Suspense } from 'react';
 import { getHomeData } from '@/services';
 
 export const dynamic = 'force-dynamic';

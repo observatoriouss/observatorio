@@ -48,7 +48,7 @@ export const getReactCachedPost = cache(async (slug: string) => {
   const startDate = new Date()
   const res = await getPostBySlug(slug)
   const endDate = new Date()
-  console.log('Time to fetch data', endDate.getTime() - startDate.getTime())
+  // console.log('Time to fetch data', endDate.getTime() - startDate.getTime())
   return res
 });
 

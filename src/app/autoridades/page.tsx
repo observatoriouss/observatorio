@@ -9,7 +9,6 @@ export const dynamic = 'force-dynamic';
 async function fetchData() {
     try {
         const authorities = await getAuthorities()
-        console.log(authorities)
         return authorities
     } catch (error) {
         console.error(error)

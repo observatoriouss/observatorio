@@ -55,6 +55,7 @@ export default function Footer({ alternative = false }: FooterProps) {
             <Link href='https://www.facebook.com/ussipan' target='_blank' className='hover:text-white transition duration-100 ease-in-out'>Facebook</Link>
             <Link href='https://www.instagram.com/ussipan/' target='_blank' className='hover:text-white transition duration-100 ease-in-out'>Instagram</Link>
             <Link href='https://www.youtube.com/@ussipan' target='_blank' className='hover:text-white transition duration-100 ease-in-out'>YouTube</Link>
+            <Link href='/dda' className='hover:text-white transition duration-100 ease-in-out'>DDA</Link>
           </div>
         </div>
       </div>
