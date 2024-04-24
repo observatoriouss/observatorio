@@ -1,19 +1,17 @@
 'use client';
 import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/satellite.css";
-import './styles.css'
+import './styles.css';
 import { Hits, InstantSearch, SearchBox, Configure } from "react-instantsearch";
 import { Hit } from "../Hit";
 import { useContext, useRef } from "react";
 import { HeaderContext } from "@/components/Header/header.context";
-import { API_URL } from '@/config/api';
-import {config} from '@/config/app';
+import { config } from '@/config/app';
 
 
 export const PostSearch = () => {
 
   const { algoliaAppId, algoliaApiKey, algoliaIndexName } = config;
-  console.log({API_URL, algoliaAppId, algoliaApiKey, algoliaIndexName})
 
   const searchClient = useRef(algoliasearch(algoliaAppId, algoliaApiKey));
 

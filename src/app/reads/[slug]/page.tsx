@@ -40,9 +40,6 @@ export async function generateMetadata(
 }
 async function Post({ slug }: { slug: string }) {
     const post = await getReactCachedPost(slug)
-    console.log({post})
-    console.log(post.slug)
-    console.log('hola')
     return (
         <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
             {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}

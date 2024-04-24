@@ -9,7 +9,6 @@ import { Highlight } from "react-instantsearch";
 
 export const Hit = ({ hit }: any) => {
   const { setShowHits, setIsOpenSearch } = useContext(HeaderContext);
-  console.log({hit})
   return (
     <Link href={`/${categoryMapperLink[hit.category] || 'news'}/${hit.slug}`} onClick={() => {
       setShowHits(false);

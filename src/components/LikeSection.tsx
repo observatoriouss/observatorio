@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 
 function LikeSection({ id, likes }: { id: string, likes: number }) {
 
-    console.log({likesa: likes})
     const [likesInView, setLikesInView] = useState(likes)
     const [isLike, setIsLike] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
@@ -33,7 +32,6 @@ function LikeSection({ id, likes }: { id: string, likes: number }) {
             setIsLoading(true)
             setIsLike(!isLike)
             const { likes } = await setLikesToPost({id})
-            console.log({ handleLikeButtonLikes: likes })
             setLikesInView(likes)
         } catch (error) {
             console.error(error)
