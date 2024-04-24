@@ -76,8 +76,8 @@ async function Post({ slug }: { slug: string }) {
             </div>
 
             {/* botón para descargar el recurso */}
-            {post.attachments?.map(a => (
-                <div className='flex flex-col md:flex-row gap-4 justify-center w-full text-uss-black'>
+            {post.attachments?.map((a, idx) => (
+                <div key={idx} className='flex flex-col md:flex-row gap-4 justify-center w-full text-uss-black'>
                     <div className='flex flex-col gap-2'>
                         <a href={a} target='_blank' rel='noreferrer' className='text-uss-black font-bold text-xl bg-[--uss-green-10] p-4 px-12 rounded-md'>Descargar</a>
                     </div>
