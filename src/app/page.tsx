@@ -45,6 +45,7 @@ async function HomeGrid() {
                 title={editorial[0].post.title}
                 imageUrl={null}
                 user={editorial[0].post.user}
+                reference={editorial[0].post.reference}
                 category={editorial[0].post.category}
                 description={editorial[0].post.description}
                 slug={`news/${editorial[0].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />}
@@ -53,6 +54,7 @@ async function HomeGrid() {
                 title={top[0].post.title}
                 imageUrl={top[0].post.imageUrl}
                 user={top[0].post.user}
+                reference={top[0].post.reference}
                 category={top[0].post.category}
                 description=''
                 slug={`news/${top[0].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
@@ -65,6 +67,7 @@ async function HomeGrid() {
                 title={top[1].post.title}
                 imageUrl={top[1].post.imageUrl}
                 user={top[1].post.user}
+                reference={top[1].post.reference}
                 category={top[1].post.category}
                 slug={`news/${top[1].post.slug}`} id={'0'} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
             </div>
@@ -75,6 +78,7 @@ async function HomeGrid() {
                 title={top[2].post.title}
                 imageUrl={top[2].post.imageUrl}
                 user={top[2].post.user}
+                reference={top[2].post.reference}
                 category={top[2].post.category}
                 description=''
                 slug={`news/${top[2].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
@@ -83,6 +87,7 @@ async function HomeGrid() {
                 title={top[3].post.title}
                 imageUrl={top[3].post.imageUrl}
                 user={top[3].post.user}
+                reference={top[3].post.reference}
                 category={top[3].post.category}
                 description=''
                 slug={`news/${top[3].post.slug}`} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
@@ -102,6 +107,7 @@ async function HomeGrid() {
               title={secondary[0].post.title}
               imageUrl={secondary[0].post.imageUrl}
               user={secondary[0].post.user}
+              reference={secondary[0].post.reference}
               category={secondary[0].post.category}
               spaces={1} id={'0'} slug={`news/${secondary[0].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
           </div>
@@ -110,6 +116,7 @@ async function HomeGrid() {
               title={secondary[1].post.title}
               imageUrl={secondary[1].post.imageUrl}
               user={secondary[1].post.user}
+              reference={secondary[1].post.reference}
               category={secondary[1].post.category}
               spaces={1} id={'0'} slug={`news/${secondary[1].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
@@ -119,6 +126,7 @@ async function HomeGrid() {
               title={secondary[2].post.title}
               imageUrl={secondary[2].post.imageUrl}
               user={secondary[2].post.user}
+              reference={secondary[2].post.reference}
               category={secondary[2].post.category}
               spaces={1} id={'0'} slug={`news/${secondary[2].post.slug}`} subCategory={null} readingTime={0} description={null} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
             />
@@ -134,6 +142,7 @@ async function HomeGrid() {
               title={secondary[3].post.title}
               imageUrl={secondary[3].post.imageUrl}
               user={secondary[3].post.user}
+              reference={secondary[3].post.reference}
               category={secondary[3].post.category}
               description=''
               slug={`news/${secondary[3].post.slug}`}
@@ -145,6 +154,7 @@ async function HomeGrid() {
               title={secondary[4].post.title}
               imageUrl={secondary[4].post.imageUrl}
               user={secondary[4].post.user}
+              reference={secondary[4].post.reference}
               category={secondary[4].post.category}
               description=''
               slug={`news/${secondary[4].post.slug}`}
@@ -156,6 +166,7 @@ async function HomeGrid() {
               title={secondary[5].post.title}
               imageUrl={secondary[5].post.imageUrl}
               user={secondary[5].post.user}
+              reference={secondary[5].post.reference}
               category={secondary[5].post.category}
               description=''
               slug={`news/${secondary[5].post.slug}`}
@@ -167,6 +178,7 @@ async function HomeGrid() {
               title={secondary[6].post.title}
               imageUrl={secondary[6].post.imageUrl}
               user={secondary[6].post.user}
+              reference={secondary[6].post.reference}
               category={secondary[6].post.category}
               description=''
               slug={`news/${secondary[6].post.slug}`}

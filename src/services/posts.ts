@@ -66,12 +66,13 @@ export interface Post {
   imageUrl: null | string;
   imageDescription: null | string;
   likes: number;
-  userId: string;
+  userId?: string;
   user: User;
   attachments: string[];
   createdAt: string;
   updatedAt: string;
   tags?: string[];
+  reference?: Reference;
 }
 export interface User {
   id:       number;
@@ -84,4 +85,9 @@ export interface User {
 export interface Tag {
   id: number;
   name: string;
+}
+
+export interface Reference {
+  author: string;
+  url: string;
 }

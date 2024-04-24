@@ -19,10 +19,10 @@ export default function CardArticle({
     imageUrl,
     slug = '',
     user,
+    reference,
     className,
     category
 }: CardArticleProps) {
-
     return (
         <div className={`bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg p-4 h-full ${type === 'middle' ? 'mb-16 md:mb-0' : ''} ${spaces === 1 ? '' : 'flex flex-col md:flex-row gap-4'} ${className}`}
         >
@@ -36,13 +36,13 @@ export default function CardArticle({
                 </Link>
                 <p className={`${type === 'middle' ? 'text-base' : 'text-xs'}text-base text-[--uss_gray_50] my-5`}>{description}</p>
                 <div className='flex flex-row gap-2 items-center'>
-                    {user?.name && (
+                    {user && (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={user?.image || ''} alt="" className='w-12 h-12 rounded-full' />
+                        <img src={user.image || ''} alt="" className='w-12 h-12 rounded-full' />
                     )}
                     <div className='flex flex-col gap-0'>
                         <h3 className='text-sm p-0 m-0'>{categoryMapper[category]}</h3>
-                        <h3 className='text-sm p-0 m-0'>{user?.name}</h3>
+                        <h3 className='text-sm p-0 m-0'>{user?.name ?? reference?.author}</h3>
                     </div>
                 </div>
             </div>
