@@ -53,7 +53,7 @@ async function Post({ slug }: { slug: string }) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className='rounded-xl w-1/2' src={post.imageUrl || ''} loading="lazy" alt='' />
             </div>
-            <LikeSection id={post.id} likes={post.likes}/>
+            <LikeSection id={post.id} likes={post.likes} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>
@@ -75,13 +75,13 @@ async function Post({ slug }: { slug: string }) {
             </div>
 
             {/* botón para descargar el recurso */}
-            {post.attachments && (
+            {post.attachments?.map(a => (
                 <div className='flex flex-col md:flex-row gap-4 justify-center w-full text-uss-black'>
                     <div className='flex flex-col gap-2'>
-                        <a href={post.attachments[0]} target='_blank' rel='noreferrer' className='text-uss-black font-bold text-xl bg-[--uss-green-10] p-4 px-12 rounded-md'>Descargar</a>
+                        <a href={a} target='_blank' rel='noreferrer' className='text-uss-black font-bold text-xl bg-[--uss-green-10] p-4 px-12 rounded-md'>Descargar</a>
                     </div>
                 </div>
-            )}
+            ))}
 
             {/* tags */}
             {post.tags && post.tags.length > 0 && (
