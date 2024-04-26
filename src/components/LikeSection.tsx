@@ -9,29 +9,27 @@ function LikeSection({ id, likes }: { id: string, likes: number }) {
     const [isLike, setIsLike] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
-    async function fetchData() {
-        try {
-            setIsLoading(true)
-            const isLike = await getIsLikeToPost(id)
-            setIsLike(isLike)
-        } catch (error) {
-            console.error(error)
-            setLikesInView(0)
-            setIsLike(false)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     useEffect(() => {
-        fetchData()
+        (async () => {
+            try {
+                setIsLoading(true)
+                const isLike = await getIsLikeToPost(id)
+                setIsLike(isLike)
+            } catch (error) {
+                console.error(error)
+                setLikesInView(0)
+                setIsLike(false)
+            } finally {
+                setIsLoading(false)
+            }
+        })()
     }, [id])
 
     const handleLikeButton = async () => {
         try {
             setIsLoading(true)
             setIsLike(!isLike)
-            const { likes } = await setLikesToPost({id})
+            const { likes } = await setLikesToPost({ id })
             setLikesInView(likes)
         } catch (error) {
             console.error(error)
