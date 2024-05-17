@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { getReactCachedPost } from '@/services/posts'
+import { getReactCachedPost } from '@/services/posts';
 import './styles.css';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -8,6 +8,7 @@ import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
 import { Category, categoryMapper } from '@/services/home';
 import { Metadata, ResolvingMetadata } from 'next';
+import VideoEmbed from './video-embed';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,9 +49,7 @@ async function Post({ slug }: { slug: string }) {
                 </Link>
                 <h1 className=' text-4xl md:text-6xl font-normal text-uss-black'>{post.title}</h1>
             </div>
-            <div className='w-full'>
-                <iframe className='rounded-xl w-full' height="500" src={post.videoUrl || ''} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-            </div>
+            <VideoEmbed videoUrl={post.videoUrl} title={post.title} />
             <LikeSection id={post.id} likes={post.likes} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
