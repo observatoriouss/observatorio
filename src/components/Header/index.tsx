@@ -73,6 +73,7 @@ function ContentHeader() {
             <Link href='/tube'>{categoryMapper[Category.TUBES]}</Link>
             <Link href='/reads'>{categoryMapper[Category.READS]}</Link>
             <Link href='/podcast'>{categoryMapper[Category.PODCAST]}</Link>
+            <Link href='/upload-content'>Autores</Link>
             <button
               onClick={() => setIsOpenSearch(!isOpenSearch)}
             >

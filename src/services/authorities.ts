@@ -7,6 +7,7 @@ export interface Authority {
   position: string;
   createdAt: string;
   id: string;
+  socialMedia: string[];
 }
 
 export const getAuthorities = async (): Promise<Authority[]> => {
