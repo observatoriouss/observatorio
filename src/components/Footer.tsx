@@ -34,6 +34,7 @@ export default function Footer({ alternative = false }: FooterProps) {
           <p className={`font-bold ${alternative ? 'text-uss-black' : 'text-uss-black'}`}>Acerca de</p>
           <div className='flex flex-col gap-1 text-uss-black text-center md:text-left'>
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/autoridades'>Observatorio | USS</Link>
+            <Link className='hover:text-white transition duration-100 ease-in-out' href='/modelo-educativo'>Modelo Educativo</Link>
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/mensaje-editorial'>Mensaje Editorial</Link>
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/innovacion-educativa'>¿Qué es innovación educativa?</Link>
             <Link className='hover:text-white transition duration-100 ease-in-out' href='/reads/glosario-de-innovacion-educativa'>Glosario de Innovación Educativa</Link>
