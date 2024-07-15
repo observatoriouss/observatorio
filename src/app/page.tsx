@@ -1,5 +1,5 @@
 import styles from '@/styles/home.module.css';
-import { CardArticle, CardRead, CardVideo, ParticlesBackground } from '@/components';
+import { CardArticle, CardRead, CardVideo, Footer, Header, ParticlesBackground } from '@/components';
 import { getHomeData } from '@/services';
 
 export const dynamic = 'force-dynamic';
@@ -25,6 +25,7 @@ async function HomeGrid() {
 
   return (
     <>
+      <Header />
       {/* Section Principal */}
       <section className={styles.container}>
         <div className='max-w-xs md:max-w-2xl lg:max-w-7xl w-full flex bg-transparent'>
@@ -291,6 +292,8 @@ async function HomeGrid() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   )
 }
@@ -298,10 +301,10 @@ async function HomeGrid() {
 export default async function Home() {
   return (
     // <Suspense fallback={<SplashScreen />}>
-      <main className={"flex min-h-screen flex-col items-center justify-between"}>
-        <ParticlesBackground />
-        <HomeGrid />
-      </main>
+    <main className={"flex min-h-screen flex-col items-center justify-between"}>
+      <ParticlesBackground />
+      <HomeGrid />
+    </main>
     // </Suspense>
   )
 }

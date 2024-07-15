@@ -41,7 +41,10 @@ export default function CardArticle({
                         <img src={user.image || ''} alt="" className='w-12 h-12 rounded-full' />
                     )}
                     <div className='flex flex-col gap-0'>
-                        <h3 className='text-sm p-0 m-0'>{categoryMapper[category]}</h3>
+                        <h3 className='text-sm p-0 m-0'
+                        // agregar atributo de accesibilidad para que readSpeaker pueda leer el texto que yo le diga
+                        aria-label='le pertenece a la categoría'
+                        >{categoryMapper[category]}</h3>
                         <h3 className='text-sm p-0 m-0'>{user?.name ?? reference?.author}</h3>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+import { Footer, Header } from '@/components';
 import { Metadata } from 'next';
 import React from 'react';
 export const metadata: Metadata = {
@@ -8,9 +9,11 @@ interface Props {
 }
 function Layout({ children }: Props) {
   return (
-    <div>
+    <>
+      <Header />
       {children}
-    </div>
+      <Footer />
+    </>
   )
 }
 

@@ -205,6 +205,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <div id='contentRead'>
+          {children}
+        </div>
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}></Script>
         <Script id="google-analytics">
           {process.env.NODE_ENV !== 'development' && `
@@ -214,9 +217,9 @@ export default function RootLayout({
             gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
           `}
         </Script>
-        <Header />
-        {children}
-        <Footer />
+        {/* <script src="https://cdn-eu.readspeaker.com/script/13446/webReader/webReader.js?pids=wr" type="text/javascript" id="rs_req_Init"></script> */}
+        <Script src="https://cdn-eu.readspeaker.com/script/13446/webReader/webReader.js?pids=wr" id="rs_req_Init"></Script>
+
       </body>
     </html>
   )

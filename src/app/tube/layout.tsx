@@ -1,3 +1,4 @@
+import { Footer, Header } from '@/components';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -10,9 +11,11 @@ interface Props {
 }
 function NewsLayout({ children }: Props) {
   return (
-    <div>
+    <>
+      <Header />
       {children}
-    </div>
+      <Footer />
+    </>
   )
 }
 
