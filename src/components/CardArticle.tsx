@@ -41,8 +41,10 @@ export default function CardArticle({
                         <img src={user.image || ''} alt="" className='w-12 h-12 rounded-full' />
                     )}
                     <div className='flex flex-col gap-0'>
-                        <h3 className='text-sm p-0 m-0 RS_TITLE' title={"Le pertenece a la cateogoría"+categoryMapper[category]}>{categoryMapper[category]} </h3>
-                        <h3 className='text-sm p-0 m-0'>{user?.name ?? reference?.author}</h3>
+                        <h3 className='text-sm p-0 m-0 RS_TITLE' title={"Le pertenece a la cateogoría" + categoryMapper[category]}>{categoryMapper[category]} </h3>
+                        <Link href={'/author/'+user?.slug ?? '/'}>
+                            <h3 className='text-sm p-0 m-0'>{user?.name ?? reference?.author}</h3>
+                        </Link>
                     </div>
                 </div>
             </div>

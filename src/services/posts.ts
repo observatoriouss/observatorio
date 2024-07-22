@@ -75,7 +75,8 @@ export interface Post {
   reference?: Reference;
 }
 export interface User {
-  id:       number;
+  id:       string;
+  slug:     string;
   name:     string;
   email:    string;
   role:     string;

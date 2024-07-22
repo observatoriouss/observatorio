@@ -57,7 +57,9 @@ async function Post({ slug }: { slug: string }) {
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>
                     <span className='text-uss-black text-xs md:text-base'>Publicado el {formatDate(post.createdAt)}</span>
-                    <span className='text-uss-black text-xs md:text-base font-bold'>Por {post.user?.name ?? post.reference?.author}</span>
+                    <Link href={`/author/${post.user?.slug}`}>
+                        <span className='text-uss-black text-xs md:text-base font-bold'>Por {post.user?.name ?? post.reference?.author}</span>
+                    </Link>
                     {post.reference && (<a className='text-xs text-blue-500' target='_blank' href={post.reference.url}>Enlace de Referencia</a>)}
                 </div>
                 <div className='flex flex-col gap-0 md:gap-2 md:justify-center md:text-center w-fit md:w-1/3'>
