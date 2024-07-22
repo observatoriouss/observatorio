@@ -205,7 +205,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='relative'>
+      <body>
         <Header />
         <div id='contentRead'>
           {children}

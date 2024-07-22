@@ -86,7 +86,9 @@ function ContentHeader() {
           </nav>
         </div>
       </header>
-      <div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve absolute top-48 md:top-36">
+      <div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve absolute top-48 md:top-36" style={{
+        position: 'absolute',
+      }}>
         <a rel="nofollow" className="rsbtn_play" title="Escucha esta p&aacute;gina utilizando ReadSpeaker webReader" href="https://app-eu.readspeaker.com/cgi-bin/rsent?customerid=13446&amp;lang=es_co&amp;readid=contentRead&amp;url=">
           <span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Escuchar</span></span></span>
           <span className="rsbtn_right rsimg rsplay rspart"></span>
