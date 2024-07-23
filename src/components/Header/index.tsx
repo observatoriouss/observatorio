@@ -1,15 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import Link from 'next/link'
-import { motion, Variants } from 'framer-motion'
-import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { motion, Variants } from 'framer-motion';
+import { useContext, useEffect } from 'react';
 import { cn } from '@/lib/cn';
-import { PostSearch } from '@/components/PostSearch/InstantSearch'
+import { PostSearch } from '@/components/PostSearch/InstantSearch';
 import { Category, categoryMapper } from '@/services/home';
 import { HeaderContext, HeaderProvider } from './header.context';
 import Image from 'next/image';
-import SearchIcon from './SearchIcon';
-import './styles.css'
+import './styles.css';
 
 const variants: Variants = {
   open: {
@@ -86,7 +85,9 @@ function ContentHeader() {
           </nav>
         </div>
       </header>
-      <div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve absolute top-48 md:top-36">
+      <div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve absolute top-48 md:top-36" style={{
+        position: 'absolute',
+      }}>
         <a rel="nofollow" className="rsbtn_play" title="Escucha esta p&aacute;gina utilizando ReadSpeaker webReader" href="https://app-eu.readspeaker.com/cgi-bin/rsent?customerid=13446&amp;lang=es_co&amp;readid=contentRead&amp;url=">
           <span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Escuchar</span></span></span>
           <span className="rsbtn_right rsimg rsplay rspart"></span>

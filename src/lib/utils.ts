@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Category } from "@/services/home";
 
 export function formatDate(date: string) {
   return DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED);
@@ -64,3 +65,16 @@ export function getYoutubeId(url: string): string | null {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function getEnumIndex(enumObject: any, value: string): number {
+  return Object.values(enumObject).indexOf(value);
+}
+
+export const OPTIONS_CATEGORY = [
+  { value: Category.NEWS, label: "Noticias" },
+  { value: Category.BITS, label: "Bits" },
+  { value: Category.READS, label: "Reads" },
+  { value: Category.TUBES, label: "Tubes" },
+  { value: Category.PODCAST, label: "Podcast" },
+  { value: Category.EDITORIAL, label: "Editorial" },
+];

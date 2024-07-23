@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Script from 'next/script'
+import Counter from '@/components/Counter'
 
 
 export const metadata: Metadata = {
@@ -195,7 +196,6 @@ export const metadata: Metadata = {
     phoneNumbers: ['074 481610'],
   }
 }
-
 export default function RootLayout({
   children,
 }: {
@@ -207,6 +207,7 @@ export default function RootLayout({
         <div id='contentRead'>
           {children}
         </div>
+        <Counter />
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}></Script>
         <Script id="google-analytics">
           {process.env.NODE_ENV !== 'development' && `

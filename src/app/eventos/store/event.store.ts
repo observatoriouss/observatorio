@@ -1,5 +1,4 @@
 import { Execution, Training } from "@/services/events";
-import { toast } from "sonner";
 import { create } from "zustand";
 
 type State = {

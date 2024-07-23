@@ -1,16 +1,38 @@
-import React from 'react'
+'use client'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Steps, STEPS, StepStore } from "./store/steps.store"
+import { cn, getEnumIndex } from "@/lib/utils"
 
 function UploadContentRequest() {
+  const { step: stepStore } = StepStore()
   return (
-    <div className='container mx-auto min-h-[600px] flex flex-col justify-center items-center gap-4'>
-        <p className='max-w-[600px] text-center'>
-            {/* invitación de la universidad hacia las personas interesadas, a poder participar en la carga de información a través de un documento adjunto en un link */}
-            La Universidad Señor de Sipán, a través de su Observatorio, ofrece asistencia a profesores, estudiantes, y profesionales apasionados por la cultura e innovación, para que puedan aportar con información relevante y actualizada en el ámbito educativo. Si deseas colaborar con nosotros, puedes hacerlo a través del siguiente formulario.
-        </p>
-
-        <a href="https://docs.google.com/document/d/1RNKd7oD-UxfvKhAMElAwY-lPc0xzPSnelqSg9fL_uB0/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
-            Formulario de carga de información
-        </a>
+    <div className='container mx-auto py-12'>
+      <br />
+      <Tabs value={stepStore} className="w-full overflow-hidden">
+        <TabsList className="w-full overflow-hidden hidden md:flex">
+          {STEPS
+            .sort((a, b) => a.position - b.position)
+            .map((step, idx) => (
+              <TabsTrigger
+                key={step.value + idx + 'content'}
+                value={step.value}
+                className={cn(
+                  idx < getEnumIndex(Steps, stepStore) ? 'border-b-2 border-green-500 rounded-none' : '',
+                )}
+              >
+                {step.position}. {step.label}
+              </TabsTrigger>
+            ))}
+        </TabsList>
+        {STEPS
+          .sort((a, b) => a.position - b.position)
+          .map((step, idx) => (
+            <TabsContent key={step.value + idx + 'content'} value={step.value}>
+              {step.component}
+            </TabsContent>
+          ))
+        }
+      </Tabs>
     </div>
   )
 }
