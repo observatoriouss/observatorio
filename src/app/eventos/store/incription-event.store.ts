@@ -114,7 +114,7 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
     try {
       set({ loading: true });
       const inscription = await addParticipant(trainingId, {
-        role,
+        roles: [role],
         professorId: professor.id,
       });
       console.log({ inscription });

@@ -23,7 +23,7 @@ export const PostSearch = () => {
       indexName={algoliaIndexName}
     >
       <Configure hitsPerPage={5} />
-      <div className="w-[360px] md:w-[600px] lg:w-[1024px] min-w-fit max-w-7xl ">
+      <div className="w-[360px] md:w-[600px] lg:w-[1000px] min-w-fit max-w-7xl ">
         <SearchBox
           onFocus={() => setShowHits(true)}
           onChangeCapture={() => setShowHits(true)}

@@ -12,6 +12,10 @@ export interface Guest {
   id: string;
 }
 
+export interface PayloadGuest extends Partial<Guest> {
+  verificationCode: string
+}
+
 export async function getGuest(
   documentType: string,
   documentNumber: string
@@ -25,14 +29,14 @@ export async function getGuest(
 // {{url}}/api/guests/:id update
 export async function updateGuest(
   id: string,
-  guest: Partial<Guest>
+  guest: PayloadGuest
 ): Promise<Guest> {
   const { data } = await api.put<Guest>(`${API_URL}/guests/${id}`, guest);
   return data;
 }
 
 // {{url}}/api/guests create
-export async function createGuest(guest: Partial<Guest>): Promise<Guest> {
+export async function createGuest(guest: PayloadGuest): Promise<Guest> {
   const { data } = await api.post<Guest>(`${API_URL}/guests`, guest);
   return data;
 }
@@ -40,17 +44,6 @@ export async function createGuest(guest: Partial<Guest>): Promise<Guest> {
 // {{url}}/api/common/send-otp
 export async function sendOTP(email: string): Promise<void> {
   await api.post(`${API_URL}/common/send-otp`, { email });
-}
-
-// {{url}}/api/common/verify-otp
-export async function verifyOTP(email: string, otp: string): Promise<void> {
-  //   await api.post(`${API_URL}/common/verify-otp`, { email, otp });
-  // simular respuesta
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
-  });
 }
 
 // {{url}}/api/posts/create-request

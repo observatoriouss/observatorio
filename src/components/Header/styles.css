@@ -29,3 +29,7 @@
         }
     }
 }
+
+.swiper-wrapper{
+    height: 19px !important;
+}

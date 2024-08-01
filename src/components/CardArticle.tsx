@@ -31,7 +31,7 @@ export default function CardArticle({
                 <img src={imageUrl} alt="" className={`w-full ${type === 'middle' ? 'h-2/4 object-cover' : ''}`} />
             )}
             <div>
-                <Link href={slug}>
+                <Link href={'/' + slug}>
                     <h1 className={`${type !== 'default' ? 'text-3xl lg:text-5xl font-base' : 'text-xl lg:text-2xl font-thin break-words'} my-3 `}>{title}</h1>
                 </Link>
                 <p className={`${type === 'middle' ? 'text-base' : 'text-xs'}text-base text-[--uss_gray_50] my-5`}>{description}</p>
@@ -42,7 +42,7 @@ export default function CardArticle({
                     )}
                     <div className='flex flex-col gap-0'>
                         <h3 className='text-sm p-0 m-0 RS_TITLE' title={"Le pertenece a la cateogoría" + categoryMapper[category]}>{categoryMapper[category]} </h3>
-                        <Link href={'/author/'+user?.slug ?? '/'}>
+                        <Link href={'/author/' + user?.slug}>
                             <h3 className='text-sm p-0 m-0'>{user?.name ?? reference?.author}</h3>
                         </Link>
                     </div>

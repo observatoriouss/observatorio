@@ -110,7 +110,7 @@ export enum MapRoleInscription {
 }
 
 export interface AddParticipantPayload {
-  role: RoleInscription;
+  roles: RoleInscription[];
   professorId: string;
 }
 export interface Certificate {

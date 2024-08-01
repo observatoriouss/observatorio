@@ -10,8 +10,12 @@ import Creatable from 'react-select/creatable'
 import { DefaultEditor } from "react-simple-wysiwyg"
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import useStore from '@/hooks/useStore'
+import { authStore } from '@/app/store/session'
+import { useRouter } from 'next/navigation'
 
 function CreatePost() {
+    const router = useRouter()
     const { requestPost, loading, crtPost, uploadService } = StepStore()
     const [description, setDescription] = useState("");
     const onHandleDescripcion = (value: string) => {
@@ -41,10 +45,19 @@ function CreatePost() {
         setValue('attachments', [...(watch('attachments') ?? []), url])
     }
 
+    const session = useStore(authStore, (state) => state)!;
+    if (!session) {
+        return null;
+    }
+    const { user } = session;
+
     const onSubmit = handleSubmit(async (payload, e) => {
+        if (!user) return router.push('/iniciar-sesion');
         (e as any).preventDefault();
-        return await crtPost(payload);
+        return await crtPost({...payload, userId: user.id});
     })
+
+
 
     return (
         <div className='container mx-auto bg-white py-12 md:p-12 w-full'>
