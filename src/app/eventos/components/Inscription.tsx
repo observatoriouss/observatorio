@@ -21,6 +21,7 @@ import { InscriptionEventStore } from "../store/incription-event.store"
 import { useEffect, useState } from "react"
 import { MapRoleInscription, ProfessorBodyRequest, RoleInscription } from "@/services/events"
 import Select from 'react-select'
+import Creatable from 'react-select/creatable'
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 import { useRouter } from 'next/navigation'
 import { cn } from "@/lib/utils"
@@ -44,16 +45,16 @@ function Inscription() {
 
     const { register: registerIns, handleSubmit: handleSubmitIns, formState: { errors: errorsInscription }, watch: watchIns, setValue: setValueIns, setError: setErrorIns } = useForm({
         values: {
-            role: ''
+            roles: []
         }
     })
 
     const { documentNumber } = watch()
-    const { role } = watchIns()
+    const { roles } = watchIns()
 
     const onSubmitIns = handleSubmitIns(async (data) => {
         if (!training) return
-        const inscription = await completeInscription(training.id, data.role as RoleInscription)
+        const inscription = await completeInscription(training.id, data.roles as RoleInscription[])
         console.log({ inscription })
         if (inscription) {
             console.log({ inscription })
@@ -109,7 +110,7 @@ function Inscription() {
                                     <div className="flex flex-col gap-4 w-full">
                                         <div className="hidden">
                                             <pre>
-                                                {JSON.stringify({ professor, documentNumber, role, trainingId: training?.id }, null, 2)}
+                                                {JSON.stringify({ professor, documentNumber, roles, trainingId: training?.id }, null, 2)}
                                             </pre>
                                         </div>
                                         {/* Input DNI */}
@@ -264,7 +265,7 @@ function Inscription() {
                                         <Label htmlFor="schoolId" className="">
                                             Rol
                                         </Label>
-                                        <Select
+                                        {/* <Select
                                             options={
                                                 Object.values(RoleInscription).map((key) => ({
                                                     value: key,
@@ -285,9 +286,45 @@ function Inscription() {
                                                     type: 'disabled'
                                                 })
                                             }}
+                                        /> */}
+                                        <Creatable
+                                            closeMenuOnSelect={false}
+                                            isMulti
+                                            options={
+                                                Object.values(RoleInscription).map((key) => ({
+                                                    value: key,
+                                                    label: MapRoleInscription[key]
+                                                }))
+                                            }
+                                            {...registerIns("roles", {
+                                                required: {
+                                                    value: true,
+                                                    message: "Roles son requeridos.",
+                                                },
+                                                validate: {
+                                                    min: (value: string[]) => {
+                                                        if (value.length < 1) {
+                                                            return 'Roles son requeridos.'
+                                                        }
+                                                        return true
+                                                    }
+                                                }
+                                            })}
+                                            value={watchIns('roles') as any &&
+                                                watchIns('roles').map(tag =>
+                                                    ({ value: tag, label: tag }))}
+                                            isDisabled={loading}
+                                            className="w-full col-span-3 z-[99]"
+                                            onChange={(options) => {
+                                                const map = options.map((option: any) => option.value)
+                                                setValueIns('roles', map as never[])
+                                                setErrorIns('roles', {
+                                                    type: 'disabled'
+                                                })
+                                            }}
                                         />
-                                        <span className="text-red-500 text-xs">{errorsInscription.role && (
-                                            <>{errorsInscription.role.message}</>
+                                        <span className="text-red-500 text-xs">{errorsInscription.roles && (
+                                            <>{errorsInscription.roles.message}</>
                                         )}</span>
                                     </div>
                                     <Button

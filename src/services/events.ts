@@ -103,10 +103,12 @@ export const getSchools = async (): Promise<School[]> => {
 export enum RoleInscription {
   ASSISTANT = "assistant",
   SPEAKER = "speaker",
+  ORGANIZER = "organizer",
 }
 export enum MapRoleInscription {
   assistant = "Asistente",
   speaker = "Ponente",
+  organizer = "Organizador",
 }
 
 export interface AddParticipantPayload {

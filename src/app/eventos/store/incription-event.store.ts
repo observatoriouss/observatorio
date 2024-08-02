@@ -31,7 +31,7 @@ type Actions = {
   completeOTP: (otp: string) => Promise<void>;
   completeInscription: (
     trainingId: string,
-    role: RoleInscription
+    roles: RoleInscription[]
   ) => Promise<Participant>;
   clearCache: () => void;
 };
@@ -104,7 +104,7 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
       set({ loading: false });
     }
   },
-  completeInscription: async (trainingId, role): Promise<Participant> => {
+  completeInscription: async (trainingId, roles): Promise<Participant> => {
     const professor = InscriptionEventStore.getState().professor;
     if (!professor) {
       toast.error("Por favor, complete el registro del profesor.");
@@ -114,7 +114,7 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
     try {
       set({ loading: true });
       const inscription = await addParticipant(trainingId, {
-        roles: [role],
+        roles,
         professorId: professor.id,
       });
       console.log({ inscription });
