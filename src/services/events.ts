@@ -39,6 +39,7 @@ export interface Execution {
   to: string;
   id: string;
   participantAttend?: boolean;
+  place: string;
 }
 
 export interface School {

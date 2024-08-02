@@ -1,10 +1,9 @@
 import { MapTrainingModality, verifyParticipant } from '@/services/events';
 import Credential from '../components/credential';
-import { formatDateTimeRange } from '@/lib/utils';
+import { formatDateTimeRange, evaluateIfIsPlaceOrLink } from '@/lib/utils';
 import VirtualCredential from './components/VirtualCredential';
 import ConfettiPage from './components/Confetti';
 import { Suspense } from 'react';
-import SplashScreen from '@/components/SplashScreen';
 
 export default async function Page({ params }: { params: { id: string } }) {
   console.log({ id: params.id })
@@ -50,6 +49,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                       fontWeight: '600',
                       borderBottom: '2px solid white',
                     }}>Hora</th>
+                    <th style={{
+                      backgroundColor: 'white',
+                      color: 'black',
+                      padding: '6px',
+                      textAlign: 'center',
+                      fontWeight: '600',
+                      borderBottom: '2px solid white',
+                    }}>Lugar / Link</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -69,6 +76,11 @@ export default async function Page({ params }: { params: { id: string } }) {
                           color: 'white',
                           borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
                         }}>{time}</td>
+                        <td style={{
+                          padding: '6px',
+                          color: 'white',
+                          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                        }}>{evaluateIfIsPlaceOrLink(execution.place)}</td>
                       </tr>
                     );
                   })}

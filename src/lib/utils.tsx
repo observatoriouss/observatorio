@@ -78,3 +78,22 @@ export const OPTIONS_CATEGORY = [
   { value: Category.PODCAST, label: "Podcast" },
   { value: Category.EDITORIAL, label: "Editorial" },
 ];
+
+export const evaluateIfIsPlaceOrLink = (place: string) => {
+  // Evaluar si es link por un regex
+  const regex = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+([\/\w \.-]*)*\/?$/;
+  const isLink = regex.test(place);
+
+  if (isLink) {
+      return (
+          <a href={place} target="_blank" rel="noreferrer" className="text-blue-600 underline">
+              Meeting
+          </a>
+      )
+  } else {
+      return (
+          <span>{place}</span>
+      )
+  }
+
+}

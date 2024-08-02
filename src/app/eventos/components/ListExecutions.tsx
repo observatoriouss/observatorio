@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { EventStore } from "../store/event.store"
 import { Execution } from "@/services/events"
-import { cn, formatDateShort, formatHour, getDuration } from "@/lib/utils"
+import { cn, evaluateIfIsPlaceOrLink, formatDateShort, formatHour, getDuration } from "@/lib/utils"
 
 interface ListExecutionsProps {
     executions: Execution[]
@@ -26,13 +26,15 @@ function ListExecutions() {
                     <DialogDescription asChild>
                         <div className="flex flex-row gap-4 text-black">
                             {executionsSelected.map((execution, index) => (
-                                <div key={'ex-' + index} className="flex flex-col  rounded-lg items-center justify-center bg-green-500 gap-0 px-5 py-4 h-24 w-24 text-black">
+                                <div key={'ex-' + index} className="flex flex-col  rounded-lg items-center justify-center bg-green-500 gap-0 px-5 py-4 h-auto w-36 text-black">
                                     <h3 className='text-sm font-normal m-0 p-0'>
                                         {formatDateShort(execution.from)}
                                     </h3>
                                     <h2 className='text-3xl md:text-xl font-semibold m-0 p-0'>{formatHour(execution.from)}</h2>
-                                    <span className='text-xs'>Duración</span>
+                                    <span className='text-xs font-semibold'>Duración</span>
                                     <span className='text-sm font-medium'>{getDuration(execution.from, execution.to)}</span>
+                                    <span className='text-xs font-semibold'>Lugar / Link</span>
+                                    <span className='text-sm font-medium  max-w-[144px]'>{evaluateIfIsPlaceOrLink(execution.place)}</span>
                                 </div>
                             ))}
                         </div>

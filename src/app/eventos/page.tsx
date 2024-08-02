@@ -1,10 +1,8 @@
-// 'use client'
 import { getEvents, MapTrainingModality } from '@/services/events';
 import Inscription from './components/Inscription';
 import ListExecutions, { InfoExecution } from './components/ListExecutions';
 import { Toaster } from 'sonner';
 import ChargeData from './components/ChargeData';
-import { Button } from '@/components/ui/button';
 import BtnInscription from './components/BtnInscription';
 
 async function fetchData() {

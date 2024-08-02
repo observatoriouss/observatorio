@@ -131,11 +131,11 @@ function Band({ participant, maxSpeed = 50, minSpeed = 10 }) {
 
             {/* Contenido dinámico actualizado */}
             <group position={[0, 0.35, 0.01]}>
-              <mesh position={[0, 0.0, 0]}>
+              {/* <mesh position={[0, 0.0, 0]}>
                 <planeGeometry args={[0.3, 0.06]} />
                 <meshBasicMaterial color="white" />
-              </mesh>
-              <Text position={[0, 0.0, 0.001]} fontSize={0.03} color="black">{MapRoleInscription[participant.role]}</Text>
+              </mesh> */}
+              {/* <Text position={[0, 0.0, 0.001]} fontSize={0.03} color="black">{MapRoleInscription[participant.role]}</Text> */}
 
               <Text position={[0, -0.08, 0]} fontSize={0.05} color="black" font="/fonts/Marselis/Marselis-Pro/MarselisPro.ttf">
                 {participant.professor.name}
