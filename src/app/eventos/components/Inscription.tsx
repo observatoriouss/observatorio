@@ -54,14 +54,14 @@ function Inscription() {
 
     const onSubmitIns = handleSubmitIns(async (data) => {
         if (!training) return
-        const inscription = await completeInscription(training.id, data.roles as RoleInscription[])
-        console.log({ inscription })
-        if (inscription) {
-            console.log({ inscription })
+        try {
+            const inscription = await completeInscription(training.id, data.roles as RoleInscription[])
             clearCache()
             setOpen(false)
             setChargingPageInscription(true)
             router.push(`/inscripcion-completada/${inscription.id}`)
+        } catch (error) {
+            console.error(error)
         }
     })
 
@@ -265,28 +265,6 @@ function Inscription() {
                                         <Label htmlFor="schoolId" className="">
                                             Rol
                                         </Label>
-                                        {/* <Select
-                                            options={
-                                                Object.values(RoleInscription).map((key) => ({
-                                                    value: key,
-                                                    label: MapRoleInscription[key]
-                                                }))
-                                            }
-                                            {...registerIns("role", {
-                                                required: {
-                                                    value: true,
-                                                    message: "Rol es requerido.",
-                                                },
-                                            })}
-                                            isDisabled={loading}
-                                            className="w-full z-[99]"
-                                            onChange={(option) => {
-                                                setValueIns('role', option?.value as string)
-                                                setErrorIns('role', {
-                                                    type: 'disabled'
-                                                })
-                                            }}
-                                        /> */}
                                         <Creatable
                                             closeMenuOnSelect={false}
                                             isMulti
@@ -312,7 +290,7 @@ function Inscription() {
                                             })}
                                             value={watchIns('roles') as any &&
                                                 watchIns('roles').map(tag =>
-                                                    ({ value: tag, label: tag }))}
+                                                    ({ value: tag, label: MapRoleInscription[tag] }))}
                                             isDisabled={loading}
                                             className="w-full col-span-3 z-[99]"
                                             onChange={(options) => {

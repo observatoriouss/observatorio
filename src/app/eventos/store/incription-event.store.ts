@@ -1,3 +1,5 @@
+import { TrainingErrorCode } from "@/lib/error-codes";
+import { ErrorType } from "@/lib/types";
 import {
   addParticipant,
   confirmRegister,
@@ -10,6 +12,7 @@ import {
   RoleInscription,
   School,
 } from "@/services/events";
+import { AxiosError } from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
 
@@ -122,12 +125,12 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
       set({ inscription });
       return inscription;
     } catch (error) {
-      console.log("error store");
-      toast.error("Ocurrió un error al completar la inscripción.");
-      set({ inscription: null });
-      return Promise.reject("Ocurrió un error al completar la inscripción.");
+      console.log({ error })
+      const code = ((error as AxiosError)?.response?.data as ErrorType)?.code as keyof typeof TrainingErrorCode;
+      toast.error(TrainingErrorCode[code] ?? "Ocurrió un error inesperado, intente nuevamente");
+      return Promise.reject(error);
     } finally {
-      // set({ loading: false });
+      set({ loading: false });
     }
   },
   clearCache: () => {
