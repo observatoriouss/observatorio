@@ -5,6 +5,8 @@ import { Toaster } from 'sonner';
 import ChargeData from './components/ChargeData';
 import BtnInscription from './components/BtnInscription';
 
+export const dynamic = 'force-dynamic';
+
 async function fetchData() {
   try {
     const events = await getEvents()
