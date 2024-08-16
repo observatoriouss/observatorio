@@ -1,10 +1,17 @@
 'use client'
 import Script from 'next/script';
 import { useEffect } from 'react';
+import { isIOS } from 'react-device-detect';
 
 declare global {
     interface Window {
         googleTranslateElementInit: () => void;
+        MSStream: any;
+    }
+}
+declare global {
+    interface Navigator {
+        userAgent: string;
     }
 }
 
@@ -88,6 +95,10 @@ const GoogleTranslate = () => {
 
 
     }, []);
+
+    if (isIOS) {
+        return null;
+    }
 
     return (
         <>
