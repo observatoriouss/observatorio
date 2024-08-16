@@ -13,9 +13,12 @@ function Register() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<PayloadRegister>({
         values: {
             user: {
-                email: 'test@prueba.com',
-                name: 'test prueba',
-                password: '1234',
+                email: '',
+                name: '',
+                password: '',
+                // email: 'test@prueba.com',
+                // name: 'test prueba',
+                // password: '1234',
                 role: 'user'
             },
             verificationCode: ''

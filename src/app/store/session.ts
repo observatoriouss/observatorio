@@ -54,7 +54,6 @@ export const authStore = create<
       getUserByToken: async () => {
         const token = getCookie("TOKEN");
 
-        console.log(token);
 
         if (token) {
           const userByToken = await getUserByToken(token);
@@ -64,7 +63,6 @@ export const authStore = create<
         }
       },
       logout: async () => {
-        console.log(getCookie("TOKEN"));
         deleteCookie("TOKEN");
         set({ user: null, isSended: false });
         toast.success("Sesión cerrada con éxito");
@@ -72,16 +70,13 @@ export const authStore = create<
       registerUser: async (body) => {
         try {
           set({ loading: true });
-          console.log(body);
           const newUser = await register(body);
           set({
             user: newUser.user,
           });
           setCookie("TOKEN", newUser.token);
           toast.success("Usuario creado con éxito");
-          console.log(newUser);
         } catch (error) {
-          console.log(error);
           toast.error("Error al crear usuario");
         } finally {
           set({ loading: false, isSended: false });
@@ -90,14 +85,12 @@ export const authStore = create<
       sendVerificationCode: async (body) => {
         try {
           set({ loading: true });
-          console.log(body);
           await sendOTP(body.user.email);
           set({
             isSended: true,
           });
           toast.success("Código de verificación enviado");
         } catch (error) {
-          console.log(error);
           toast.error("Error al enviar código de verificación");
         } finally {
           set({ loading: false });

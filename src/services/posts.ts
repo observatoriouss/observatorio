@@ -45,10 +45,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 }
 
 export const getReactCachedPost = cache(async (slug: string) => {
-  const startDate = new Date()
   const res = await getPostBySlug(slug)
-  const endDate = new Date()
-  // console.log('Time to fetch data', endDate.getTime() - startDate.getTime())
   return res
 });
 
@@ -66,6 +63,7 @@ export interface Post {
   imageUrl: null | string;
   imageDescription: null | string;
   likes: number;
+  numberOfComments: number;
   userId?: string;
   user: User;
   attachments: string[];

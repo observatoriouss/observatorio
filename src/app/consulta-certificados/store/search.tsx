@@ -23,13 +23,11 @@ export const SearchStore = create<State & Actions>((set) => ({
         try {
             set({ loading: true });
             const trainings = await getTrainingByDocument("dni", documentNumber);
-            console.log({ trainings });
             set({ trainings });
             toast.success(
                 "Búsqueda realizada con éxito."
             );
         } catch (error) {
-            console.log("error store");
             toast.error(
                 "No se encontró ningún documento asociado al DNI ingresado."
             );
@@ -43,7 +41,6 @@ export const SearchStore = create<State & Actions>((set) => ({
             set({ loading: true });
             if (!participant.certificate) return;
             const response = await fetch(participant.certificate?.url);
-            console.log({ response })
             const blob = await response.blob();
 
             // Crea una URL para el Blob y descarga el archivo
@@ -57,7 +54,6 @@ export const SearchStore = create<State & Actions>((set) => ({
             window.URL.revokeObjectURL(urlBlob);
             document.body.removeChild(a);
         } catch (error) {
-            console.log(error);
             toast.error("Error al generar PDF");
         } finally { set({ loading: false }); }
     },

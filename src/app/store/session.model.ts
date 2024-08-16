@@ -22,12 +22,7 @@ export interface User {
     role:         string;
     image:        string;
     isActive:     boolean;
-    createdAt:    Date;
+    createdAt:    string;
     id:           string;
-    _rid:         string;
-    _self:        string;
-    _etag:        string;
-    _attachments: string;
     slug:         string;
-    _ts:          number;
 }

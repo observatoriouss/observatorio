@@ -1,0 +1,31 @@
+.comment-editor {
+    position: relative;
+}
+
+.placeholder {
+    position: absolute;
+    top: 12%;
+    left: 0px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
+    /* Para que el placeholder no interfiera con el input */
+    font-size: 1rem;
+}
+
+.placeholderHiddenUI {
+    position: absolute;
+    top: 45%;
+    left: 0px;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
+    /* Para que el placeholder no interfiera con el input */
+    font-size: 1rem;
+}
+
+.editable-div:empty:before {
+    content: attr(placeholder);
+    color: rgb(160, 160, 160);
+    pointer-events: none;
+}

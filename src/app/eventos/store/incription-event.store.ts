@@ -54,7 +54,7 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
       const schools = await getSchools();
       set({ schools });
     } catch (error) {
-      console.log("error store");
+      console.error("error store");
     } finally {
       set({ loading: false });
     }
@@ -63,13 +63,11 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
     try {
       set({ loading: true });
       const professor = await getProfessor("dni", documentNumber);
-      console.log({ professor });
       set({ professor });
       toast.success(
         "El documento se encuentra registrado en la base de datos."
       );
     } catch (error) {
-      console.log("error store");
       toast.error(
         "No se encontró el documento registrado en la base de datos. Por favor, verifique los datos ingresados o complete el formulario de inscripción."
       );
@@ -86,7 +84,6 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
       set({ succesfulRegister: true });
       toast.success("Profesor registrado con éxito.");
     } catch (error) {
-      console.log("error store");
       toast.error("Ocurrió un error al registrar el profesor.");
     } finally {
       set({ loading: false });
@@ -101,7 +98,6 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
       set({ succesfulRegister: false });
       set({ professor });
     } catch (error) {
-      console.log("error store");
       toast.error("Código de verificación incorrecto.");
     } finally {
       set({ loading: false });
@@ -120,12 +116,10 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
         roles,
         professorId: professor.id,
       });
-      console.log({ inscription });
       toast.success("Inscripción completada con éxito.");
       set({ inscription });
       return inscription;
     } catch (error) {
-      console.log({ error })
       const code = ((error as AxiosError)?.response?.data as ErrorType)?.code as keyof typeof TrainingErrorCode;
       toast.error(TrainingErrorCode[code] ?? "Ocurrió un error inesperado, intente nuevamente");
       return Promise.reject(error);

@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { getPostBySlug, getReactCachedPost } from '@/services/posts'
+import { getReactCachedPost } from '@/services/posts';
 import './styles.css';
 import Link from 'next/link';
-import { Suspense, cache } from 'react';
+import { Suspense } from 'react';
 import SplashScreen from '@/components/SplashScreen';
 import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
 import { Category, categoryMapper } from '@/services/home';
 import { Metadata, ResolvingMetadata } from 'next';
+import AsideComments from '@/components/Post/AsideComments';
+import PostSelected from '@/components/Post/PostSelected';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,6 +44,7 @@ async function Post({ slug }: { slug: string }) {
     const post = await getReactCachedPost(slug)
     return (
         <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
+            <PostSelected post={post} />
             {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
             <div className='flex flex-col gap-1'>
                 <Link href='/news'>
@@ -55,15 +58,16 @@ async function Post({ slug }: { slug: string }) {
                 <img className='rounded-xl' src={post.imageUrl || ''} width="100%" loading="lazy"></img>
                 <p className='text-uss-black font-thin text-sm py-2 text-right'>{post.imageDescription}</p>
             </div>
-            <LikeSection id={post.id} likes={post.likes}/>
+            <div className='flex flex-row gap-2'>
+                <LikeSection id={post.id} likes={post.likes} />
+                <AsideComments />
+            </div>
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>
                     <span className='text-uss-black text-xs md:text-base'>Publicado el {formatDate(post.createdAt)}</span>
                     <Link href={`/author/${post.user?.slug}`}>
-                        <Link href={`/author/${post.user?.slug}`}>
                         <span className='text-uss-black text-xs md:text-base font-bold'>Por {post.user?.name ?? post.reference?.author}</span>
-                    </Link>
                     </Link>
                     {post.reference && (<a className='text-xs text-blue-500' target='_blank' href={post.reference.url}>Enlace de Referencia</a>)}
                 </div>

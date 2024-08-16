@@ -119,8 +119,6 @@ function ContentHeader() {
               slidesPerView={4}
               loop={true}
               modules={[Navigation]}
-              onSlideChange={() => console.log('slide change')}
-              onSwiper={(swiper) => console.log(swiper)}
               navigation={{
                 nextEl: `.nextMenu`,
                 prevEl: `.prevMenu`,

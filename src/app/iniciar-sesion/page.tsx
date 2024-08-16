@@ -16,8 +16,10 @@ export interface PayloadLogin {
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm<PayloadLogin>({
         values: {
-            email: 'test@prueba.com',
-            password: '1234'
+            email: '',
+            password: ''
+            // email: 'test@prueba.com',
+            // password: '1234'
         }
     })
     const router = useRouter();

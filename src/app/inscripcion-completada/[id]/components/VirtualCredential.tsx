@@ -26,7 +26,7 @@ function VirtualCredential({ participant }: { participant: Participant }) {
                 console.error('Error al generar la imagen:', err);
             }
         } else {
-            console.log('El div no está listo o la imagen no se ha cargado');
+            console.error('Error al generar la imagen: divRef.current no existe o la imagen no ha cargado');
         }
     };
 

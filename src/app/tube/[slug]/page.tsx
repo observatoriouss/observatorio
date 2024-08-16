@@ -9,6 +9,8 @@ import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
 import { Category, categoryMapper } from '@/services/home';
 import { Metadata, ResolvingMetadata } from 'next';
 import VideoEmbed from './video-embed';
+import AsideComments from '@/components/Post/AsideComments';
+import PostSelected from '@/components/Post/PostSelected';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,6 +45,7 @@ async function Post({ slug }: { slug: string }) {
     const post = await getReactCachedPost(slug)
     return (
         <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
+            <PostSelected post={post} />
             <div className='flex flex-col gap-1'>
                 <Link href='/tube'>
                 <span className='text-uss-black font-thin'>Regresar a <b className='font-bold'>{categoryMapper[Category.TUBES]}</b> </span>
@@ -50,7 +53,10 @@ async function Post({ slug }: { slug: string }) {
                 <h1 className=' text-4xl md:text-6xl font-normal text-uss-black'>{post.title}</h1>
             </div>
             <VideoEmbed videoUrl={post.videoUrl} title={post.title} />
-            <LikeSection id={post.id} likes={post.likes} />
+            <div className='flex flex-row gap-2'>
+                <LikeSection id={post.id} likes={post.likes} />
+                <AsideComments />
+            </div>
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>

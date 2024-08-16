@@ -73,7 +73,6 @@ function Inscription() {
         if (!documentNumber) return setProfessor(null)
 
         if (documentNumber.toString().length === 8) {
-            console.log('entra')
             validateExistDNI(documentNumber)
         }
     }, [documentNumber])

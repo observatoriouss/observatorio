@@ -7,7 +7,6 @@ export const dynamic = 'force-dynamic';
 async function fetchData({ slug }: { slug: string }) {
     try {
         const author = await getAuthorBySlug(slug)
-        console.log({author})
         return author
     } catch (error) {
         console.error(error)

@@ -8,6 +8,8 @@ import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
 import { Category, categoryMapper } from '@/services/home';
 import { Metadata, ResolvingMetadata } from 'next';
+import AsideComments from '@/components/Post/AsideComments';
+import PostSelected from '@/components/Post/PostSelected';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,6 +45,7 @@ async function Post({ slug }: { slug: string }) {
     return (
         <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
             {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
+            <PostSelected post={post} />
             <div className='flex flex-col gap-1'>
                 <Link href='/reads'>
                     <span className='text-uss-black font-thin'>Regresar a <b className='font-bold'>{categoryMapper[Category.READS]}</b> </span>
@@ -53,7 +56,10 @@ async function Post({ slug }: { slug: string }) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className='rounded-xl w-1/2' src={post.imageUrl || ''} loading="lazy" alt='' />
             </div>
-            <LikeSection id={post.id} likes={post.likes} />
+            <div className='flex flex-row gap-2'>
+                <LikeSection id={post.id} likes={post.likes} />
+                <AsideComments />
+            </div>
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>

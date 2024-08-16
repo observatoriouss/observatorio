@@ -6,9 +6,7 @@ import ConfettiPage from './components/Confetti';
 import { Suspense } from 'react';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  console.log({ id: params.id })
   const participant = await verifyParticipant(params.id)
-  console.log({ participant })
 
   return (
     <Suspense fallback={<></>}>
