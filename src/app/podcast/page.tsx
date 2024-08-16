@@ -22,6 +22,7 @@ async function Podcasts() {
             reference={item.reference}
             category={item.category}
             slug={'podcast/' + item.slug}
+            numberOfComments={0}
             description='' id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''}
           />
         </div>

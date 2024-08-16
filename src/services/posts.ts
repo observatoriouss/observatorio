@@ -63,7 +63,7 @@ export interface Post {
   imageUrl: null | string;
   imageDescription: null | string;
   likes: number;
-  numberOfComments: number;
+  numberOfComments?: number;
   userId?: string;
   user: User;
   attachments: string[];

@@ -34,7 +34,7 @@ function Confirmation() {
                     type='submit'
                     className='w-full'
                     onClick={() => {
-                        setSteps(Steps.Search)
+                        setSteps(Steps.DataValidation)
                     }}
                 >
                     Volver al inicio

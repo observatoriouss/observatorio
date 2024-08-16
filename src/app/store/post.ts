@@ -111,8 +111,8 @@ export const PostStore = create<State & Actions>((set) => ({
           commentTerm: "",
         });
       }
-      set({ postSelected: { ...post, numberOfComments: post.numberOfComments + 1 } });
-      set({ postSelectedDraft: { ...post, numberOfComments: post.numberOfComments + 1 } });
+      set({ postSelected: { ...post, numberOfComments: (post.numberOfComments ?? 0) + 1 } });
+      set({ postSelectedDraft: { ...post, numberOfComments: (post.numberOfComments ?? 0) + 1 } });
 
     } catch (error) {
       const code = ((error as AxiosError)?.response?.data as ErrorType)

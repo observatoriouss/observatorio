@@ -21,6 +21,7 @@ async function Reads() {
                         reference={item.reference}
                         category={item.category}
                         description=''
+                        numberOfComments={0}
                         slug={'reads/' + item.slug} id={'0'} subCategory={null} readingTime={0} videoUrl={null} podcastUrl={null} imageDescription={null} likes={0} userId={'0'} attachments={[]} createdAt={''} updatedAt={''} />
                 </div>
             ))}
