@@ -82,6 +82,10 @@ function ContentHeader() {
     {
       href: '/upload-content',
       name: 'Autores'
+    },
+    {
+      href: '/eventos',
+      name: 'Eventos'
     }
   ]
   return (

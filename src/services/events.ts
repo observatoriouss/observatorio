@@ -73,13 +73,22 @@ export const getProfessor = async (
   );
   return data;
 };
+export enum ProfessorEmploymentType {
+  FULL_TIME = "full_time",
+  PART_TIME = "part_time",
+}
 
+export const MapProfessorEmploymentType = {
+  [ProfessorEmploymentType.FULL_TIME]: "Tiempo completo",
+  [ProfessorEmploymentType.PART_TIME]: "Medio tiempo",
+};
 export interface ProfessorBodyRequest {
   name: string;
   email: string;
   documentType: string;
   documentNumber: number;
   schoolId: string;
+  employmentType: ProfessorEmploymentType;
 }
 // {{url}}/api/professors
 export const createProfessor = async (

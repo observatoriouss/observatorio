@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { InscriptionEventStore } from "../store/incription-event.store"
 import { useEffect, useState } from "react"
-import { MapRoleInscription, ProfessorBodyRequest, RoleInscription } from "@/services/events"
+import { MapProfessorEmploymentType, MapRoleInscription, ProfessorBodyRequest, ProfessorEmploymentType, RoleInscription } from "@/services/events"
 import Select from 'react-select'
 import Creatable from 'react-select/creatable'
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
@@ -34,12 +34,12 @@ function Inscription() {
     const [chargingPageInscription, setChargingPageInscription] = useState(false)
 
     const { register, handleSubmit, formState: { errors }, watch, setValue, setError } = useForm<ProfessorBodyRequest>({
-        values: {
+        defaultValues: {
             documentNumber: '' as unknown as number,
             documentType: 'dni',
             email: '',
             name: '',
-            schoolId: ''
+            schoolId: '',
         }
     })
 
@@ -174,6 +174,42 @@ function Inscription() {
                                                     <span className="text-red-500 text-xs">{errors.email && (
                                                         <>{errors.email.message}</>
                                                     )}</span>
+                                                </div>
+                                                <div className="grid w-full gap-1.5">
+                                                    <Label>
+                                                        Tipo
+                                                    </Label>
+                                                    <Select
+                                                        options={
+                                                            Object.values(ProfessorEmploymentType).map((type) => ({
+                                                                value: type,
+                                                                label: MapProfessorEmploymentType[type]
+                                                            }))
+                                                        }
+                                                        {...register("employmentType", {
+                                                            required: {
+                                                                value: true,
+                                                                message: "Tipo es requerido.",
+                                                            },
+                                                        })}
+                                                        value={watch('employmentType') as any &&
+                                                        {
+                                                            value: watch('employmentType'),
+                                                            label: MapProfessorEmploymentType[watch('employmentType')]
+                                                        }
+                                                        }
+                                                        isDisabled={loading}
+                                                        className="w-full col-span-3 z-[100]"
+                                                        onChange={(option) => {
+                                                            setValue('employmentType', option?.value)
+                                                            setError('employmentType', {
+                                                                type: 'disabled'
+                                                            })
+                                                        }}
+                                                    />
+                                                    {errors.employmentType &&
+                                                        <span className="text-red-600 text-xs">{errors.employmentType.message}</span>
+                                                    }
                                                 </div>
                                                 <div className="grid w-full gap-1.5">
                                                     <Label htmlFor="schoolId" className="">
