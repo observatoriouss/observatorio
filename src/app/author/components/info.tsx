@@ -16,6 +16,7 @@ async function fetchData({ slug }: { slug: string }) {
 
 async function Author({ slug }: { slug: string }) {
     const author = await fetchData({ slug })
+    console.log({author})
     return (
         <Suspense fallback={
             <div>
@@ -45,14 +46,13 @@ async function Author({ slug }: { slug: string }) {
                     {/* email y rol */}
                     <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light flex gap-3 items-center">
                         Autor
-                        <img
-                            className="w-6 h-6 rounded-lg object-cover"
-                            src={
-                                author?.country?.icon ||
-                                "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png250px/pe.png"
-                            }
-                            alt={author?.country?.name}
-                        />
+                        {author?.country && (
+                            <img
+                                className="w-6 h-6 rounded-lg object-cover"
+                                src={author?.country.icon}
+                                alt={author?.country.name}
+                            />
+                        )}
                     </p>
                     <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light">
                         {author?.email}
