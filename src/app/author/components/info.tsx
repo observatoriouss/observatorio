@@ -40,6 +40,9 @@ async function Author({ slug }: { slug: string }) {
 
                 <div className="h-[50px] md:h-[75px] lg:h-[100px] xl:h-[125px] 2xl:h-[150px]" />
                 <div className="flex flex-col py-4 items-center">
+                    <pre>
+                        {JSON.stringify(author, null, 2)}
+                    </pre>
                     <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
                         {author?.name}
                     </h1>
