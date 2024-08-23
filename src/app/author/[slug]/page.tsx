@@ -4,7 +4,7 @@ import { Metadata, ResolvingMetadata } from "next"
 import { Suspense } from "react"
 import Author from "../components/info"
 
-
+export const dynamic = 'force-dynamic';
 
 type Props = {
     params: { slug: string }
