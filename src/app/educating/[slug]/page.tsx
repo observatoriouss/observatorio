@@ -12,6 +12,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import AsideComments from '@/components/Post/AsideComments';
 import PostSelected from '@/components/Post/PostSelected';
 
+export const dynamic = 'force-dynamic';
 type Props = {
     params: { slug: string }
     // searchParams: { [key: string]: string | string[] | undefined }
