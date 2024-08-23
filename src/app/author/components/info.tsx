@@ -43,8 +43,16 @@ async function Author({ slug }: { slug: string }) {
                         {author?.name}
                     </h1>
                     {/* email y rol */}
-                    <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light">
+                    <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light flex gap-3 items-center">
                         Autor
+                        <img
+                            className="w-6 h-6 rounded-lg object-cover"
+                            src={
+                                author?.country?.icon ||
+                                "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png250px/pe.png"
+                            }
+                            alt={author?.country?.name}
+                        />
                     </p>
                     <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light">
                         {author?.email}

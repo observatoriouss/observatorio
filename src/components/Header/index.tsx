@@ -84,9 +84,13 @@ function ContentHeader() {
       name: 'Autores'
     },
     {
+      href: '/sala-innovacion-chot',
+      name: 'CHOT'
+    },
+    {
       href: '/eventos',
       name: 'Eventos'
-    }
+    },
   ]
   return (
     <>

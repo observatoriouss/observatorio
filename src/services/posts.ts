@@ -80,6 +80,12 @@ export interface User {
   role:     string;
   image:    null | string;
   isActive: boolean;
+  country: Country;
+}
+export interface Country {
+  name: string;
+  code: string;
+  icon: string;
 }
 export interface Tag {
   id: number;

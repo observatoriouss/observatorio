@@ -66,8 +66,16 @@ async function Post({ slug }: { slug: string }) {
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>
                     <span className='text-uss-black text-xs md:text-base'>Publicado el {formatDate(post.createdAt)}</span>
-                    <Link href={`/author/${post.user?.slug}`}>
+                    <Link href={`/author/${post.user?.slug}`} className='flex gap-3 items-center'>
                         <span className='text-uss-black text-xs md:text-base font-bold'>Por {post.user?.name ?? post.reference?.author}</span>
+                        <img
+                            className="w-6 h-6 rounded-lg object-cover"
+                            src={
+                                post.user?.country?.icon ||
+                                "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png250px/pe.png"
+                            }
+                            alt={post.user?.country?.name}
+                        />
                     </Link>
                     {post.reference && (<a className='text-xs text-blue-500' target='_blank' href={post.reference.url}>Enlace de Referencia</a>)}
                 </div>
