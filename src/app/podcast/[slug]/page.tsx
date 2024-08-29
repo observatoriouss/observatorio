@@ -60,7 +60,7 @@ async function Post({ slug }: { slug: string }) {
                 <LikeSection id={post.id} likes={post.likes} />
                 <AsideComments />
             </div>
-            <SocialShareButtons url={`${Category.PODCAST}/${post.slug}`} title={post.title} />
+            <SocialShareButtons url={`podcast/${post.slug}`} title={post.title} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>
