@@ -29,10 +29,8 @@ function DetailsAccount() {
         }
     })
     useEffect(() => {
-        session?.getCountries()
-    }, [])
-    useEffect(() => {
         if (!session?.user) return
+        session?.getCountries()
         reset({
             ...session.user
         })
