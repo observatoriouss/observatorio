@@ -84,12 +84,12 @@ function ContentHeader() {
       name: 'Autores'
     },
     {
-      href: '/sala-innovacion-chot',
-      name: 'CHOT'
-    },
-    {
       href: '/eventos',
       name: 'Eventos'
+    },
+    {
+      href: '/sala-innovacion-chot',
+      name: 'CHOT'
     },
   ]
   return (
@@ -243,6 +243,11 @@ export const MenuAction = ({
           {user ? (
             <>
               <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+              <DropdownMenuItem asChild>
+                <Link href="/mi-cuenta" className='cursor-pointer'>
+                  Mi cuenta
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild onClick={logout} className='cursor-pointer'>
                 <div className='flex'>

@@ -52,7 +52,9 @@ export enum Category {
 }
 
 // mapper para enum Category
-export const categoryMapper = {
+export const categoryMapper: {
+  [key in Category]: string;
+} = {
   [Category.NEWS]: "Noticias",
   [Category.BITS]: "Educando",
   [Category.READS]: "Lecturas",
