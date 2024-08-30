@@ -3,6 +3,7 @@ import { getAuthorBySlug } from "@/services/author"
 import { Metadata, ResolvingMetadata } from "next"
 import { Suspense } from "react"
 import Author from "../components/info"
+import RedirectAuthorUndefined from "./redirect"
 
 export const dynamic = 'force-dynamic';
 
@@ -34,11 +35,13 @@ export async function generateMetadata(
 }
 
 async function Educating(request: { params: { slug: string } }) {
+
     return (
         <Suspense
             key={request.params.slug}
             fallback={<SplashScreen />}
         >
+            <RedirectAuthorUndefined params={request.params} />
             <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
                 <Author slug={request.params.slug} />
             </main>

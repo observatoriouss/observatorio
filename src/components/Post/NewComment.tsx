@@ -7,7 +7,8 @@ import { Button } from '../ui/button';
 import './styles.css';
 import { cn } from '@/lib/utils';
 import { PostStore } from '@/app/store/post';
-
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation'
 interface NewCommentProps {
   isReply?: boolean;
   placeholder?: string;
@@ -15,6 +16,7 @@ interface NewCommentProps {
   commentId?: string;
 }
 function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', onCancel, commentId }: NewCommentProps) {
+  const router = useRouter()
   const session = useStore(authStore, (state) => state)!;
   const { createComment } = PostStore()
   const [activeFormats, setActiveFormats] = useState({ bold: false, italic: false, underline: false });
@@ -87,6 +89,16 @@ function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', on
   };
 
   const handlePostComment = async () => {
+    if (!session?.user) {
+      toast('Debes iniciar sesión para comentar', {
+        // action: {
+        //   label: 'Iniciar sesión',
+        //   onClick: () => router.push('/iniciar-sesion')
+        // },
+      })
+      router.push('/iniciar-sesion')
+      return;
+    }
     if (comment.trim() === '') return;
     setIsCreateCommentLoading(true);
     await createComment({

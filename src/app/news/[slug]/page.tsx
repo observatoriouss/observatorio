@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import SplashScreen from '@/components/SplashScreen';
 import LikeSection from '@/components/LikeSection';
 import { formatDate, transformSecondsToMinutes } from '@/lib/utils';
-import { Category, categoryMapper } from '@/services/home';
+import { Category, categoryMapper, categoryMapperLink } from '@/services/home';
 import { Metadata, ResolvingMetadata } from 'next';
 import AsideComments from '@/components/Post/AsideComments';
 import PostSelected from '@/components/Post/PostSelected';
@@ -63,7 +63,7 @@ async function Post({ slug }: { slug: string }) {
                 <LikeSection id={post.id} likes={post.likes} />
                 <AsideComments />
             </div>
-            <SocialShareButtons url={`news/${post.slug}`} title={post.title} />
+            <SocialShareButtons url={categoryMapperLink[Category.NEWS] + '/' + post.slug} title={post.title} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
                 <div className='flex flex-col gap-0 md:gap-2 w-fit md:w-1/3'>
