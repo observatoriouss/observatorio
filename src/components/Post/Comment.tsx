@@ -45,13 +45,12 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
           dangerouslySetInnerHTML={{ __html: comment.body }}
         />
       </div>
-
-          <pre className='text-xs'>
-            {JSON.stringify({
-              comment,
-              session: session?.user
-              }, null, 2)}
-          </pre>
+      <pre className='text-xs hidden'>
+        {JSON.stringify({
+          comment,
+          session: session?.user
+        }, null, 2)}
+      </pre>
       <div className="grid grid-cols-[auto,1fr,auto] gap-4 items-center">
         <div className='flex'>
           <Button
