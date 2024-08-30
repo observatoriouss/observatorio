@@ -6,12 +6,15 @@ import { Separator } from '../ui/separator'
 import NewComment from './NewComment'
 import { PostStore } from '@/app/store/post'
 import { cn } from '@/lib/utils'
+import useStore from '@/hooks/useStore'
+import { authStore } from '@/app/store/session'
 
 interface CommentProps {
   comment: Comment
   isChild?: boolean
 }
 function CommentComponent({ comment, isChild = false }: CommentProps) {
+  const session = useStore(authStore, (state) => state)!;
   const { likeComment } = PostStore()
   const [reply, setReply] = useState(false)
   const handleChangeReply = () => setReply(!reply)
@@ -43,6 +46,12 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
         />
       </div>
 
+          <pre className='text-xs'>
+            {JSON.stringify({
+              comment,
+              session: session?.user
+              }, null, 2)}
+          </pre>
       <div className="grid grid-cols-[auto,1fr,auto] gap-4 items-center">
         <div className='flex'>
           <Button
@@ -52,7 +61,8 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
             aria-label="Toggle bold"
             className={cn('text-xs h-6 p-0 px-2',
               isLikeCommentLoading ? 'pointer-events-none' : '',
-              comment.iLikedIt ? 'text-red-500 bg-red-50' : ''
+              // comment.iLikedIt ? 'text-red-500 bg-red-50' : '',
+              (session?.user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500 bg-red-50' : ''
             )}
             onClick={() => handleLike(comment.id)}
           >
@@ -63,7 +73,8 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
             ) :
               (<div className='flex items-center text-black'>
                 <Heart className={cn("h-3 w-3 mr-1",
-                  comment.iLikedIt ? 'text-red-500' : ''
+                  // comment.iLikedIt ? 'text-red-500' : '',
+                  (session?.user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500' : ''
                 )} /> {comment.numberOfLikes}
               </div>)
             }
