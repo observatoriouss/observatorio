@@ -22,7 +22,7 @@ function ModalRequest() {
 
     const { loading, open, setOpen, uploadService, action, updateRequest, requestSelected } = RequestStore();
 
-    const [description, setDescription] = useState("");
+    const [description, setDescription] = useState(requestSelected?.content);
     const onHandleDescripcion = (value: string) => {
         setDescription(value);
         setValue("content", value);

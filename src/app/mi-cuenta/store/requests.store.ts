@@ -1,5 +1,6 @@
 import { uploadFile } from "@/app/upload-content/services/steps.service";
 import { RequestPost } from "@/app/upload-content/store/steps.store";
+import { getPostBySlug } from "@/services/posts";
 import {
     ApprovalStatus,
   getRequestsByUserId,
@@ -59,8 +60,12 @@ export const RequestStore = create<State & Actions>((set) => ({
       set({ loading: false });
     }
   },
-  setRequestSelected: (requestId, action) => {
-    console.log({ requestId, action });
+  setRequestSelected: async (requestId, action) => {
+    if (action === 'edit-request') {
+      const requestSelected = await getPostBySlug(requestId);
+      set({ requestSelected: requestSelected as unknown as Request, action, open: !!requestId });
+      return
+    }
     const requestSelected = RequestStore.getState().myRequests.find(
       (Request) => Request.id === requestId
     );

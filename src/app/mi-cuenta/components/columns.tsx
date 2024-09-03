@@ -41,7 +41,7 @@ export const columns: ColumnDef<Request>[] = [
     {
         id: "actions",
         cell: ({ row }) => {
-            const { rejectionReasons, approvalStatus, id } = row.original
+            const { rejectionReasons, approvalStatus, id, slug } = row.original
             const { setRequestSelected } = RequestStore()
 
             // if (!participant.certificate) return <></>
@@ -49,7 +49,7 @@ export const columns: ColumnDef<Request>[] = [
             return (
                 <div className="flex flex-row gap-1">
                     {
-                        rejectionReasons.length ? (
+                        rejectionReasons?.length ? (
                             <Button className='bg-transparent shadow-none hover:bg-transparent border border-purple-500 h-7 w-7 p-1'
                             onClick={() => setRequestSelected(id, 'list-rejects')}
                             >
@@ -60,7 +60,7 @@ export const columns: ColumnDef<Request>[] = [
                     {
                         approvalStatus === 'rejected' && (
                             <Button className='bg-transparent shadow-none hover:bg-transparent border border-green-500 h-7 w-7 p-1'
-                            onClick={() => setRequestSelected(id, 'edit-request')}
+                            onClick={() => setRequestSelected(slug, 'edit-request')}
                             >
                                 <Edit className="text-green-500" />
                             </Button>
