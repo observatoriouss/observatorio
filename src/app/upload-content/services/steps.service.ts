@@ -1,6 +1,7 @@
 import { API_URL } from "@/config/api";
 import { api } from "@/services/axios";
 import { RequestPost } from "../store/steps.store";
+import { getCookie } from "cookies-next";
 
 export interface Guest {
   name: string;
@@ -13,7 +14,7 @@ export interface Guest {
 }
 
 export interface PayloadGuest extends Partial<Guest> {
-  verificationCode: string
+  verificationCode: string;
 }
 
 export async function getGuest(
@@ -47,19 +48,29 @@ export async function sendOTP(email: string): Promise<void> {
 }
 
 // {{url}}/api/posts/create-request
-export async function createRequestPost(request: RequestPost): Promise<RequestPost> {
-  const { data } = await api.post(`${API_URL}/posts/create-request`, request);
-  return data
+export async function createRequestPost(
+  request: RequestPost
+): Promise<RequestPost> {
+  const { data } = await api.post(`${API_URL}/posts/create-request`, request, {
+    headers: {
+      Authorization: `Bearer ${getCookie("TOKEN")}`,
+    },
+  });
+  return data;
 }
 
 // {{url}}/api/storage/upload
 export async function uploadFile(file: File): Promise<{ url: string }> {
   const formData = new FormData();
-  formData.append('file', file);
-  const { data } = await api.post<{ url: string }>(`${API_URL}/storage/upload`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  formData.append("file", file);
+  const { data } = await api.post<{ url: string }>(
+    `${API_URL}/storage/upload`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
   return data;
 }
