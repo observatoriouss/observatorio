@@ -7,14 +7,18 @@ import useStore from '@/hooks/useStore'
 import { authStore } from '@/app/store/session'
 import { useRouter } from "next/navigation"
 import { User } from '@/app/store/session.model'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
+import { Label } from '@/components/ui/label'
 
 function ValidationData() {
     const router = useRouter()
     const { loading, setSteps } = StepStore()
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Partial<User>>({
+    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<Partial<User>>({
         values: {
             name: '',
             email: '',
+            image: ''
         }
     })
 
@@ -29,6 +33,7 @@ function ValidationData() {
     const { user } = session;
     session && setValue('name', user?.name)
     session && setValue('email', user?.email)
+    session && setValue('image', user?.image)
 
     const handleRedirectToLogin = () => {
         router.push('/iniciar-sesion')
@@ -38,8 +43,12 @@ function ValidationData() {
             <h1 className='text-2xl font-bold text-center'>
                 Validación de Datos
             </h1>
+            <p className='text-sm text-center w-full'>
+                Por favor, verifica que los datos sean correctos, de lo contrario, actualízalos en:
+                <Link href="/mi-cuenta" className="text-blue-500"> Mi Cuenta</Link>
+            </p>
             {user ? (<>
-                <form onSubmit={onSubmit} className="py-4">
+                <form onSubmit={onSubmit} className="py-4 flex flex-col gap-2">
                     {/* <div className="grid w-full gap-1.5">
                         <Input
                             type="number" id="dni" placeholder="Inserte DNI"
@@ -69,6 +78,9 @@ function ValidationData() {
                         )}</span>
                     </div> */}
                     <div className="grid w-full gap-1.5">
+                        <Label htmlFor="name" className="text-left">
+                            Nombres
+                        </Label>
                         <Input
                             type="text" id="name" placeholder="Nombre"
                             disabled={loading}
@@ -86,6 +98,9 @@ function ValidationData() {
                         )}</span>
                     </div>
                     <div className="grid w-full gap-1.5">
+                        <Label htmlFor="name" className="text-left">
+                            Correo Electrónico
+                        </Label>
                         <Input
                             type="email" id="email" placeholder="Email"
                             disabled={loading}
@@ -101,6 +116,37 @@ function ValidationData() {
                         <span className="text-red-500 text-xs">{errors.email && (
                             <>{errors.email.message}</>
                         )}</span>
+                    </div>
+                    <div className={cn(
+                        "flex flex-col items-start gap-2",
+                    )}>
+                        <div className='pb-2'>
+                            {user.image ? (
+                                <img src={user.image} alt="Imagen" className="h-36 aspect-square object-cover transition-all hover:scale-105" />
+                            ) : (
+                                <div className="h-36 aspect-square bg-gray-200 flex items-center justify-center text-xs px-2">
+                                    <p className='text-center'>
+                                        <span className='font-semibold'>No hay imagen cargada</span> <br />
+                                        Por favor, carga tu imagen en:
+                                        <Link href="/mi-cuenta" className="text-blue-500"> Mi Cuenta</Link>
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                        <Input
+                            disabled={session?.loading}
+                            value={user.image || ''}
+                            className="hidden"
+                            {...register('image', {
+                                required: {
+                                    value: true,
+                                    message: 'Imagen es requerida.'
+                                },
+                            })}
+                        />
+                        {errors.image &&
+                            <span className="text-red-600 text-xs">{errors.image.message}</span>
+                        }
                     </div>
                     <Button
                         type='submit'
