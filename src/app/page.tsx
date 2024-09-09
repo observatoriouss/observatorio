@@ -19,7 +19,7 @@ async function HomeGrid() {
 
   if (!sections) {
     return <div>
-      <h1>No hay contenido para mostrar</h1>
+      <h1>No hay contenido para mostrar.</h1>
     </div>;
   }
 
