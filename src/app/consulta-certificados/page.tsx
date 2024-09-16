@@ -3,14 +3,17 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
-import { SearchStore } from "./store/search";
+import { useSearchStore } from "./store/search";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
 import { DataTableCertificates } from "./components/table";
 import { columns } from "./components/columns";
 
 function Page() {
-    const { loading, getCertificationsByDNI, trainings } = SearchStore()
+    const loading = useSearchStore( state => state.loading);
+    const getCertificationsByDNI = useSearchStore( state => state.getCertificationsByDNI);
+    const trainings = useSearchStore( state => state.trainings);
+
     const { register, handleSubmit, formState: { errors }, watch, setValue, setError } = useForm({
         values: {
             documentNumber: '' as unknown as number,

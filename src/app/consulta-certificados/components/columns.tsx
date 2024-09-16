@@ -2,8 +2,28 @@
 
 import { Button } from "@/components/ui/button"
 import { MapTrainingModality, SingleTraining } from "@/services/events"
-import { ColumnDef } from "@tanstack/react-table"
-import { SearchStore } from "../store/search"
+import { ColumnDef, Row } from "@tanstack/react-table"
+import { useSearchStore } from "../store/search"
+
+const CellComponent = ({ row }: { row: Row<SingleTraining> }) => {
+    const { participant } = row.original
+            const downloadCertificate = useSearchStore( state => state.downloadCertificate);
+
+            if (!participant.certificate) return <></>
+
+            return (
+                // Descargar certificado
+                <Button
+                    size={"sm"}
+                    onClick={() => {
+                        if (!participant) return
+                        downloadCertificate(participant)
+                    }}
+                >
+                    <span className="text-xs">Descargar certificado</span>
+                </Button>
+            )
+};
 
 export const columns: ColumnDef<SingleTraining>[] = [
     {
@@ -46,24 +66,6 @@ export const columns: ColumnDef<SingleTraining>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => {
-            const { participant } = row.original
-            const { downloadCertificate } = SearchStore()
-
-            if (!participant.certificate) return <></>
-
-            return (
-                // Descargar certificado
-                <Button
-                    size={"sm"}
-                    onClick={() => {
-                        if (!participant) return
-                        downloadCertificate(participant)
-                    }}
-                >
-                    <span className="text-xs">Descargar certificado</span>
-                </Button>
-            )
-        },
+        cell: CellComponent
     },
 ]

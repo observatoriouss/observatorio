@@ -1,10 +1,11 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Steps, StepStore } from '../store/steps.store'
+import { Steps, useStepStore } from '../store/steps.store'
 import { CircleCheck } from 'lucide-react'
 
 function Confirmation() {
-    const { idRequest, setSteps } = StepStore()
+    const idRequest = useStepStore(state => state.idRequest)
+    const setSteps = useStepStore(state => state.setSteps)
     return (
         <div className='container mx-auto bg-white py-12 md:p-12 w-full'>
             <h1 className='text-2xl font-bold text-center'>

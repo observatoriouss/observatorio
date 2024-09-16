@@ -61,7 +61,7 @@ type Actions = {
   uploadService: (file: File) => Promise<{ url: string }>;
 };
 
-export const StepStore = create<State & Actions>((set) => ({
+export const useStepStore = create<State & Actions>()((set) => ({
   step: Steps.DataValidation,
   loading: false,
   otp: '',

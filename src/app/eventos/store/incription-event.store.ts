@@ -39,7 +39,7 @@ type Actions = {
   clearCache: () => void;
 };
 
-export const InscriptionEventStore = create<State & Actions>((set) => ({
+export const useInscriptionEventStore = create<State & Actions>()((set, get) => ({
   loading: false,
   professor: null,
   succesfulRegister: false,
@@ -104,7 +104,7 @@ export const InscriptionEventStore = create<State & Actions>((set) => ({
     }
   },
   completeInscription: async (trainingId, roles): Promise<Participant> => {
-    const professor = InscriptionEventStore.getState().professor;
+    const professor = get().professor;
     if (!professor) {
       toast.error("Por favor, complete el registro del profesor.");
       set({ inscription: null });

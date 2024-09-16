@@ -1,6 +1,6 @@
 'use client';
-import { PostStore } from "@/app/store/post";
-import { authStore } from "@/app/store/session";
+import { usePostStore } from "@/app/store/post";
+import { useAuthStore } from "@/app/store/session";
 import {
     Sheet,
     SheetContent,
@@ -8,7 +8,6 @@ import {
     SheetHeader, SheetTitle,
     SheetTrigger
 } from "@/components/ui/sheet";
-import useStore from "@/hooks/useStore";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
@@ -19,9 +18,12 @@ import CommentComponent from "./Comment";
 
 
 function AsideComments() {
-
-    const { isOpenComments, setIsOpenComments, postSelected, getCommentsForPost, commentsForPostDraft } = PostStore()
-    const session = useStore(authStore, (state) => state)!;
+    const isOpenComments = usePostStore(state => state.isOpenComments);
+    const setIsOpenComments = usePostStore(state => state.setIsOpenComments);
+    const postSelected = usePostStore(state => state.postSelected);
+    const getCommentsForPost = usePostStore(state => state.getCommentsForPost);
+    const commentsForPostDraft = usePostStore(state => state.commentsForPostDraft);
+    const user = useAuthStore(state => state.user)
     useEffect(() => {
         if (postSelected) {
             getCommentsForPost(postSelected.id)
@@ -42,7 +44,7 @@ function AsideComments() {
                 <SheetDescription className="flex flex-col gap-4" asChild>
                     <>
                         <div className="p-4">
-                            {session?.user ? (
+                            {user ? (
                                 <NewComment />
                             ) : (
                                 <Card className="mt-2">

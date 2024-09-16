@@ -12,12 +12,12 @@ import {
     InputOTPSeparator,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { EventStore } from "../store/event.store"
+import { useEventStore } from "../store/event.store"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
-import { InscriptionEventStore } from "../store/incription-event.store"
+import { useInscriptionEventStore } from "../store/incription-event.store"
 import { useEffect, useState } from "react"
 import { MapProfessorEmploymentType, MapRoleInscription, ProfessorBodyRequest, ProfessorEmploymentType, RoleInscription } from "@/services/events"
 import Select from 'react-select'
@@ -29,8 +29,20 @@ import SplashScreen from "@/components/SplashScreen"
 
 function Inscription() {
     const router = useRouter()
-    const { open, setOpen, trainingSelected: training } = EventStore()
-    const { verifyComplete, loading, professor, validateExistDNI, setProfessor, schools, succesfulRegister, registerProfessor, completeOTP, completeInscription, clearCache } = InscriptionEventStore()
+    const open = useEventStore(state => state.open)
+    const setOpen = useEventStore(state => state.setOpen)
+    const training = useEventStore(state => state.trainingSelected)
+    const verifyComplete = useInscriptionEventStore(state => state.verifyComplete)
+    const loading = useInscriptionEventStore(state => state.loading)
+    const professor = useInscriptionEventStore(state => state.professor)
+    const validateExistDNI = useInscriptionEventStore(state => state.validateExistDNI)
+    const setProfessor = useInscriptionEventStore(state => state.setProfessor)
+    const schools = useInscriptionEventStore(state => state.schools)
+    const succesfulRegister = useInscriptionEventStore(state => state.succesfulRegister)
+    const registerProfessor = useInscriptionEventStore(state => state.registerProfessor)
+    const completeOTP = useInscriptionEventStore(state => state.completeOTP)
+    const completeInscription = useInscriptionEventStore(state => state.completeInscription)
+    const clearCache = useInscriptionEventStore(state => state.clearCache)
     const [chargingPageInscription, setChargingPageInscription] = useState(false)
 
     const { register, handleSubmit, formState: { errors }, watch, setValue, setError } = useForm<ProfessorBodyRequest>({

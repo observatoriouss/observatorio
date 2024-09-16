@@ -1,29 +1,24 @@
 'use client'
-import React, { useEffect } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useEffect } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DetailsAccount from './tabs-content/detailsAccount';
 import MyRequests from './tabs-content/myRequests';
-import useStore from '@/hooks/useStore';
-import { authStore } from '../store/session';
-import { useRouter } from 'next/navigation'
+import { useAuthStore } from '../store/session';
+import { useRouter } from 'next/navigation';
 
 function MyAccountPage() {
     const navigate = useRouter();
-    const session = useStore(authStore, (state) => state)!;
+    const user = useAuthStore(state => state.user);
 
-    useEffect(() => {
-        if (session) {
-            if (!session.user) {
-                navigate.push('/iniciar-sesion');
-            }
-        }
-    }, [session])
+    if (!user) {
+        navigate.push('/iniciar-sesion');
+    }
 
     return (
         <div className='py-4 md:py-6 flex flex-col gap-4'>
             <div className='p-4 bg-uss-green'>
                 <h3 className='font-medium'>Bienvenido</h3>
-                <h2 className='font-bold text-lg'>{session?.user?.name}</h2>
+                <h2 className='font-bold text-lg'>{user?.name}</h2>
             </div>
 
             <Tabs defaultValue="account">

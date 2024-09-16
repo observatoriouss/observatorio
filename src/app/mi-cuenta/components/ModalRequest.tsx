@@ -7,7 +7,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { RequestStore } from "../store/requests.store";
+import { useRequestStore } from "../store/requests.store";
 import { RequestPost } from "@/app/upload-content/store/steps.store";
 import { formatDate, OPTIONS_CATEGORY } from "@/lib/utils";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,13 @@ import Creatable from 'react-select/creatable';
 
 function ModalRequest() {
 
-    const { loading, open, setOpen, uploadService, action, updateRequest, requestSelected } = RequestStore();
+    const loading = useRequestStore(state => state.loading)
+    const open = useRequestStore(state => state.open)
+    const setOpen = useRequestStore(state => state.setOpen)
+    const uploadService = useRequestStore(state => state.uploadService)
+    const action = useRequestStore(state => state.action)
+    const updateRequest = useRequestStore(state => state.updateRequest)
+    const requestSelected = useRequestStore(state => state.requestSelected)
 
     const [description, setDescription] = useState(requestSelected?.content);
     const onHandleDescripcion = (value: string) => {

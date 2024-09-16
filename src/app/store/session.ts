@@ -1,6 +1,6 @@
-import { create } from "zustand";
+import { create, StateCreator } from "zustand";
 import { deleteCookie, getCookie, setCookie } from "cookies-next";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist, createJSONStorage, devtools } from "zustand/middleware";
 import {
   PayloadLogin,
   PayloadRegister,
@@ -32,109 +32,151 @@ interface Actions {
   updateDataUser: (body: UserBodyRequest, id: string) => Promise<void>;
 }
 
-export const authStore = create<
+const storeApi: StateCreator<
   State & Actions,
+  [["zustand/devtools", never]],
   [["zustand/persist", State & Actions]]
->(
-  persist(
-    (set, get) => ({
-      user: null,
-      countries: [],
-      isSended: false,
-      loading: false,
-      showPassword: false,
-      getCountries: async () => {
-        const countries = await getCountries();
-        set({ countries });
-      },
-      setShowPassword: (showPassword: boolean) => {
-        set({ showPassword });
-      },
-      login: async (body: PayloadLogin) => {
-        try {
-          set({ loading: true });
-          const userData = await login(body);
-          set({
-            user: userData.user,
-          });
-          setCookie("TOKEN", userData.token);
-          toast.success("Sesión iniciada con éxito");
-        } catch (error) {
-          toast.error("Error al iniciar sesión");
-          throw new Error("Failed to login");
-        } finally {
-          set({ loading: false, isSended: false });
-        }
-      },
-      getUserByToken: async () => {
-        const token = getCookie("TOKEN");
+> = (set, get) => ({
+  user: null,
+  countries: [],
+  isSended: false,
+  loading: false,
+  showPassword: false,
+  getCountries: async () => {
+    try {
+      const countries = await getCountries();
+      set({ countries }, false, "getCountries");
+    } catch (error) {
+      console.error("Error al obtener los países");
+    }
+  },
+  setShowPassword: (showPassword: boolean) => {
+    set({ showPassword }, false, "setShowPassword");
+  },
+  login: async (body: PayloadLogin) => {
+    try {
+      set({ loading: true });
+      const userData = await login(body);
+      set(
+        {
+          user: userData.user,
+        },
+        false,
+        "loginSuccess"
+      );
+      setCookie("TOKEN", userData.token);
+      toast.success("Sesión iniciada con éxito");
+    } catch (error) {
+      toast.error("Error al iniciar sesión");
+      throw new Error("Failed to login");
+    } finally {
+      set({ loading: false, isSended: false });
+    }
+  },
+  getUserByToken: async () => {
+    const token = getCookie("TOKEN");
 
-        if (token) {
-          const userByToken = await getUserByToken(token);
-          set({
-            user: userByToken,
-          });
-        }
-      },
-      logout: async () => {
-        deleteCookie("TOKEN");
-        set({ user: null, isSended: false });
-        toast.success("Sesión cerrada con éxito");
-      },
-      registerUser: async (body) => {
-        try {
-          set({ loading: true });
-          const newUser = await register(body);
-          set({
-            user: newUser.user,
-          });
-          setCookie("TOKEN", newUser.token);
-          toast.success("Usuario creado con éxito");
-        } catch (error) {
-          toast.error("Error al crear usuario");
-        } finally {
-          set({ loading: false, isSended: false });
-        }
-      },
-      sendVerificationCode: async (body) => {
-        try {
-          set({ loading: true });
-          await sendOTP(body.user.email);
-          set({
-            isSended: true,
-          });
-          toast.success("Código de verificación enviado");
-        } catch (error) {
-          toast.error("Error al enviar código de verificación");
-        } finally {
-          set({ loading: false });
-        }
-      },
-      updateDataUser: async (body, id) => {
-        try {
-          const token = getCookie("TOKEN");
-          set({ loading: true });
-          const user = await updateUser({
-            countryCode: body.countryCode,
-            image: body.image,
-            name: body.name,
-            password: body.password === "" ? undefined : body.password,
-            role: body.role,
-            
-          }, id, token);
-          set({ user });
-          toast.success("Usuario actualizado con éxito");
-        } catch (error) {
-          toast.error("Error al actualizar usuario");
-        } finally {
-          set({ loading: false, isSended: false });
-        }
-      },
+    if (token) {
+      const userByToken = await getUserByToken(token);
+      set(
+        {
+          user: userByToken,
+        },
+        false,
+        "getUserByToken"
+      );
+    }
+  },
+  logout: async () => {
+    deleteCookie("TOKEN");
+    set({ user: null, isSended: false }, false, "logout");
+    toast.success("Sesión cerrada con éxito");
+  },
+  registerUser: async (body) => {
+    try {
+      set({ loading: true });
+      const newUser = await register(body);
+      set(
+        {
+          user: newUser.user,
+        },
+        false,
+        "registerUserSuccess"
+      );
+      setCookie("TOKEN", newUser.token);
+      toast.success("Usuario creado con éxito");
+    } catch (error) {
+      toast.error("Error al crear usuario");
+    } finally {
+      set({ loading: false, isSended: false });
+    }
+  },
+  sendVerificationCode: async (body) => {
+    try {
+      set({ loading: true });
+      await sendOTP(body.user.email);
+      set(
+        {
+          isSended: true,
+        },
+        false,
+        "sendVerificationCode"
+      );
+      toast.success("Código de verificación enviado");
+    } catch (error) {
+      toast.error("Error al enviar código de verificación");
+    } finally {
+      set({ loading: false });
+    }
+  },
+  updateDataUser: async (body, id) => {
+    try {
+      const token = getCookie("TOKEN");
+      set({ loading: true });
+      const user = await updateUser(
+        {
+          countryCode: body.countryCode,
+          image: body.image,
+          name: body.name,
+          password: body.password === "" ? undefined : body.password,
+          role: body.role,
+        },
+        id,
+        token
+      );
+      set({ user }, false, "updateDataUserSuccess");
+      toast.success("Usuario actualizado con éxito");
+    } catch (error) {
+      toast.error("Error al actualizar usuario");
+    } finally {
+      set({ loading: false, isSended: false });
+    }
+  },
+});
+
+export const useAuthStore = create<State & Actions>()(
+  persist(
+    devtools(storeApi, {
+      name: "Auth Store",
     }),
     {
       name: "auth-store",
-      // skipHydration: true,
-      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ user: state.user }),
+      storage: createJSONStorage(() => ({
+        // Returning a promise from getItem is necessary to avoid issues with hydration
+        getItem: async (name) =>
+          new Promise((resolve) =>
+            setTimeout(() => {
+              const isServer = typeof window === "undefined";
+              if (isServer) return;
+
+              const value = localStorage?.getItem(name);
+              resolve(value);
+            }, 100)
+          ),
+        setItem: (name, value) => localStorage?.setItem(name, value),
+        removeItem: (name) => localStorage?.removeItem(name),
+      })),
     }
   )
 );

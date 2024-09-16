@@ -12,8 +12,7 @@ import './styles.css';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { ChevronLeft, ChevronRight, LogOut, Search, User } from 'lucide-react';
 import { Button } from '../ui/button';
-import useStore from '@/hooks/useStore';
-import { authStore } from '@/app/store/session';
+import { useAuthStore } from '@/app/store/session';
 import { usePathname } from 'next/navigation';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -218,11 +217,9 @@ interface MenuActionProps {
 export const MenuAction = ({
   isOpenSearch, setIsOpenSearch, classNameButton, classNameIcons
 }: MenuActionProps) => {
-  const session = useStore(authStore, (state) => state)!;
-  if (!session) {
-    return null;
-  }
-  const { user, logout } = session;
+  const user = useAuthStore(state => state.user);
+  const logout = useAuthStore(state => state.logout);
+
   return (
     <div className='flex gap-1'>
       <Button

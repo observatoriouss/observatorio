@@ -2,20 +2,22 @@
 import { useEffect } from 'react';
 import { DataTableRequests } from '../components/table';
 import { columns } from '../components/columns';
-import { RequestStore } from '../store/requests.store';
-import useStore from '@/hooks/useStore';
-import { authStore } from '@/app/store/session';
+import { useRequestStore } from '../store/requests.store';
+import { useAuthStore } from '@/app/store/session';
 import ModalRequest from '../components/ModalRequest';
 
 function MyRequests() {
-  const session = useStore(authStore, (state) => state)!;
-  const { myRequests, getRequestsByUser, loading, open } = RequestStore()
+  const user = useAuthStore(state => state.user);
+  const myRequests = useRequestStore(state => state.myRequests)
+  const getRequestsByUser = useRequestStore(state => state.getRequestsByUser)
+  const loading = useRequestStore(state => state.loading)
+  const open = useRequestStore(state => state.open)
+
   useEffect(() => {
-    console.log('asdasda')
-    if (!session?.user) return
-    getRequestsByUser(session?.user?.id!)
-  }, [session?.user])
-  if (!session?.user) return
+    if (!user) return
+    getRequestsByUser(user?.id)
+  }, [user])
+  if (!user) return null;
   return (
     <div>
       <h1 className='uppercase text-green-800 font-bold text-xl pb-4'>MIS SOLICITUDES</h1>

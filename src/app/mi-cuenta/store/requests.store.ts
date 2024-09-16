@@ -2,7 +2,7 @@ import { uploadFile } from "@/app/upload-content/services/steps.service";
 import { RequestPost } from "@/app/upload-content/store/steps.store";
 import { getPostBySlug } from "@/services/posts";
 import {
-    ApprovalStatus,
+  ApprovalStatus,
   getRequestsByUserId,
   Request,
   updateRequestStatus,
@@ -38,7 +38,7 @@ type Actions = {
   uploadService: (file: File) => Promise<{ url: string }>;
 };
 
-export const RequestStore = create<State & Actions>((set) => ({
+export const useRequestStore = create<State & Actions>()((set, get) => ({
   loading: false,
   myRequests: [],
   action: "none",
@@ -61,12 +61,16 @@ export const RequestStore = create<State & Actions>((set) => ({
     }
   },
   setRequestSelected: async (requestId, action) => {
-    if (action === 'edit-request') {
+    if (action === "edit-request") {
       const requestSelected = await getPostBySlug(requestId);
-      set({ requestSelected: requestSelected as unknown as Request, action, open: !!requestId });
-      return
+      set({
+        requestSelected: requestSelected as unknown as Request,
+        action,
+        open: !!requestId,
+      });
+      return;
     }
-    const requestSelected = RequestStore.getState().myRequests.find(
+    const requestSelected = get().myRequests.find(
       (Request) => Request.id === requestId
     );
     set({ requestSelected, action, open: !!requestId });
@@ -77,19 +81,17 @@ export const RequestStore = create<State & Actions>((set) => ({
       set({ loading: true });
       const updatedRequest = await updateRequestStatus(id, {
         newData: {
-            ...payload,
-            attachments: payload.attachments?.length ? payload.attachments : [],
+          ...payload,
+          attachments: payload.attachments?.length ? payload.attachments : [],
         },
         approvalStatus: ApprovalStatus.pending,
       });
-      const updatedRequests = RequestStore.getState().myRequests.map(
-        (request) => {
-          if (request.id === id) {
-            return updatedRequest;
-          }
-          return request;
+      const updatedRequests = get().myRequests.map((request) => {
+        if (request.id === id) {
+          return updatedRequest;
         }
-      );
+        return request;
+      });
       set({ myRequests: updatedRequests });
       set({ open: false });
     } catch (error) {

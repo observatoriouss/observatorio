@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect } from "react"
-import { InscriptionEventStore } from "../store/incription-event.store"
+import { useInscriptionEventStore } from "../store/incription-event.store"
 
 function ChargeData() {
-    const { getListSchools } = InscriptionEventStore()
+    const getListSchools = useInscriptionEventStore(state => state.getListSchools)
     useEffect(() => {
         getListSchools()
     }, [])

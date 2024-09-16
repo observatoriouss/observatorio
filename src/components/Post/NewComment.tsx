@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { Bold, Italic, Underline, User } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
-import useStore from "@/hooks/useStore";
-import { authStore } from "@/app/store/session";
+import { useAuthStore } from "@/app/store/session";
 import { Button } from '../ui/button';
 import './styles.css';
 import { cn } from '@/lib/utils';
-import { PostStore } from '@/app/store/post';
+import { usePostStore } from '@/app/store/post';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 interface NewCommentProps {
   isReply?: boolean;
   placeholder?: string;
@@ -17,8 +16,8 @@ interface NewCommentProps {
 }
 function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', onCancel, commentId }: NewCommentProps) {
   const router = useRouter()
-  const session = useStore(authStore, (state) => state)!;
-  const { createComment } = PostStore()
+  const user = useAuthStore(state => state.user)
+  const createComment = usePostStore(state => state.createComment)
   const [activeFormats, setActiveFormats] = useState({ bold: false, italic: false, underline: false });
   const editableRef = useRef<HTMLDivElement>(null);
   const savedSelection = useRef<Range | null>(null);
@@ -89,7 +88,7 @@ function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', on
   };
 
   const handlePostComment = async () => {
-    if (!session?.user) {
+    if (!user) {
       toast('Debes iniciar sesión para comentar', {
         // action: {
         //   label: 'Iniciar sesión',
@@ -147,7 +146,7 @@ function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', on
             <div className="rounded-full bg-green-100 h-6 w-6 flex items-center justify-center">
               <User size={16} />
             </div>
-            <h2 className="text-base font-semibold">{session?.user?.name}</h2>
+            <h2 className="text-base font-semibold">{user?.name}</h2>
           </div>
         )}
 

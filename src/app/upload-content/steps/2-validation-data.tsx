@@ -1,19 +1,21 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Steps, StepStore } from '../store/steps.store'
+import { Steps, useStepStore } from '../store/steps.store'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
-import useStore from '@/hooks/useStore'
-import { authStore } from '@/app/store/session'
+import { useAuthStore } from '@/app/store/session'
 import { useRouter } from "next/navigation"
 import { User } from '@/app/store/session.model'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { Label } from '@/components/ui/label'
+import { useEffect } from 'react'
 
 function ValidationData() {
+    const user = useAuthStore(state => state.user)
+    const loading = useStepStore(state => state.loading)
+    const setSteps = useStepStore(state => state.setSteps)
     const router = useRouter()
-    const { loading, setSteps } = StepStore()
     const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<Partial<User>>({
         values: {
             name: '',
@@ -26,14 +28,15 @@ function ValidationData() {
         setSteps(Steps.CreateNewPost)
     })
 
-    const session = useStore(authStore, (state) => state)!;
-    if (!session) {
-        return null;
-    }
-    const { user } = session;
-    session && setValue('name', user?.name)
-    session && setValue('email', user?.email)
-    session && setValue('image', user?.image)
+
+    useEffect(() => {
+        if (user) {
+            setValue('name', user.name)
+            setValue('email', user.email)
+            setValue('image', user.image)
+        }
+    }, [user])
+
 
     const handleRedirectToLogin = () => {
         router.push('/iniciar-sesion')
@@ -134,7 +137,7 @@ function ValidationData() {
                             )}
                         </div>
                         <Input
-                            disabled={session?.loading}
+                            disabled={loading}
                             value={user.image || ''}
                             className="hidden"
                             {...register('image', {

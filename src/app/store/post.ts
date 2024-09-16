@@ -37,7 +37,7 @@ type Actions = {
   deleteComment: (postCommentId: string) => Promise<void>;
 };
 
-export const PostStore = create<State & Actions>((set) => ({
+export const usePostStore = create<State & Actions>()((set, get) => ({
   commentTerm: "",
   postSelected: null,
   postSelectedDraft: null,
@@ -72,8 +72,8 @@ export const PostStore = create<State & Actions>((set) => ({
   setIsDialogDeleteCommentOpen: (isDialogDeleteCommentOpen) =>
     set({ isDialogDeleteCommentOpen }),
   createComment: async (body) => {
-    const post = PostStore.getState().postSelected;
-    const commentsForPost = PostStore.getState().commentsForPost;
+    const post = get().postSelected;
+    const commentsForPost = get().commentsForPost;
     if (!post) {
       toast.error("No se ha seleccionado un post");
       return;
@@ -127,8 +127,8 @@ export const PostStore = create<State & Actions>((set) => ({
     }
   },
   likeComment: async (postCommentId) => {
-    const post = PostStore.getState().postSelected;
-    const commentsForPost = PostStore.getState().commentsForPost;
+    const post = get().postSelected;
+    const commentsForPost = get().commentsForPost;
     if (!post) {
       toast.error("No se ha seleccionado un post");
       return;
@@ -163,8 +163,8 @@ export const PostStore = create<State & Actions>((set) => ({
     }
   },
   deleteComment: async (postCommentId) => {
-    const post = PostStore.getState().postSelected;
-    const commentsForPost = PostStore.getState().commentsForPost;
+    const post = get().postSelected;
+    const commentsForPost = get().commentsForPost;
     if (!post) {
       toast.error("No se ha seleccionado un post");
       return;

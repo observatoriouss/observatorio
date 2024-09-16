@@ -1,10 +1,10 @@
 'use client'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Steps, STEPS, StepStore } from "./store/steps.store"
+import { Steps, STEPS, useStepStore } from "./store/steps.store"
 import { cn, getEnumIndex } from "@/lib/utils"
 
 function UploadContentRequest() {
-  const { step: stepStore } = StepStore()
+  const stepStore = useStepStore(state => state.step)
   return (
     <div className='container mx-auto py-12'>
       <br />

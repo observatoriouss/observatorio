@@ -1,21 +1,20 @@
 import { Comment } from '@/app/store/post.model'
 import { Heart, MessageCircle, User } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
 import NewComment from './NewComment'
-import { PostStore } from '@/app/store/post'
+import { usePostStore } from '@/app/store/post'
 import { cn } from '@/lib/utils'
-import useStore from '@/hooks/useStore'
-import { authStore } from '@/app/store/session'
+import { useAuthStore } from '@/app/store/session'
 
 interface CommentProps {
   comment: Comment
   isChild?: boolean
 }
 function CommentComponent({ comment, isChild = false }: CommentProps) {
-  const session = useStore(authStore, (state) => state)!;
-  const { likeComment } = PostStore()
+  const user = useAuthStore(state => state.user)
+  const likeComment = usePostStore(state => state.likeComment)
   const [reply, setReply] = useState(false)
   const handleChangeReply = () => setReply(!reply)
   const [isLikeCommentLoading, setIsLikeCommentLoading] = useState(false)
@@ -48,7 +47,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
       <pre className='text-xs hidden'>
         {JSON.stringify({
           comment,
-          session: session?.user
+          session: user
         }, null, 2)}
       </pre>
       <div className="grid grid-cols-[auto,1fr,auto] gap-4 items-center">
@@ -61,7 +60,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
             className={cn('text-xs h-6 p-0 px-2',
               isLikeCommentLoading ? 'pointer-events-none' : '',
               // comment.iLikedIt ? 'text-red-500 bg-red-50' : '',
-              (session?.user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500 bg-red-50' : ''
+              (user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500 bg-red-50' : ''
             )}
             onClick={() => handleLike(comment.id)}
           >
@@ -73,7 +72,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
               (<div className='flex items-center text-black'>
                 <Heart className={cn("h-3 w-3 mr-1",
                   // comment.iLikedIt ? 'text-red-500' : '',
-                  (session?.user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500' : ''
+                  (user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500' : ''
                 )} /> {comment.numberOfLikes}
               </div>)
             }

@@ -1,5 +1,5 @@
 'use client'
-import { RequestPost, StepStore } from '../store/steps.store'
+import { RequestPost, useStepStore } from '../store/steps.store'
 import { useForm } from 'react-hook-form'
 import { Category } from '@/services/home'
 import { Label } from '@/components/ui/label'
@@ -8,15 +8,19 @@ import { OPTIONS_CATEGORY } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import Creatable from 'react-select/creatable'
 import { DefaultEditor } from "react-simple-wysiwyg"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import useStore from '@/hooks/useStore'
-import { authStore } from '@/app/store/session'
+import { useAuthStore } from '@/app/store/session'
 import { useRouter } from 'next/navigation'
 
 function CreatePost() {
+    const user = useAuthStore(state => state.user);
+    const requestPost = useStepStore(state => state.requestPost);
+    const loading = useStepStore(state => state.loading);
+    const crtPost = useStepStore(state => state.crtPost);
+    const uploadService = useStepStore(state => state.uploadService);
+
     const router = useRouter()
-    const { requestPost, loading, crtPost, uploadService } = StepStore()
     const [description, setDescription] = useState("");
     const onHandleDescripcion = (value: string) => {
         setDescription(value);
@@ -45,19 +49,17 @@ function CreatePost() {
         setValue('attachments', [...(watch('attachments') ?? []), url])
     }
 
-    const session = useStore(authStore, (state) => state)!;
-    if (!session) {
-        return null;
-    }
-    const { user } = session;
-
     const onSubmit = handleSubmit(async (payload, e) => {
         if (!user) return router.push('/iniciar-sesion');
         (e as any).preventDefault();
-        return await crtPost({...payload, userId: user.id});
+        return await crtPost({ ...payload, userId: user.id });
     })
 
-
+    useEffect(() => {
+        if (!user) {
+            router.push('/iniciar-sesion');
+        }
+    }, [user])
 
     return (
         <div className='container mx-auto bg-white py-12 md:p-12 w-full'>

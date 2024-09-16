@@ -7,7 +7,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { EventStore } from "../store/event.store"
+import { useEventStore } from "../store/event.store"
 import { Execution } from "@/services/events"
 import { cn, evaluateIfIsPlaceOrLink, formatDateShort, formatHour, getDuration } from "@/lib/utils"
 
@@ -15,7 +15,9 @@ interface ListExecutionsProps {
     executions: Execution[]
 }
 function ListExecutions() {
-    const { openExecutions, setOpenExecutions, executionsSelected } = EventStore()
+    const openExecutions = useEventStore(state => state.openExecutions)
+    const setOpenExecutions = useEventStore(state => state.setOpenExecutions)
+    const executionsSelected = useEventStore(state => state.executionsSelected)
 
     return (
         <Dialog open={openExecutions} onOpenChange={setOpenExecutions}>
@@ -48,7 +50,7 @@ function ListExecutions() {
 export default ListExecutions
 
 export const InfoExecution = ({ executions }: ListExecutionsProps) => {
-    const { setExecutionsSelected } = EventStore()
+    const { setExecutionsSelected } = useEventStore()
 
     const handleOpen = () => {
         if (executions.length > 1) {

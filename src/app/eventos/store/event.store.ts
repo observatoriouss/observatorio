@@ -17,7 +17,7 @@ type Actions = {
   setTrainingSelected: (training: Training | null) => void;
 };
 
-export const EventStore = create<State & Actions>((set) => ({
+export const useEventStore = create<State & Actions>()((set) => ({
   loading: false,
   open: false,
   openExecutions: false,

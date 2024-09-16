@@ -15,7 +15,7 @@ type Actions = {
     downloadCertificate: (participant: Participant) => Promise<void>;
 };
 
-export const SearchStore = create<State & Actions>((set) => ({
+export const useSearchStore = create<State & Actions>()((set) => ({
     loading: false,
     trainings: null,
     setLoading: (loading) => set({ loading }),

@@ -4,8 +4,7 @@ import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon, LoaderCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import useStore from '@/hooks/useStore';
-import { authStore } from '../store/session';
+import { useAuthStore } from '../store/session';
 import { PayloadRegister } from '../store/session.model';
 import { useRouter } from 'next/navigation';
 
@@ -25,12 +24,13 @@ function Register() {
         }
     })
     const router = useRouter();
-    const session = useStore(authStore, (state) => state)!;
-    if (!session) {
-        return null;
-    }
-    const { loading, isSended, sendVerificationCode, registerUser, showPassword, setShowPassword } = session;
-    const { user } = watch()
+    const loading = useAuthStore(state => state.loading)
+    const isSended = useAuthStore(state => state.isSended)
+    const sendVerificationCode = useAuthStore(state => state.sendVerificationCode)
+    const registerUser = useAuthStore(state => state.registerUser)
+    const showPassword = useAuthStore(state => state.showPassword)
+    const setShowPassword = useAuthStore(state => state.setShowPassword)
+
     const onSubmit = handleSubmit((data) => {
         sendVerificationCode(data)
     })
@@ -111,11 +111,11 @@ function Register() {
                     <Input
                         type={showPassword ? 'text' : 'password'} id="password-confirm" placeholder="Confirmar Contraseña"
                         disabled={loading}
-                        readOnly={user.password === '' || isSended}
+                        readOnly={watch('user.password') === '' || isSended}
                         required
                         onChange={(e) => {
                             const value = e.target.value
-                            if (value !== user.password) {
+                            if (value !== watch('user.password')) {
                                 e.target.setCustomValidity('Las contraseñas no coinciden')
                             }
                             else {

@@ -4,9 +4,8 @@ import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
-import useStore from '@/hooks/useStore';
-import { authStore } from '../store/session';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '../store/session';
 
 export interface PayloadLogin {
     email: string;
@@ -23,15 +22,18 @@ function Login() {
         }
     })
     const router = useRouter();
-    const session = useStore(authStore, (state) => state)!;
-    if (!session) {
-        return null;
-    }
-    const { loading, login, showPassword, setShowPassword } = session;
+    const user = useAuthStore(state => state.user);
+    const loading = useAuthStore(state => state.loading)
+    const login = useAuthStore(state => state.login)
+    const showPassword = useAuthStore(state => state.showPassword)
+    const setShowPassword = useAuthStore(state => state.setShowPassword)
     const onSubmit = handleSubmit(async (data) => {
         await login(data)
         router.push('/')
     })
+    if (user) {
+        router.push('/')
+    }
     return (
         <div className='container mx-auto py-12'>
             <h1 className='text-2xl font-bold text-center'>Iniciar Sesión</h1>
