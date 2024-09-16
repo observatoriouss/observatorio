@@ -1,4 +1,4 @@
-import { create, StateCreator } from "zustand";
+import { create, createStore, StateCreator } from "zustand";
 import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { persist, createJSONStorage, devtools } from "zustand/middleware";
 import {
@@ -13,15 +13,15 @@ import { sendOTP } from "../upload-content/services/steps.service";
 import { Country } from "@/services/posts";
 import { getCountries } from "@/services/common";
 
-interface State {
-  user: User | null;
+export interface SessionState {
+  user?: User;
   countries: Country[];
   isSended: boolean;
   loading: boolean;
   showPassword: boolean;
-}
-
-interface Actions {
+  _hasHydrated: boolean;
+  setHasHydrated: (state: any) => void;
+  // Actions
   setShowPassword: (showPassword: boolean) => void;
   login: (body: PayloadLogin) => Promise<void>;
   getUserByToken: () => Promise<void>;
@@ -33,15 +33,21 @@ interface Actions {
 }
 
 const storeApi: StateCreator<
-  State & Actions,
+  SessionState,
   [["zustand/devtools", never]],
-  [["zustand/persist", State & Actions]]
+  [["zustand/persist", SessionState]]
 > = (set, get) => ({
-  user: null,
+  user: undefined,
   countries: [],
   isSended: false,
   loading: false,
   showPassword: false,
+  _hasHydrated: false,
+  setHasHydrated: (state: any) => {
+    set({
+      _hasHydrated: state,
+    });
+  },
   getCountries: async () => {
     try {
       const countries = await getCountries();
@@ -89,7 +95,7 @@ const storeApi: StateCreator<
   },
   logout: async () => {
     deleteCookie("TOKEN");
-    set({ user: null, isSended: false }, false, "logout");
+    set({ user: undefined, isSended: false }, false, "logout");
     toast.success("Sesión cerrada con éxito");
   },
   registerUser: async (body) => {
@@ -154,7 +160,7 @@ const storeApi: StateCreator<
   },
 });
 
-export const useAuthStore = create<State & Actions>()(
+export const useAuthStore = create<SessionState>()(
   persist(
     devtools(storeApi, {
       name: "Auth Store",
@@ -177,6 +183,9 @@ export const useAuthStore = create<State & Actions>()(
         setItem: (name, value) => localStorage?.setItem(name, value),
         removeItem: (name) => localStorage?.removeItem(name),
       })),
+      onRehydrateStorage: (state) => {
+        return () => state.setHasHydrated(true)
+      }
     }
   )
 );

@@ -12,7 +12,6 @@ import './styles.css';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { ChevronLeft, ChevronRight, LogOut, Search, User } from 'lucide-react';
 import { Button } from '../ui/button';
-import { useAuthStore } from '@/app/store/session';
 import { usePathname } from 'next/navigation';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,6 +19,7 @@ import { Navigation } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { useAuthStore } from '@/app/store/session';
 
 const variants: Variants = {
   open: {

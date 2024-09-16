@@ -10,8 +10,8 @@ import Creatable from 'react-select/creatable'
 import { DefaultEditor } from "react-simple-wysiwyg"
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { useAuthStore } from '@/app/store/session'
 import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/app/store/session'
 
 function CreatePost() {
     const user = useAuthStore(state => state.user);

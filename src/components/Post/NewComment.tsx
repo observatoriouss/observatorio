@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { Bold, Italic, Underline, User } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
-import { useAuthStore } from "@/app/store/session";
 import { Button } from '../ui/button';
 import './styles.css';
 import { cn } from '@/lib/utils';
 import { usePostStore } from '@/app/store/post';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/app/store/session';
 interface NewCommentProps {
   isReply?: boolean;
   placeholder?: string;

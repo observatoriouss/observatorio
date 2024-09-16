@@ -3,13 +3,13 @@ import { Button } from '@/components/ui/button'
 import { Steps, useStepStore } from '../store/steps.store'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
-import { useAuthStore } from '@/app/store/session'
 import { useRouter } from "next/navigation"
 import { User } from '@/app/store/session.model'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { Label } from '@/components/ui/label'
 import { useEffect } from 'react'
+import { useAuthStore } from '@/app/store/session'
 
 function ValidationData() {
     const user = useAuthStore(state => state.user)

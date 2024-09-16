@@ -9,10 +9,14 @@ import { useRouter } from 'next/navigation';
 function MyAccountPage() {
     const navigate = useRouter();
     const user = useAuthStore(state => state.user);
+    const hasHydrated = useAuthStore(state => state._hasHydrated);
 
-    if (!user) {
-        navigate.push('/iniciar-sesion');
-    }
+    useEffect(() => {
+        if (!hasHydrated) return
+        if (!user) {
+            navigate.push('/iniciar-sesion')
+        }
+    }, [hasHydrated, user])
 
     return (
         <div className='py-4 md:py-6 flex flex-col gap-4'>

@@ -1,6 +1,5 @@
 'use client';
 import { usePostStore } from "@/app/store/post";
-import { useAuthStore } from "@/app/store/session";
 import {
     Sheet,
     SheetContent,
@@ -15,6 +14,7 @@ import NewComment from "./NewComment";
 import { Separator } from "../ui/separator";
 import { useEffect } from "react";
 import CommentComponent from "./Comment";
+import { useAuthStore } from "@/app/store/session";
 
 
 function AsideComments() {

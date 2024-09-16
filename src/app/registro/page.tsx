@@ -4,9 +4,9 @@ import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon, LoaderCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { useAuthStore } from '../store/session';
 import { PayloadRegister } from '../store/session.model';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '../store/session';
 
 function Register() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<PayloadRegister>({
