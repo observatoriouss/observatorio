@@ -4,12 +4,11 @@ import { Steps, useStepStore } from '../store/steps.store'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { useRouter } from "next/navigation"
-import { User } from '@/app/store/session.model'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { Label } from '@/components/ui/label'
 import { useEffect } from 'react'
-import { useAuthStore } from '@/app/store/session'
+import { useAuthStore, User } from "@/stores/session";
 
 function ValidationData() {
     const user = useAuthStore(state => state.user)

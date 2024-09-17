@@ -1,4 +1,4 @@
-import { User } from "./session.model";
+import { User } from "@/stores/session/session.model";
 
 export interface Comment {
     body:          string;

@@ -1,5 +1,4 @@
 'use client'
-import { UserBodyRequest } from '@/app/store/session.model';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
@@ -8,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import { toast } from 'sonner';
-import { useAuthStore } from '@/app/store/session';
+import { useAuthStore, UserBodyRequest } from "@/stores/session";
 
 function DetailsAccount() {
     const [loadFile, setLoadFile] = useState(false)

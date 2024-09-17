@@ -4,7 +4,7 @@ import { DataTableRequests } from '../components/table';
 import { columns } from '../components/columns';
 import { useRequestStore } from '../store/requests.store';
 import ModalRequest from '../components/ModalRequest';
-import { useAuthStore } from '@/app/store/session';
+import { useAuthStore } from "@/stores/session";
 
 function MyRequests() {
   const user = useAuthStore(state => state.user);

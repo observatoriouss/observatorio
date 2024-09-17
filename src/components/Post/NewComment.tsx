@@ -4,10 +4,10 @@ import { Card, CardContent } from "../ui/card";
 import { Button } from '../ui/button';
 import './styles.css';
 import { cn } from '@/lib/utils';
-import { usePostStore } from '@/app/store/post';
+import { usePostStore } from "@/stores/post";
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/app/store/session';
+import { useAuthStore } from "@/stores/session";
 interface NewCommentProps {
   isReply?: boolean;
   placeholder?: string;

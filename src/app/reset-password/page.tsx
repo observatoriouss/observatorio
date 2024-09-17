@@ -4,28 +4,28 @@ import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from "@/stores/session";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { PayloadResetPassword, useAuthStore } from "@/stores/session";
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
-export interface PayloadLogin {
-    email: string;
-    password: string;
-}
-
-function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm<PayloadLogin>({
+// token is query param
+function ResetPassword() {
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Omit<PayloadResetPassword, 'token'>>({
         values: {
-            email: '',
             password: ''
             // email: 'test@prueba.com',
             // password: '1234'
         }
     })
+    const searchParams = useSearchParams()
+
+    const token = searchParams.get('token')
     const router = useRouter();
     const user = useAuthStore(state => state.user);
     const loading = useAuthStore(state => state.loading)
-    const login = useAuthStore(state => state.login)
+    const isResetPassword = useAuthStore(state => state.isResetPassword)
+    const resetPassword = useAuthStore(state => state.resetPassword)
     const showPassword = useAuthStore(state => state.showPassword)
     const setShowPassword = useAuthStore(state => state.setShowPassword)
 
@@ -39,34 +39,21 @@ function Login() {
     }, [hasHydrated, user])
 
     const onSubmit = handleSubmit(async (data) => {
-        await login(data)
-        router.push('/')
+        if (!token) {
+            toast.error('Token no encontrado')
+            return
+        }
+        await resetPassword({
+            ...data,
+            token
+        })
+        setValue('password', '')
     })
     return (
         <div className='container mx-auto py-12'>
-            <h1 className='text-2xl font-bold text-center'>Iniciar Sesión</h1>
-            <p className='text-center'>¿Aún no tienes cuenta? <Link className='text-blue-600' href='/registro'>Regístrate</Link></p>
+            <h1 className='text-2xl font-bold text-center'>Actualiza tu contraseña</h1>
             <br />
             <form onSubmit={onSubmit} className="container mx-auto bg-white p-4 md:p-4">
-                <div className="grid w-full gap-1.5">
-                    <Input
-                        type="email" id="email" placeholder="Inserte Email"
-                        disabled={loading}
-                        {...register('email', {
-                            pattern: {
-                                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                                message: 'El Email no es válido'
-                            },
-                            required: {
-                                value: true,
-                                message: 'El Email es requerido'
-                            },
-                        })}
-                    />
-                    <span className="text-red-500 text-xs">{errors.email && (
-                        <>{errors.email.message}</>
-                    )}</span>
-                </div>
                 <div className="grid w-full gap-1.5 relative">
                     <Input
                         type={showPassword ? 'text' : 'password'}
@@ -94,14 +81,20 @@ function Login() {
                     className='w-full mt-4'
                     disabled={loading}
                 >
-                    Iniciar Sesión
+                    Cambiar Contraseña
                 </Button>
             </form>
             <br />
-            <p className='text-center'>¿Olvidaste tu contraseña? <Link className='text-blue-600' href='/recupera-tu-cuenta'>Recupera tu cuenta</Link></p>
-            <br />
+            {isResetPassword && (
+                <>
+                    <p className='text-center text-green-500'>
+                        Contraseña actualizada correctamente.
+                    </p>
+                    <p className='text-center'>¿Iniciar sesión? <Link className='text-blue-600' href='/iniciar-sesion'>Login</Link></p>
+                </>
+            )}
         </div>
     )
 }
 
-export default Login
+export default ResetPassword

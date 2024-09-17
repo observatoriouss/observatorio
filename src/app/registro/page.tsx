@@ -4,9 +4,9 @@ import { Input } from '@/components/ui/input';
 import { EyeIcon, EyeOffIcon, LoaderCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import { PayloadRegister } from '../store/session.model';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '../store/session';
+import { useAuthStore, PayloadRegister } from "@/stores/session";
+import { useEffect } from 'react';
 
 function Register() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<PayloadRegister>({
@@ -24,12 +24,22 @@ function Register() {
         }
     })
     const router = useRouter();
+    const user = useAuthStore(state => state.user)
     const loading = useAuthStore(state => state.loading)
     const isSended = useAuthStore(state => state.isSended)
     const sendVerificationCode = useAuthStore(state => state.sendVerificationCode)
     const registerUser = useAuthStore(state => state.registerUser)
     const showPassword = useAuthStore(state => state.showPassword)
     const setShowPassword = useAuthStore(state => state.setShowPassword)
+
+    const hasHydrated = useAuthStore(state => state._hasHydrated);
+
+    useEffect(() => {
+        if (!hasHydrated) return
+        if (user) {
+            router.push('/')
+        }
+    }, [hasHydrated, user])
 
     const onSubmit = handleSubmit((data) => {
         sendVerificationCode(data)

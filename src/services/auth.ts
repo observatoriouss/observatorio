@@ -1,4 +1,12 @@
-import { PayloadLogin, Session, PayloadRegister, User, UserBodyRequest } from "@/app/store/session.model";
+import {
+  PayloadLogin,
+  Session,
+  PayloadRegister,
+  User,
+  UserBodyRequest,
+  PayloadRecoverAccount,
+  PayloadResetPassword,
+} from "@/stores/session";
 import { api } from "./axios";
 import { CookieValueTypes } from "cookies-next";
 
@@ -26,11 +34,25 @@ export async function getUserByToken(token: string): Promise<User> {
 
 // update user
 // {{url}}/api/users/ef76314f-38fb-4367-ab26-30a3147149dd
-export async function updateUser(body: UserBodyRequest, id: string, tokenBearerAuthorize: CookieValueTypes): Promise<User> {
+export async function updateUser(
+  body: UserBodyRequest,
+  id: string,
+  tokenBearerAuthorize: CookieValueTypes
+): Promise<User> {
   const { data } = await api.put<User>(`/users/${id}`, body, {
     headers: {
       Authorization: `Bearer ${tokenBearerAuthorize}`,
     },
   });
   return data;
+}
+
+// {{url}}/api/auth/send-reset-password-otp
+export async function sendResetPasswordOTP(body: PayloadRecoverAccount) {
+  await api.post(`/auth/send-reset-password-otp`, body);
+}
+
+// {{url}}/api/auth/reset-password
+export async function resetPassword(body: PayloadResetPassword) {
+  await api.post(`/auth/reset-password`, body);
 }

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DetailsAccount from './tabs-content/detailsAccount';
 import MyRequests from './tabs-content/myRequests';
-import { useAuthStore } from '../store/session';
+import { useAuthStore } from '@/stores/session';
 import { useRouter } from 'next/navigation';
 
 function MyAccountPage() {

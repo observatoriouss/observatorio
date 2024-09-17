@@ -3,21 +3,25 @@ import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { persist, createJSONStorage, devtools } from "zustand/middleware";
 import {
   PayloadLogin,
+  PayloadRecoverAccount,
   PayloadRegister,
+  PayloadResetPassword,
   User,
   UserBodyRequest,
 } from "./session.model";
-import { getUserByToken, login, register, updateUser } from "@/services/auth";
+import { getUserByToken, login, register, resetPassword, sendResetPasswordOTP, updateUser } from "@/services/auth";
 import { toast } from "sonner";
-import { sendOTP } from "../upload-content/services/steps.service";
 import { Country } from "@/services/posts";
 import { getCountries } from "@/services/common";
+import { sendOTP } from "@/app/upload-content/services/steps.service";
 
 export interface SessionState {
   user?: User;
   countries: Country[];
   isSended: boolean;
   loading: boolean;
+  isSendedToken: boolean;
+  isResetPassword: boolean;
   showPassword: boolean;
   _hasHydrated: boolean;
   setHasHydrated: (state: any) => void;
@@ -30,6 +34,8 @@ export interface SessionState {
   registerUser: (body: PayloadRegister) => Promise<void>;
   getCountries: () => Promise<void>;
   updateDataUser: (body: UserBodyRequest, id: string) => Promise<void>;
+  recoverPassword: (body: PayloadRecoverAccount) => Promise<void>;
+  resetPassword: (body: PayloadResetPassword) => Promise<void>;
 }
 
 const storeApi: StateCreator<
@@ -41,6 +47,8 @@ const storeApi: StateCreator<
   countries: [],
   isSended: false,
   loading: false,
+  isSendedToken: false,
+  isResetPassword: false,
   showPassword: false,
   _hasHydrated: false,
   setHasHydrated: (state: any) => {
@@ -156,6 +164,43 @@ const storeApi: StateCreator<
       toast.error("Error al actualizar usuario");
     } finally {
       set({ loading: false, isSended: false });
+    }
+  },
+  recoverPassword: async (body) => {
+    try {
+      set({ loading: true });
+      await sendResetPasswordOTP(body);
+      set(
+        {
+          isSendedToken: true,
+        },
+        false,
+        "recoverPassword"
+      );
+      toast.success("Invitación enviada.");
+    } catch (error) {
+      toast.error("Error al enviar código de verificación, intente nuevamente.");
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  resetPassword: async (body) => {
+    try {
+      set({ loading: true });
+      await resetPassword(body);
+      set(
+        {
+          isResetPassword: true,
+        },
+        false,
+        "resetPassword"
+      );
+      toast.success("Contraseña actualizada con éxito");
+    } catch (error) {
+      toast.error("Error al actualizar contraseña");
+    } finally {
+      set({ loading: false });
     }
   },
 });

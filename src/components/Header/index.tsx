@@ -19,7 +19,7 @@ import { Navigation } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useAuthStore } from '@/app/store/session';
+import { useAuthStore } from "@/stores/session";
 
 const variants: Variants = {
   open: {

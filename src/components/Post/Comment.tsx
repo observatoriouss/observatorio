@@ -1,12 +1,11 @@
-import { Comment } from '@/app/store/post.model'
 import { Heart, MessageCircle, User } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
 import NewComment from './NewComment'
-import { usePostStore } from '@/app/store/post'
+import { usePostStore, Comment } from "@/stores/post";
 import { cn } from '@/lib/utils'
-import { useAuthStore } from '@/app/store/session'
+import { useAuthStore } from "@/stores/session";
 
 interface CommentProps {
   comment: Comment

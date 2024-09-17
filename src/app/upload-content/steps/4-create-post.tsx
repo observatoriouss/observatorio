@@ -11,7 +11,7 @@ import { DefaultEditor } from "react-simple-wysiwyg"
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { useAuthStore } from '@/app/store/session'
+import { useAuthStore } from "@/stores/session";
 
 function CreatePost() {
     const user = useAuthStore(state => state.user);

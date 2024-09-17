@@ -34,3 +34,12 @@ export interface UserBodyRequest {
   role: string;
   countryCode: string;
 }
+
+export interface PayloadRecoverAccount {
+  email: string;
+}
+
+export interface PayloadResetPassword {
+  password: string;
+  token: string;
+}

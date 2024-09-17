@@ -2,7 +2,7 @@ import {
   Comment,
   LikeCommentResponse,
   PayloadComment,
-} from "@/app/store/post.model";
+} from "@/stores/post";
 import { api } from "./axios";
 import { getCookie } from "cookies-next";
 // {{url}}/api/posts/:id/comments

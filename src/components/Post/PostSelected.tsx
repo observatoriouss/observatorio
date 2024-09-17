@@ -1,5 +1,5 @@
 'use client';
-import { usePostStore } from '@/app/store/post'
+import { usePostStore } from "@/stores/post";
 import { Post } from '@/services/posts'
 import React, { useEffect } from 'react'
 

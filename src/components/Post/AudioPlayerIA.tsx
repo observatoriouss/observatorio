@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause } from 'lucide-react';
-import { usePostStore } from '@/app/store/post';
 
 interface AudioPlayerProps {
     audioBlob: string;
