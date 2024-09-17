@@ -6,6 +6,8 @@ import ChargeData from './components/ChargeData';
 import BtnInscription from './components/BtnInscription';
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 
 async function fetchData() {
   try {

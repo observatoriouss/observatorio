@@ -11,8 +11,12 @@ import { Metadata, ResolvingMetadata } from 'next';
 import AsideComments from '@/components/Post/AsideComments';
 import PostSelected from '@/components/Post/PostSelected';
 import SocialShareButtons from '@/components/ShareButtonsSocial';
+import AudioPlayerIA from '@/components/Post/AudioPlayerIA';
+import GenerateAudio from '@/components/Post/GenerateAudio';
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 
 type Props = {
     params: { slug: string }
@@ -61,6 +65,8 @@ async function Post({ slug }: { slug: string }) {
                 <LikeSection id={post.id} likes={post.likes} />
                 <AsideComments />
             </div>
+            {post.contentAudioUrl && <AudioPlayerIA audioBlob={post.contentAudioUrl} />}
+            {!post.contentAudioUrl  && post.content && (post.content.toString().length < 4000) && <GenerateAudio postId={post.id} />}
             <SocialShareButtons url={categoryMapperLink[Category.READS] + '/' + post.slug} title={post.title} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>

@@ -13,6 +13,8 @@ import PostSelected from '@/components/Post/PostSelected';
 import SocialShareButtons from '@/components/ShareButtonsSocial';
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 
 type Props = {
     params: { slug: string }

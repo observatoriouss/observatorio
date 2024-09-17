@@ -5,6 +5,8 @@ import { Suspense } from "react";
 
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 
 async function fetchData({ id }: { id: string }) {
     try {

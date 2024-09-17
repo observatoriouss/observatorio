@@ -5,6 +5,9 @@ import { getTubes } from '@/services/posts';
 import { Suspense } from 'react'
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
+
 async function getData() {
     const res = await getTubes()
     return res

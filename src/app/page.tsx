@@ -3,6 +3,8 @@ import { CardArticle, CardRead, CardVideo, Footer, Header, ParticlesBackground }
 import { getHomeData } from '@/services';
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 async function getData() {
   const sections = await getHomeData()
   return sections

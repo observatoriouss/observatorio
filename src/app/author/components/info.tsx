@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import Posts from "./posts";
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 
 async function fetchData({ slug }: { slug: string }) {
     try {

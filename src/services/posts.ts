@@ -49,6 +49,18 @@ export const getReactCachedPost = cache(async (slug: string) => {
   return res
 });
 
+// getAudio
+// {{url}}/api/posts/:id/audio
+export interface ContentAudio {
+  contentAudioUrl: string;
+}
+
+export async function getAudio(id: string): Promise<ContentAudio> {
+  const response = await fetch(`${API_URL}/posts/${id}/audio`);
+  const data = await response.json();
+  return data;
+}
+
 export interface Post {
   id: string;
   title: string;
@@ -64,6 +76,7 @@ export interface Post {
   imageDescription: null | string;
   likes: number;
   numberOfComments?: number;
+  contentAudioUrl?: string;
   userId?: string;
   user: User;
   attachments: string[];

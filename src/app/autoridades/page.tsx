@@ -5,6 +5,8 @@ import Image from 'next/image';
 import React from 'react'
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+export const fetchCache = 'default-no-store'
 
 async function fetchData() {
     try {
