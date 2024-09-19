@@ -5,8 +5,6 @@ import { Button } from '../ui/button';
 import './styles.css';
 import { cn } from '@/lib/utils';
 import { usePostStore } from "@/stores/post";
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 import { useAuthStore } from "@/stores/session";
 interface NewCommentProps {
   isReply?: boolean;
@@ -15,8 +13,9 @@ interface NewCommentProps {
   commentId?: string;
 }
 function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', onCancel, commentId }: NewCommentProps) {
-  const router = useRouter()
+
   const user = useAuthStore(state => state.user)
+  const setOpenAuthDialog = useAuthStore(state => state.setOpenAuthDialog)
   const createComment = usePostStore(state => state.createComment)
   const [activeFormats, setActiveFormats] = useState({ bold: false, italic: false, underline: false });
   const editableRef = useRef<HTMLDivElement>(null);
@@ -88,16 +87,7 @@ function NewComment({ isReply = false, placeholder = 'Qué estás pensando?', on
   };
 
   const handlePostComment = async () => {
-    if (!user) {
-      toast('Debes iniciar sesión para comentar', {
-        // action: {
-        //   label: 'Iniciar sesión',
-        //   onClick: () => router.push('/iniciar-sesion')
-        // },
-      })
-      router.push('/iniciar-sesion')
-      return;
-    }
+    if (!user) return setOpenAuthDialog(true)
     if (comment.trim() === '') return;
     setIsCreateCommentLoading(true);
     await createComment({

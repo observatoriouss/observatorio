@@ -22,8 +22,10 @@ export interface SessionState {
   loading: boolean;
   isSendedToken: boolean;
   isResetPassword: boolean;
+  openAuthDialog: boolean;
   showPassword: boolean;
   _hasHydrated: boolean;
+  setOpenAuthDialog: (openAuthDialog: boolean) => void;
   setHasHydrated: (state: any) => void;
   // Actions
   setShowPassword: (showPassword: boolean) => void;
@@ -49,8 +51,12 @@ const storeApi: StateCreator<
   loading: false,
   isSendedToken: false,
   isResetPassword: false,
+  openAuthDialog: false,
   showPassword: false,
   _hasHydrated: false,
+  setOpenAuthDialog: (openAuthDialog: boolean) => {
+    set({ openAuthDialog }, false, "setOpenAuthDialog");
+  },
   setHasHydrated: (state: any) => {
     set({
       _hasHydrated: state,

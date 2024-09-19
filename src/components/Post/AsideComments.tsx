@@ -24,6 +24,12 @@ function AsideComments() {
     const getCommentsForPost = usePostStore(state => state.getCommentsForPost);
     const commentsForPostDraft = usePostStore(state => state.commentsForPostDraft);
     const user = useAuthStore(state => state.user)
+    const setOpenAuthDialog = useAuthStore(state => state.setOpenAuthDialog)
+
+    const handleOpenAuthDialog = () => {
+        setOpenAuthDialog(true)
+    }
+
     useEffect(() => {
         if (postSelected) {
             getCommentsForPost(postSelected.id)
@@ -47,11 +53,11 @@ function AsideComments() {
                             {user ? (
                                 <NewComment />
                             ) : (
-                                <Card className="mt-2">
+                                <Card className="mt-2 cursor-pointer" onClick={handleOpenAuthDialog}>
                                     <CardContent className="p-4 underline">
-                                        <Link href="/iniciar-sesion">
+                                        <p>
                                             ¿Qué es lo que piensas?
-                                        </Link>
+                                        </p>
                                     </CardContent>
                                 </Card>
                             )}

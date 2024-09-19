@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Script from 'next/script'
-import Counter from '@/components/Counter'
-import ToasterContainer from '@/components/Toaster'
-import GoogleTranslate from '@/components/GoogleTranslate'
+import ClientComponents from '@/components/ClientComponents'
 
 
 export const metadata: Metadata = {
@@ -209,9 +207,7 @@ export default function RootLayout({
         <div id='contentRead'>
           {children}
         </div>
-        <Counter />
-        <GoogleTranslate />
-        <ToasterContainer />
+        <ClientComponents />
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}></Script>
         <Script id="google-analytics">
           {process.env.NODE_ENV !== 'development' && `

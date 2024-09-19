@@ -13,6 +13,7 @@ interface CommentProps {
 }
 function CommentComponent({ comment, isChild = false }: CommentProps) {
   const user = useAuthStore(state => state.user)
+  const setOpenAuthDialog = useAuthStore(state => state.setOpenAuthDialog)
   const likeComment = usePostStore(state => state.likeComment)
   const [reply, setReply] = useState(false)
   const handleChangeReply = () => setReply(!reply)
@@ -23,6 +24,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
   }
 
   const handleLike = async (postId: string) => {
+    if (!user) return setOpenAuthDialog(true)
     setIsLikeCommentLoading(true)
     await likeComment(postId)
     setIsLikeCommentLoading(false)
