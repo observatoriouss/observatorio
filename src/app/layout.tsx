@@ -207,7 +207,6 @@ export default function RootLayout({
         <div id='contentRead'>
           {children}
         </div>
-        <ClientComponents />
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}></Script>
         <Script id="google-analytics">
           {process.env.NODE_ENV !== 'development' && `

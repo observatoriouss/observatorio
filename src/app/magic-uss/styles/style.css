@@ -1,0 +1,90 @@
+/* Estilo del contenedor de código */
+pre {
+    background-color: #282a36;
+    /* Fondo Dracula */
+    color: #f8f8f2;
+    /* Texto por defecto Dracula */
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    /* Para permitir scroll horizontal si el código es largo */
+    white-space: pre-wrap;
+    /* Mantener saltos de línea */
+    font-family: 'Fira Code', 'Consolas', monospace;
+    /* Fuente de código */
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Estilo de los bloques de código */
+code {
+    display: block;
+    color: inherit;
+    /* Heredar el color del contenedor */
+}
+
+/* Estilo para los comentarios */
+.comment {
+    color: #6272a4;
+    /* Azul grisáceo para comentarios */
+    font-style: italic;
+}
+
+/* Estilo para palabras clave (if, else, return, etc.) */
+.keyword {
+    color: #ff79c6;
+    /* Rosa para palabras clave */
+    font-weight: normal;
+}
+
+/* Estilo para las cadenas (texto entre comillas) */
+.string {
+    color: #f1fa8c;
+    /* Amarillo claro para cadenas de texto */
+}
+
+/* Estilo para las funciones */
+.function {
+    color: #50fa7b;
+    /* Verde brillante para nombres de funciones */
+    font-weight: normal;
+}
+
+/* Estilo para las variables */
+.variable {
+    color: #f8f8f2;
+    /* Blanco para nombres de variables */
+}
+
+/* Estilo para números */
+.number {
+    color: #bd93f9;
+    /* Púrpura para números */
+}
+
+/* Estilo para constantes o valores booleanos */
+.constant {
+    color: #bd93f9;
+    /* Púrpura para constantes */
+    font-weight: normal;
+}
+
+/* Estilo para las etiquetas HTML dentro del código */
+.tag {
+    color: #ff79c6;
+    /* Rosa para etiquetas */
+    font-weight: normal;
+}
+
+/* Estilo adicional para operadores */
+.operator {
+    color: #ff79c6;
+    /* Rosa para operadores */
+}
+
+/* Estilo para clases o tipos */
+.type {
+    color: #8be9fd;
+    /* Cian para clases o tipos */
+    font-style: italic;
+}

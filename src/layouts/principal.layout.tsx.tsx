@@ -2,7 +2,7 @@ import React from "react";
 import { Footer, Header } from "@/components";
 import ClientComponents from "@/components/ClientComponents";
 
-export default function ContainerLayout({
+export default function PrincipalLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -11,9 +11,7 @@ export default function ContainerLayout({
     <>
       <Header />
       <ClientComponents />
-      <main className="mx-auto container pt-[180px] md:pt-[145px]">
-        {children}
-      </main>
+      {children}
       <Footer />
     </>
   );

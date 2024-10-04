@@ -22,7 +22,7 @@ function CounterClient() {
     if (visit === null) return null;
 
     return (
-        <div className='fixed bottom-4 right-4 p-2 bg-gray-800 text-white rounded-md shadow-lg'>
+        <div className='fixed bottom-4 right-4 p-2 bg-gray-800 text-white rounded-md shadow-lg z-[99]'>
             <p className='font-light text-sm'>Nº Visitas: {visit}</p>
         </div>
     );

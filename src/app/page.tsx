@@ -1,6 +1,8 @@
+import React from 'react';
 import styles from '@/styles/home.module.css';
 import { CardArticle, CardRead, CardVideo, Footer, Header, ParticlesBackground } from '@/components';
 import { getHomeData } from '@/services';
+import ClientComponents from '@/components/ClientComponents';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -26,8 +28,9 @@ async function HomeGrid() {
   }
 
   return (
-    <>
+    <React.Fragment>
       <Header />
+      <ClientComponents />
       {/* Section Principal */}
       <section className={styles.container}>
         <div className='max-w-xs md:max-w-2xl lg:max-w-7xl w-full flex bg-transparent'>
@@ -296,7 +299,7 @@ async function HomeGrid() {
       </section>
 
       <Footer />
-    </>
+    </React.Fragment>
   )
 }
 
