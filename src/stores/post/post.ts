@@ -19,6 +19,7 @@ type State = {
   commentsForPost: Comment[];
   commentsForPostDraft: Comment[];
   isOpenComments: boolean;
+  isOpenAskToPost: boolean;
   isLoadingComments: boolean;
   isDialogDeleteCommentOpen: boolean;
   isDialogDeleteCommentLoading: boolean;
@@ -31,6 +32,7 @@ type Actions = {
   setPostSelected: (post: Post | null) => void;
   getCommentsForPost: (postId: string) => Promise<void>;
   setIsOpenComments: (isOpenComments: boolean) => void;
+  setIsOpenAskToPost: (isOpenAskToPost: boolean) => void;
   setIsDialogDeleteCommentOpen: (isDialogDeleteCommentOpen: boolean) => void;
   createComment: (body: PayloadComment) => Promise<void>;
   likeComment: (postCommentId: string) => Promise<void>;
@@ -44,6 +46,7 @@ export const usePostStore = create<State & Actions>()((set, get) => ({
   commentsForPost: [],
   commentsForPostDraft: [],
   isOpenComments: false,
+  isOpenAskToPost: false,
   isLoadingComments: false,
   isDialogDeleteCommentOpen: false,
   isDialogDeleteCommentLoading: false,
@@ -69,6 +72,7 @@ export const usePostStore = create<State & Actions>()((set, get) => ({
     }
   },
   setIsOpenComments: (isOpenComments) => set({ isOpenComments }),
+  setIsOpenAskToPost: (isOpenAskToPost) => set({ isOpenAskToPost }),
   setIsDialogDeleteCommentOpen: (isDialogDeleteCommentOpen) =>
     set({ isDialogDeleteCommentOpen }),
   createComment: async (body) => {

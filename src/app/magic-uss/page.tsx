@@ -15,10 +15,12 @@ import AuthDialog from '@/components/AuthDialog'
 import Sidebar from './components/Sidebar'
 import { useMagicUssStore } from './store/magic-uss.store'
 import { Role } from './models/magic-uss.model'
+import Link from 'next/link'
 
 export default function MagicUSS() {
     /* Session Store */
     const user = useAuthStore(state => state.user)
+    const logout = useAuthStore(state => state.logout);
     const openAuthDialog = useAuthStore(state => state.openAuthDialog)
     const _hasHydrated = useAuthStore(state => state._hasHydrated)
     const setOpenAuthDialog = useAuthStore(state => state.setOpenAuthDialog)
@@ -93,13 +95,17 @@ export default function MagicUSS() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Mi cuenta</span>
+                <DropdownMenuItem asChild>
+                    <Link href="/mi-cuenta" className='cursor-pointer'>
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Mi cuenta</span>
+                    </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Cerrar sesión</span>
+                <DropdownMenuItem asChild onClick={logout} className='cursor-pointer'>
+                    <div className='flex'>
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Cerrar sesión</span>
+                    </div>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

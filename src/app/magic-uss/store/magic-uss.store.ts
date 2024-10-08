@@ -38,6 +38,7 @@ interface StateMagicUss {
   initNewConversation: () => void;
   createNewConversation: () => void; //interactua con un EventSource
   sendMessage: () => void; //interactua con un EventSource
+  askToPost: (postId: string) => void; //interactua con un EventSource
   getConversations: () => Promise<void>;
   getMessages: () => Promise<void>;
   toggleSidebar: () => void;
@@ -286,6 +287,85 @@ export const storeApi: StateCreator<
       eventSource.close();
       get().setIsLoading(false);
     };
+  },
+
+  askToPost: async (postId: string) => {
+    const user = useAuthStore.getState().user;
+    if (!user) return;
+
+    const question = get().newMessage;
+
+    set({
+      isLoading: true,
+      messages: [
+        {
+          id: Date.now().toString(),
+          body: question,
+          role: Role.USER,
+          createdAt: new Date().toISOString(),
+          conversationId: "new-conversation",
+        },
+        {
+          id: (Date.now() + 1).toString(),
+          body: "...",
+          role: Role.ASSISTANT,
+          createdAt: new Date().toISOString(),
+          conversationId: "new-conversation",
+        },
+      ],
+      // isSelectedConversation: false,
+      newMessage: "",
+    });
+
+    // Escuchar los mensajes que envía el servidor
+    const eventSource = await MagicUssService.ask(postId, question);
+
+    let msg = "";
+    eventSource.onmessage = function (event: MessageEvent) {
+      console.log("Message from server:", { data: event.data });
+
+      // Parsear el contenido JSON sin comillas manuales
+      const data: PartialContent | EndContent = JSON.parse(event.data);
+      console.log({ data });
+      if (data.type === EnumTypeMessage.PARTIAL_CONTENT) {
+        msg += data.payload;
+        console.log({ msg });
+        console.log({ type: EnumTypeMessage.PARTIAL_CONTENT });
+        let formattedMessage = formatBodyMessage(msg);
+
+        document.getElementById("response-dummy")!.innerHTML = formattedMessage;
+      } else if (data.type === EnumTypeMessage.END) {
+        console.log({ type: EnumTypeMessage.END });
+
+        let formattedMessage = formatBodyMessage(msg);
+
+        const messages = get().messages;
+        messages[messages.length - 1] = {
+          body: formattedMessage,
+          createdAt: new Date().toISOString(),
+          conversationId: "new-conversation",
+          id: (Date.now() + 1).toString(),
+          role: Role.ASSISTANT,
+        };
+        set({
+          messages,
+          // currentConversation: data.payload.conversation,
+          // isSelectedConversation: true,
+          isLoading: false,
+        });
+      }
+
+      if (data.type === EnumTypeMessage.END) {
+        eventSource.close();
+      }
+    };
+
+    // Manejar posibles errores
+    eventSource.onerror = function (err) {
+      console.error("EventSource failed:", err);
+      eventSource.close
+      get().setIsLoading(false);
+    }
   },
 
   getConversations: async () => {

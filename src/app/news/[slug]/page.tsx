@@ -13,6 +13,7 @@ import PostSelected from '@/components/Post/PostSelected';
 import SocialShareButtons from '@/components/ShareButtonsSocial';
 import AudioPlayerIA from '@/components/Post/AudioPlayerIA';
 import GenerateAudio from '@/components/Post/GenerateAudio';
+import AskToPost from '@/components/Post/AskToPost';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -67,6 +68,7 @@ async function Post({ slug }: { slug: string }) {
                 <LikeSection id={post.id} likes={post.likes} />
                 <AsideComments />
             </div>
+            <AskToPost />
             {post.contentAudioUrl && <AudioPlayerIA audioBlob={post.contentAudioUrl} />}
             {/* {!post.contentAudioUrl  && post.content && (post.content.toString().length < 4000) && <GenerateAudio postId={post.id} />} */}
             <SocialShareButtons url={categoryMapperLink[Category.NEWS] + '/' + post.slug} title={post.title} />

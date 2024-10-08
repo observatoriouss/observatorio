@@ -46,9 +46,9 @@ export class MagicUssService {
     );
   };
 
-  static ask = async (conversationId: number, question: string) => {
+  static ask = async (postId: string, question: string) => {
     return new EventSource(
-      `${this.baseURLStream}/posts/${conversationId}/ask?question=${question}`
+      `${this.baseURLStream}/posts/${postId}/ask?question=${question}`
     );
   };
 }
