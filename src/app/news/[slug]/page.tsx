@@ -70,7 +70,7 @@ async function Post({ slug }: { slug: string }) {
             </div>
             <AskToPost />
             {post.contentAudioUrl && <AudioPlayerIA audioBlob={post.contentAudioUrl} />}
-            {/* {!post.contentAudioUrl  && post.content && (post.content.toString().length < 4000) && <GenerateAudio postId={post.id} />} */}
+            {!post.contentAudioUrl  && post.content && (post.content.toString().length < 4000) && <GenerateAudio postId={post.id} />}
             <SocialShareButtons url={categoryMapperLink[Category.NEWS] + '/' + post.slug} title={post.title} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
