@@ -10,7 +10,7 @@ import { HeaderContext, HeaderProvider } from './header.context';
 import Image from 'next/image';
 import './styles.css';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { ChevronLeft, ChevronRight, LogOut, Search, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, LogOut, Search, Sparkles, User } from 'lucide-react';
 import { Button } from '../ui/button';
 import { usePathname } from 'next/navigation';
 // Import Swiper React components
@@ -20,6 +20,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useAuthStore } from "@/stores/session";
+import { AnimatedGradientText } from '../ui/gradient-text';
 
 const variants: Variants = {
   open: {
@@ -221,7 +222,7 @@ export const MenuAction = ({
   const logout = useAuthStore(state => state.logout);
 
   return (
-    <div className='flex gap-1'>
+    <div className='flex gap-1 items-center'>
       <Button
         variant="outline"
         className={cn('bg-[#50D744] hover:bg-green-500 p-3', classNameButton)}
@@ -267,6 +268,21 @@ export const MenuAction = ({
           </>)}
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <Link href="/magic-uss" className='h-full w-full'>
+        <AnimatedGradientText
+          className='rounded-md'
+        >
+          <span
+            className={cn(
+              `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+            )}
+          >
+            AI
+          </span>
+          {/* <Sparkles className="ml-1 size-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5 " /> */}
+        </AnimatedGradientText>
+      </Link>
     </div>
   )
 }
