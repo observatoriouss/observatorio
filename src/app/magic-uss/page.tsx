@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
-import { PlusCircle, Send, Menu, User, LogOut, PanelRightCloseIcon } from "lucide-react"
+import { PlusCircle, Send, Menu, User, LogOut, PanelRightCloseIcon, Loader2 } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useAuthStore } from '@/stores/session'
 import { cn } from '@/lib/utils'
@@ -16,6 +16,7 @@ import Sidebar from './components/Sidebar'
 import { useMagicUssStore } from './store/magic-uss.store'
 import { Role } from './models/magic-uss.model'
 import Link from 'next/link'
+import { Input } from '@/components/ui/input'
 
 export default function MagicUSS() {
     /* Session Store */
@@ -252,17 +253,23 @@ export default function MagicUSS() {
                         </ScrollArea>
                         <div className="p-4 border-t">
                             <div className="flex items-center">
-                                <Textarea
+                                <Input
                                     value={newMessage}
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     placeholder="Escribe tu mensaje aquí..."
                                     className="flex-grow mr-2"
-                                    rows={1}
+                                    // rows={1}
                                     disabled={isLoadingMessages || isLoading}
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault();
+                                            isLoadingMessages || (isDummyConversation && !isSelectedConversation) ? createNewConversation() : sendMessage()
+                                        }
+                                    }}
                                 />
                                 <Button onClick={isLoadingMessages || (isDummyConversation && !isSelectedConversation) ? createNewConversation : sendMessage}
                                     disabled={isLoading}>
-                                    <Send className="h-4 w-4" />
+                                    {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                                 </Button>
                             </div>
                         </div>

@@ -4,6 +4,7 @@ import React, { useRef } from 'react'
 import Link from 'next/link';
 import { Post } from '@/services/posts';
 import { categoryMapper } from '@/services/home';
+import { cn } from '@/lib/utils';
 
 interface CardArticleProps extends Post {
     type?: 'middle' | 'default' | 'editorial';
@@ -28,7 +29,14 @@ export default function CardArticle({
         >
             {imageUrl && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={imageUrl} alt="" className={`w-full ${type === 'middle' ? 'h-2/4 object-cover' : ''}`} />
+                <img src={imageUrl} alt=""
+                    className={cn(
+                        'w-full aspect-square object-center',
+                        type === 'middle' ? 'h-2/4 object-cover' : '',
+                        type === 'editorial' ? 'h-2/4 object-cover' : '',
+                        type === 'default' ? 'h-2/4 object-cover' : '',
+                    )}
+                />
             )}
             <div>
                 <Link href={'/' + slug}>
