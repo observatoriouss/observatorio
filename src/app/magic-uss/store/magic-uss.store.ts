@@ -36,6 +36,7 @@ interface StateMagicUss {
   setDummyRef: (ref: HTMLButtonElement) => void;
   setInputMsgRef: (ref: HTMLDivElement) => void;
   setResponseMsgRef: (ref: HTMLDivElement) => void;
+  focusInputMsg: () => void;
   initNewConversation: () => void;
   createNewConversation: () => void; //interactua con un EventSource
   sendMessage: () => void; //interactua con un EventSource
@@ -66,7 +67,16 @@ export const storeApi: StateCreator<
   isContinueConversation: false,
 
   setCurrentConversation: (currentConversation) => {
-    set({ currentConversation, isSelectedConversation: true, messages: [], isFirstMessage: false });
+    set({
+      currentConversation,
+      isSelectedConversation: true,
+      messages: [],
+      isFirstMessage: false,
+      isDummyConversation: false,
+      conversations: get().conversations.filter(
+        (conv) => conv.id !== "new-conversation"
+      ),
+    });
   },
 
   setNewMessage: (message: string) => {
@@ -87,6 +97,15 @@ export const storeApi: StateCreator<
 
   setResponseMsgRef: (ref: HTMLDivElement) => {
     set({ responseMsgRef: ref });
+  },
+
+  focusInputMsg: () => {
+    const inputMsgRef = document.getElementById(
+      "inputNewMessage"
+    ) as HTMLInputElement;
+    if (inputMsgRef) {
+      inputMsgRef.focus();
+    }
   },
 
   initNewConversation: () => {
@@ -119,10 +138,12 @@ export const storeApi: StateCreator<
         ...get().conversations,
       ],
     });
+
+    get().focusInputMsg();
   },
 
   createNewConversation: async () => {
-    console.log('createNewConversation')
+    console.log("createNewConversation");
     const user = useAuthStore.getState().user;
     if (!user) return;
 
@@ -153,7 +174,7 @@ export const storeApi: StateCreator<
     // Escuchar los mensajes que envía el servidor
     const eventSource = await MagicUssService.createConversation({
       userId: user.id,
-      body
+      body,
     });
 
     let msg = "";
@@ -210,6 +231,8 @@ export const storeApi: StateCreator<
       }
     };
 
+    get().focusInputMsg();
+
     // Manejar posibles errores
     eventSource.onerror = function (err) {
       console.error("EventSource failed:", err);
@@ -219,7 +242,7 @@ export const storeApi: StateCreator<
   },
 
   sendMessage: () => {
-    console.log('sendMessage')
+    console.log("sendMessage");
     const user = useAuthStore.getState().user;
     const currentConversation = get().currentConversation;
     if (!user && !currentConversation) return;
@@ -293,6 +316,8 @@ export const storeApi: StateCreator<
         eventSource.close();
       }
     };
+
+    get().focusInputMsg();
 
     // Manejar posibles errores
     eventSource.onerror = function (err) {
@@ -376,9 +401,9 @@ export const storeApi: StateCreator<
     // Manejar posibles errores
     eventSource.onerror = function (err) {
       console.error("EventSource failed:", err);
-      eventSource.close
+      eventSource.close;
       get().setIsLoading(false);
-    }
+    };
   },
 
   getConversations: async () => {
@@ -434,8 +459,8 @@ export const storeApi: StateCreator<
       isDummyConversation: false,
       isSelectedConversation: false,
       isContinueConversation: false,
-    })
-  }
+    });
+  },
 });
 
 export const useMagicUssStore = create<StateMagicUss>()(

@@ -47,6 +47,7 @@ export default function MagicUSS() {
     const toggleSidebar = useMagicUssStore(state => state.toggleSidebar)
     const isMobileSidebarOpen = useMagicUssStore(state => state.isMobileSidebarOpen)
     const toggleMobileSidebar = useMagicUssStore(state => state.toggleMobileSidebar)
+    const focusInputMsg = useMagicUssStore(state => state.focusInputMsg)
 
     const inputDummyRef = React.useRef<HTMLDivElement>(null)
     const responseDummyRef = React.useRef<HTMLDivElement>(null)
@@ -129,6 +130,7 @@ export default function MagicUSS() {
                 && !isDummyConversation
                 && currentConversation.id !== 'new-conversation') {
                 getMessages()
+                focusInputMsg()
             }
         }
     }, [currentConversation, _hasHydrated])
@@ -254,6 +256,7 @@ export default function MagicUSS() {
                         <div className="p-4 border-t">
                             <div className="flex items-center">
                                 <Input
+                                    id={'inputNewMessage'}
                                     value={newMessage}
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     placeholder="Escribe tu mensaje aquí..."

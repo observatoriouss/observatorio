@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils'
 
 function Sidebar() {
     const isLoadingConversations = useMagicUssStore(state => state.isLoadingConversations)
+    const isLoading = useMagicUssStore(state => state.isLoading)
     const isContinueConversation = useMagicUssStore(state => state.isContinueConversation)
     const isDummyConversation = useMagicUssStore(state => state.isDummyConversation)
     const isMobileSidebarOpen = useMagicUssStore(state => state.isMobileSidebarOpen)
@@ -65,12 +66,12 @@ function Sidebar() {
             <Button
                 onClick={initNewConversation}
                 className="mb-4 w-full bg-gray-700 hover:bg-gray-600"
-                disabled={isLoadingConversations && !isContinueConversation}
+                disabled={(isLoadingConversations && !isContinueConversation) || isLoading}
             >
                 <PlusCircle className="mr-2 h-4 w-4" /> Nueva conversación
             </Button>
             <ScrollArea className="flex-grow">
-                {isLoadingConversations && !isContinueConversation && (
+                {(isLoadingConversations && !isContinueConversation) && (
                     <div className="flex items-center justify-center h-full">
                         <p>Cargando...</p>
                     </div>
@@ -87,7 +88,7 @@ function Sidebar() {
                             "w-full justify-start mb-2 text-left",
                             currentConversation?.id === conv.id && "bg-white"
                         )}
-                        disabled={isLoadingConversations && !isContinueConversation}
+                        disabled={(isLoadingConversations && !isContinueConversation || isLoading)}
                     >
                         <MessageSquare className="mr-2 h-4 w-4" />
                         {conv.title}
