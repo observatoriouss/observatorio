@@ -43,6 +43,7 @@ interface StateMagicUss {
   getMessages: () => Promise<void>;
   toggleSidebar: () => void;
   toggleMobileSidebar: () => void;
+  clearData: () => void;
 }
 
 export const storeApi: StateCreator<
@@ -412,6 +413,17 @@ export const storeApi: StateCreator<
 
   toggleMobileSidebar: () =>
     set({ isMobileSidebarOpen: !get().isMobileSidebarOpen }),
+
+  clearData: () => {
+    set({
+      newMessage: "",
+      messages: [],
+      currentConversation: undefined,
+      isDummyConversation: false,
+      isSelectedConversation: false,
+      isContinueConversation: false,
+    })
+  }
 });
 
 export const useMagicUssStore = create<StateMagicUss>()(

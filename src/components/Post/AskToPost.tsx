@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { usePostStore } from '@/stores/post';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 import { RainbowButton } from '../ui/rainbow-button';
@@ -9,13 +9,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useMagicUssStore } from '@/app/magic-uss/store/magic-uss.store';
+import { useAuthStore } from '@/stores/session';
 
 function AskToPost() {
+    const user = useAuthStore(state => state.user);
+    const setOpenAuthDialog = useAuthStore(state => state.setOpenAuthDialog)
     const postSelected = usePostStore(state => state.postSelected);
 
     const open = usePostStore(state => state.isOpenAskToPost);
     const setOpen = usePostStore(state => state.setIsOpenAskToPost);
     const messages = useMagicUssStore(state => state.messages);
+    const clearData = useMagicUssStore(state => state.clearData);
     const newMessage = useMagicUssStore(state => state.newMessage)
     const setNewMessage = useMagicUssStore(state => state.setNewMessage)
     const isLoading = useMagicUssStore(state => state.isLoading)
@@ -23,10 +27,17 @@ function AskToPost() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (!user) return setOpenAuthDialog(true)
         if (!newMessage.trim()) return
         if (!postSelected) return
         askToPost(postSelected.id)
     }
+
+    useEffect(() => {
+        return () => {
+            clearData()
+        }
+    }, [])
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -57,6 +68,9 @@ function AskToPost() {
                                     className="text-center text-gray-500 italic"
                                 >
                                     ¿Qué te gustaría saber sobre el post?
+                                    {/* <pre>
+                                        {postSelected?.id}
+                                    </pre> */}
                                 </motion.p>
                             ) : (
                                 // conversation.map((message, index) => (
