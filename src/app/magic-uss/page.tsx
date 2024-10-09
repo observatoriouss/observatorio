@@ -27,6 +27,7 @@ export default function MagicUSS() {
 
     /* Magic USS Store */
     const isLoading = useMagicUssStore(state => state.isLoading)
+    const isFirstMessage = useMagicUssStore(state => state.isFirstMessage)
     const isLoadingMessages = useMagicUssStore(state => state.isLoadingMessages)
     const isDummyConversation = useMagicUssStore(state => state.isDummyConversation)
     const isSelectedConversation = useMagicUssStore(state => state.isSelectedConversation)
@@ -122,7 +123,10 @@ export default function MagicUSS() {
 
     useEffect(() => {
         if (_hasHydrated) {
-            if (currentConversation && !isDummyConversation && currentConversation.id !== 'new-conversation') {
+            if (currentConversation
+                && !isFirstMessage
+                && !isDummyConversation
+                && currentConversation.id !== 'new-conversation') {
                 getMessages()
             }
         }

@@ -16,6 +16,7 @@ interface StateMagicUss {
   currentConversation?: Conversation;
   messages: Message[];
   newMessage: string;
+  isFirstMessage: boolean;
   isLoading: boolean;
   isLoadingConversations: boolean;
   isLoadingMessages: boolean;
@@ -55,6 +56,7 @@ export const storeApi: StateCreator<
   currentConversation: undefined,
   newMessage: "",
   isLoading: false,
+  isFirstMessage: false,
   isLoadingConversations: false,
   isLoadingMessages: false,
   isSidebarOpen: true,
@@ -64,7 +66,7 @@ export const storeApi: StateCreator<
   isContinueConversation: false,
 
   setCurrentConversation: (currentConversation) => {
-    set({ currentConversation, isSelectedConversation: true, messages: [] });
+    set({ currentConversation, isSelectedConversation: true, messages: [], isFirstMessage: false });
   },
 
   setNewMessage: (message: string) => {
@@ -120,6 +122,7 @@ export const storeApi: StateCreator<
   },
 
   createNewConversation: async () => {
+    console.log('createNewConversation')
     const user = useAuthStore.getState().user;
     if (!user) return;
 
@@ -175,8 +178,15 @@ export const storeApi: StateCreator<
         let conversations = get().conversations;
         conversations[0] = data.payload.conversation;
 
-        let messages = get().messages;
-        messages[messages.length - 1] = {
+        let messages = [];
+        messages[0] = {
+          body,
+          conversationId: data.payload.inputMessage.conversationId,
+          createdAt: data.payload.inputMessage.createdAt,
+          id: data.payload.inputMessage.id,
+          role: data.payload.inputMessage.role,
+        };
+        messages[1] = {
           body: formattedMessage,
           conversationId: data.payload.responseMessage.conversationId,
           createdAt: data.payload.responseMessage.createdAt,
@@ -186,11 +196,12 @@ export const storeApi: StateCreator<
         set({
           messages,
           currentConversation: data.payload.conversation,
-          isDummyConversation: true,
+          isDummyConversation: false,
           conversations,
           isSelectedConversation: true,
           isContinueConversation: true,
           isLoading: false,
+          isFirstMessage: true,
         });
       }
 
@@ -208,6 +219,7 @@ export const storeApi: StateCreator<
   },
 
   sendMessage: () => {
+    console.log('sendMessage')
     const user = useAuthStore.getState().user;
     const currentConversation = get().currentConversation;
     if (!user && !currentConversation) return;
