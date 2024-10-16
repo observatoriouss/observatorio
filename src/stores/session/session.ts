@@ -160,6 +160,7 @@ const storeApi: StateCreator<
           name: body.name,
           password: body.password === "" ? undefined : body.password,
           role: body.role,
+          biography: body.biography,
         },
         id,
         token

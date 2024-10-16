@@ -36,7 +36,7 @@ export async function generateMetadata(
     }
 }
 
-async function Educating(request: { params: { slug: string } }) {
+async function AuthorPage(request: { params: { slug: string } }) {
 
     return (
         <Suspense
@@ -51,4 +51,4 @@ async function Educating(request: { params: { slug: string } }) {
     )
 }
 
-export default Educating
+export default AuthorPage

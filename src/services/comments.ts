@@ -1,15 +1,15 @@
-import {
-  Comment,
-  LikeCommentResponse,
-  PayloadComment,
-} from "@/stores/post";
+import { Comment, LikeCommentResponse, PayloadComment } from "@/stores/post";
 import { api } from "./axios";
 import { getCookie } from "cookies-next";
 // {{url}}/api/posts/:id/comments
 export const getCommentsForPost = async (
   postId: string
 ): Promise<Comment[]> => {
-  const { data } = await api.get<Comment[]>(`/posts/${postId}/comments`);
+  const { data } = await api.get<Comment[]>(`/posts/${postId}/comments`, {
+    headers: {
+      Authorization: `Bearer ${getCookie("TOKEN")}`,
+    },
+  });
   return data;
 };
 

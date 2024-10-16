@@ -26,6 +26,7 @@ export interface User {
   id: string;
   slug: string;
   countryCode: string;
+  biography?: string;
 }
 export interface UserBodyRequest {
   name: string;
@@ -33,6 +34,7 @@ export interface UserBodyRequest {
   image: string;
   role: string;
   countryCode: string;
+  biography?: string;
 }
 
 export interface PayloadRecoverAccount {

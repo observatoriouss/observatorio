@@ -1,5 +1,5 @@
 import {
-    Certificate, getCertificate, getTrainingByDocument, Participant, TrainingByDocument
+    Certificate, getCertificate, getTrainingByDocument, MapRoleInscription, Participant, TrainingByDocument
 } from "@/services/events";
 import { toast } from "sonner";
 import { create } from "zustand";
@@ -12,7 +12,7 @@ type State = {
 type Actions = {
     setLoading: (loading: boolean) => void;
     getCertificationsByDNI: (documentNumber: number) => Promise<void>;
-    downloadCertificate: (participant: Participant) => Promise<void>;
+    downloadCertificate: (certificate: Certificate) => Promise<void>;
 };
 
 export const useSearchStore = create<State & Actions>()((set) => ({
@@ -36,11 +36,12 @@ export const useSearchStore = create<State & Actions>()((set) => ({
             set({ loading: false });
         }
     },
-    downloadCertificate: async (participant: Participant) => {
+    downloadCertificate: async (certificate: Certificate) => {
         try {
             set({ loading: true });
-            if (!participant.certificate) return;
-            const response = await fetch(participant.certificate?.url);
+            if (!certificate) return;
+            const response = await fetch(certificate?.url);
+            console.log({ response })
             const blob = await response.blob();
 
             // Crea una URL para el Blob y descarga el archivo
@@ -48,12 +49,13 @@ export const useSearchStore = create<State & Actions>()((set) => ({
             const a = document.createElement("a");
             a.style.display = "none";
             a.href = urlBlob;
-            a.download = "Certificado.pdf"; // Nombre del archivo descargado
+            a.download = `Certificado ${MapRoleInscription[certificate.role]}.pdf`; // Nombre del archivo descargado
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(urlBlob);
             document.body.removeChild(a);
         } catch (error) {
+            console.log(error);
             toast.error("Error al generar PDF");
         } finally { set({ loading: false }); }
     },

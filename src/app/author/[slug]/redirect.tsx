@@ -12,7 +12,7 @@ function RedirectAuthorUndefined({ params }: Props) {
         return null
     }
     return (
-        <div>RedirectAuthorUndefined</div>
+        <div></div>
     )
 }
 

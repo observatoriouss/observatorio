@@ -18,7 +18,7 @@ async function fetchData({ slug }: { slug: string }) {
 
 async function Author({ slug }: { slug: string }) {
     const author = await fetchData({ slug })
-    console.log({author})
+    console.log({ author })
     return (
         <Suspense fallback={
             <div>
@@ -34,7 +34,7 @@ async function Author({ slug }: { slug: string }) {
                             <img
                                 src={author.image ?? ''}
                                 alt={author.name}
-                                className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] xl:w-[250px] xl:h-[250px] 2xl:w-[300px] 2xl:h-[300px] rounded-full shadow-lg"
+                                className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] xl:w-[250px] xl:h-[250px] 2xl:w-[300px] 2xl:h-[300px] aspect-square object-cover rounded-full shadow-lg"
                             />
                         </div>
                     )}
@@ -59,7 +59,21 @@ async function Author({ slug }: { slug: string }) {
                     <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light">
                         {author?.email}
                     </p>
+                    <p className="text-md font-light">
+                        Nro Posts: {author?.postsCount} || Nro Likes: {author?.postLikes}
+                    </p>
                 </div>
+                {/* Create biography section */}
+                {author?.biography && (
+                    <section className="w-full bg-transparent p-4 lg:py-12">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-2">
+                            Biografía
+                        </h3>
+                        <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light"
+                            dangerouslySetInnerHTML={{ __html: author.biography }}
+                        />
+                    </section>
+                )}
                 <section className='w-full bg-transparent p-4 lg:py-12'>
                     {author && <Posts id={author.id} />}
                 </section>

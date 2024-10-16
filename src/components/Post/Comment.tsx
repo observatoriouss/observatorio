@@ -15,6 +15,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
   const user = useAuthStore(state => state.user)
   const setOpenAuthDialog = useAuthStore(state => state.setOpenAuthDialog)
   const likeComment = usePostStore(state => state.likeComment)
+  const postSelected = usePostStore(state => state.postSelected)
   const [reply, setReply] = useState(false)
   const handleChangeReply = () => setReply(!reply)
   const [isLikeCommentLoading, setIsLikeCommentLoading] = useState(false)
@@ -34,9 +35,20 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
     <div className="p-4 w-full">
       <div className="grid grid-cols-[auto,1fr] gap-2 items-center mb-4">
         <div className="rounded-full bg-green-100 h-6 w-6 flex items-center justify-center">
-          <User size={16} />
+          {comment.user?.image ? (
+            <img
+              src={comment.user.image}
+              alt={comment.user.name}
+              className="rounded-full h-6 w-6"
+            />
+          ) : (
+            <User size={16} />
+          )}
         </div>
-        <h2 className="text-base font-semibold">{comment.user.name}</h2>
+        <h2 className={cn(
+          "text-base font-normal text-gray-600",
+          postSelected?.userId === comment.userId ? 'font-bold text-black underline' : ''
+        )}>{comment.user.name}</h2>
       </div>
 
       <div className="mb-4">
@@ -60,8 +72,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
             aria-label="Toggle bold"
             className={cn('text-xs h-6 p-0 px-2',
               isLikeCommentLoading ? 'pointer-events-none' : '',
-              // comment.iLikedIt ? 'text-red-500 bg-red-50' : '',
-              (user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500 bg-red-50' : ''
+              (comment.iLikedIt) ? 'text-red-500 bg-red-50' : ''
             )}
             onClick={() => handleLike(comment.id)}
           >
@@ -72,8 +83,7 @@ function CommentComponent({ comment, isChild = false }: CommentProps) {
             ) :
               (<div className='flex items-center text-black'>
                 <Heart className={cn("h-3 w-3 mr-1",
-                  // comment.iLikedIt ? 'text-red-500' : '',
-                  (user?.id === comment.user.id && comment.iLikedIt) ? 'text-red-500' : ''
+                  (comment.iLikedIt) ? 'text-red-500' : ''
                 )} /> {comment.numberOfLikes}
               </div>)
             }

@@ -132,6 +132,7 @@ export interface Certificate {
   trainingFromDate: string;
   trainingToDate:   string;
   url:              string;
+  role:            RoleInscription;
 }
 
 export interface Participant {
@@ -140,7 +141,7 @@ export interface Participant {
   role: RoleInscription;
   attendanceStatus: string;
   professor: Professor;
-  certificate?: Certificate;
+  certificates:      Certificate[];
 }
 
 // {{url}}/api/training/:id/participants

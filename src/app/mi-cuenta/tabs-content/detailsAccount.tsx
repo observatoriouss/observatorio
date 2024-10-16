@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import { toast } from 'sonner';
 import { useAuthStore, UserBodyRequest } from "@/stores/session";
+import DefaultEditor from 'react-simple-wysiwyg';
 
 function DetailsAccount() {
     const [loadFile, setLoadFile] = useState(false)
@@ -16,6 +17,12 @@ function DetailsAccount() {
     const loading = useAuthStore(state => state.loading);
     const updateDataUser = useAuthStore(state => state.updateDataUser);
     const countries = useAuthStore(state => state.countries);
+
+    const [description, setDescription] = useState(user?.biography);
+    const onHandleDescripcion = (value: string) => {
+        setDescription(value);
+        setValue("biography", value);
+    };
 
     const {
         register,
@@ -32,6 +39,7 @@ function DetailsAccount() {
             name: '',
             image: '',
             password: '',
+            biography: user?.biography,
         }
     })
     useEffect(() => {
@@ -39,6 +47,7 @@ function DetailsAccount() {
         reset({
             ...user
         })
+        setDescription(user.biography);
     }, [user])
 
     useEffect(() => {
@@ -201,6 +210,28 @@ function DetailsAccount() {
                         />
                         {errors.countryCode &&
                             <span className="text-red-600 text-xs">{errors.countryCode.message}</span>
+                        }
+                    </div>
+
+                    {/* Biography */}
+                    <div className="flex flex-col items-start gap-2">
+                        <Label htmlFor="description" className="text-right">
+                            Biografía
+                        </Label>
+                        <div className="border-[1px] rounded border-slate-200 w-full">
+                            <DefaultEditor
+                                value={description}
+                                onChange={(e) => {
+                                    onHandleDescripcion(e.target.value);
+                                }}
+                            />
+                            <input
+                                type="hidden"
+                                {...register("biography", { required: true })}
+                            />
+                        </div>
+                        {errors.biography &&
+                            <span className="text-red-600 text-xs">{errors.biography.message}</span>
                         }
                     </div>
 

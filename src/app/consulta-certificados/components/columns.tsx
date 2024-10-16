@@ -1,28 +1,38 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { MapTrainingModality, SingleTraining } from "@/services/events"
+import { MapRoleInscription, MapTrainingModality, SingleTraining } from "@/services/events"
 import { ColumnDef, Row } from "@tanstack/react-table"
 import { useSearchStore } from "../store/search"
 
 const CellComponent = ({ row }: { row: Row<SingleTraining> }) => {
     const { participant } = row.original
-            const downloadCertificate = useSearchStore( state => state.downloadCertificate);
+    const { downloadCertificate } = useSearchStore()
 
-            if (!participant.certificate) return <></>
+    if (!participant.certificates?.length) return <></>
 
-            return (
-                // Descargar certificado
-                <Button
-                    size={"sm"}
-                    onClick={() => {
-                        if (!participant) return
-                        downloadCertificate(participant)
-                    }}
-                >
-                    <span className="text-xs">Descargar certificado</span>
-                </Button>
-            )
+    return (
+        // Descargar certificado
+        <>
+            {participant.certificates && (
+                <div className="flex flex-row gap-1">
+                    {participant.certificates.map((certificate) => (
+                        <Button
+                            key={certificate.id}
+                            size={"sm"}
+                            className="bg-blue-500 hover:bg-blue-500 hover:bg-opacity-80"
+                            onClick={() => {
+                                if (!participant) return
+                                downloadCertificate(certificate)
+                            }}
+                        >
+                            <span className="text-xs">Certificado {MapRoleInscription[certificate.role]}</span>
+                        </Button>
+                    ))}
+                </div>
+            )}
+        </>
+    )
 };
 
 export const columns: ColumnDef<SingleTraining>[] = [
@@ -61,7 +71,7 @@ export const columns: ColumnDef<SingleTraining>[] = [
         header: "Estado",
         cell: (props) => {
             const { participant } = props.row.original
-            return participant.certificate ? "Aprobado" : "Pendiente"
+            return participant.certificates?.length ? "Aprobado" : "Pendiente"
         },
     },
     {

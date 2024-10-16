@@ -46,7 +46,7 @@ export default function CardArticle({
                 <div className='flex flex-row gap-2 items-center'>
                     {user && (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={user.image || ''} alt="" className='w-12 h-12 rounded-full' />
+                        <img src={user.image || ''} alt="" className='w-12 h-12 rounded-full aspect-square object-cover' />
                     )}
                     <div className='flex flex-col gap-0'>
                         <h3 className='text-sm p-0 m-0 RS_TITLE' title={"Le pertenece a la cateogoría" + categoryMapper[category]}>{categoryMapper[category]} </h3>
