@@ -1,5 +1,23 @@
+'use client'
 import React from 'react';
 import VideoEmbed from '../tube/[slug]/video-embed';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const IMAGES = [
+    "/img/chot/1.jpeg",
+    "/img/chot/2.jpeg",
+    "/img/chot/3.jpeg",
+    "/img/chot/4.jpeg",
+    "/img/chot/5.jpeg",
+    "/img/chot/6.jpeg",
+    "/img/chot/7.jpeg",
+]
 
 const SalaInnovacionEducativa = () => {
     return (
@@ -100,6 +118,55 @@ const SalaInnovacionEducativa = () => {
             <p className="text-lg font-bold text-gray-900">
                 ¡Bienvenidos a la nueva era de la educación en la Universidad Señor de Sipán!
             </p>
+
+            <Swiper
+                spaceBetween={10}
+                // slidesPerView={4}
+                loop={true}
+                modules={[Navigation]}
+                navigation={{
+                    nextEl: `.nextMenu`,
+                    prevEl: `.prevMenu`,
+                }}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                    1280: {
+                        slidesPerView: 4,
+                        spaceBetween: 40,
+                    },
+                }}
+            >
+                {IMAGES.map((img, idx) => (
+                    <SwiperSlide key={idx + 'navs'}>
+                        <img key={idx + 'img' + img} src={img} alt={'CHOT'} className='w-full' />
+                    </SwiperSlide>
+                ))}
+                <div
+                    className={`prevMenu absolute top-2/4 z-20 -mt-[16px] flex h-8 w-8 cursor-pointer items-center justify-center transition-all duration-200 -left-[10px]`}
+                    role="button"
+                >
+                    <span className="sr-only">Prev</span>
+                    <ChevronLeft width={18} height={18} />
+                </div>
+                <div
+                    className={`nextMenu absolute top-2/4 z-20 -mt-[16px] flex h-8 w-8 cursor-pointer items-center justify-center transition-all duration-200 -right-[10px]`}
+                    role="button"
+                >
+                    <span className="sr-only">Next</span>
+                    <ChevronRight width={18} height={18} />
+                </div>
+            </Swiper>
         </div>
     );
 };

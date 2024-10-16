@@ -10,7 +10,7 @@ import { HeaderContext, HeaderProvider } from './header.context';
 import Image from 'next/image';
 import './styles.css';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { ChevronLeft, ChevronRight, LogOut, Search, Sparkles, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, LogOut, Search, User } from 'lucide-react';
 import { Button } from '../ui/button';
 import { usePathname } from 'next/navigation';
 // Import Swiper React components
@@ -98,7 +98,7 @@ function ContentHeader() {
         'flex justify-center absolute top-0 w-full pb-4',
         isOpenSearch ? 'z-10' : 'z-20'
       )}>
-        <div className='container flex flex-col gap-4 md:gap-0 md:flex-row justify-between w-full items-center p-0 md:p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
+        <div className='container flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between w-full items-center p-0 lg:p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
           <div className='flex flex-row gap-1 md:gap-3 items-center justify-center w-fit'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <Link href='/'>
@@ -107,21 +107,22 @@ function ContentHeader() {
                 alt="Logo USS"
                 // className='w-40'
                 width={200}
-                height={80}
+                height={0}
+                className='w-52 h-auto'
               />
             </Link>
             <div className='w-[2px] h-8 bg-black'></div>
             <div>
-              <h1 className='text-md md:text-xl font-medium'>Observatorio Educativo</h1>
+              <h1 className='text-lg font-medium'>Observatorio Educativo</h1>
             </div>
           </div>
-          <nav className='hidden md:flex items-center gap-2 md:gap-4 text-sm md:text-base'>
+          <nav className='hidden lg:flex items-center gap-2 lg:gap-4 text-sm lg:text-base'>
             {NAVS.map((nav) => (
               <LinkNav key={nav.href} href={nav.href} name={nav.name} />
             ))}
             <MenuAction isOpenSearch={isOpenSearch} setIsOpenSearch={setIsOpenSearch} />
           </nav>
-          <nav className='flex gap-1 md:hidden items-center w-full relative px-8 pb-4'>
+          <nav className='flex gap-1 lg:hidden items-center w-full relative px-2 pb-4'>
             <Swiper
               spaceBetween={-10}
               slidesPerView={4}
@@ -269,9 +270,9 @@ export const MenuAction = ({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Link href="/magic-uss" className='h-full w-full'>
+      <Link href="/magic-uss" className='h-6 w-6 md:h-full md:w-full'>
         <AnimatedGradientText
-          className='rounded-md'
+          className='rounded-md h-6 w-6 md:h-full md:w-full px-3 py-3 md:px-4 md:py-2.5'
         >
           <span
             className={cn(
