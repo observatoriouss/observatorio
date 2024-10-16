@@ -1,6 +1,7 @@
 import { api } from "@/services/axios";
 import { Conversation, Message } from "../models/magic-uss.model";
 import { getCookie } from "cookies-next";
+import { API_URL_STREAMS } from "@/config/api";
 
 interface PayloadCreateConversation {
   userId: string;
@@ -29,7 +30,7 @@ export class MagicUssService {
   };
 
   // Streams
-  static baseURLStream = "https://observatorio-streams.azurewebsites.net";
+  static baseURLStream = API_URL_STREAMS;
 
   static createConversation = async (payload: PayloadCreateConversation) => {
     return new EventSource(

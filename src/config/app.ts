@@ -1,6 +1,7 @@
 const nodeEnv = process.env.NODE_ENV || "development";
 export let config: {
   apiUrl: string;
+  apiUrlStreams: string;
   gaMeasurementId: string;
   algoliaAppId: string;
   algoliaIndexName: string;
@@ -10,6 +11,7 @@ export let config: {
 if (nodeEnv === "development") {
   config = {
     apiUrl: "https://observatorio-uss.azurewebsites.net/api",
+    apiUrlStreams: "https://observatorio-streams.azurewebsites.net",
     gaMeasurementId: "G-8NFR32HVCJ",
     algoliaAppId: "N4AQ3CGJV0",
     algoliaApiKey: "a234ce86d7d413461f9c512ca0cb4563",
@@ -18,6 +20,7 @@ if (nodeEnv === "development") {
 } else {
   config = {
     apiUrl: "https://observatory-uss.azurewebsites.net/api",
+    apiUrlStreams: "https://observatory-streams-prod.azurewebsites.net",
     gaMeasurementId: "G-8NFR32HVCJ",
     algoliaAppId: "RAKRXKZMHD",
     algoliaApiKey: "c194f25811d488e0cc9373303d0abfc4",
