@@ -4,6 +4,7 @@ import ListExecutions, { InfoExecution } from './components/ListExecutions';
 import { Toaster } from 'sonner';
 import ChargeData from './components/ChargeData';
 import BtnInscription from './components/BtnInscription';
+import CumbreIberoamericana from './components/CumbreIberoamericana';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -26,6 +27,10 @@ async function Events() {
       <div>
         <h1 className='text-4xl font-bold text-uss-black'>Eventos</h1>
       </div>
+
+      <section>
+      <CumbreIberoamericana />
+      </section>
 
       <section className='flex flex-col gap-4  min-w-full'>
 
