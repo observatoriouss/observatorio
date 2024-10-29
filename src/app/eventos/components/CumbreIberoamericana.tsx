@@ -25,6 +25,7 @@ export default function CumbreIberoamericana() {
     }
 
     const handleImageClick = (index: number) => {
+        setSelectedVideo(null)
         setSelectedImage(index)
         setIsDialogOpen(true)
     }
