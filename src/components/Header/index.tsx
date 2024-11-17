@@ -111,7 +111,7 @@ function ContentHeader() {
             </div>
           </div>
           <nav className='flex justify-between xl:justify-end w-full items-center gap-4 text-xs lg:text-base'>
-            <div className='flex max-w-[250px] sm:max-w-xl md:max-w-3xl lg:max-w-none overflow-y-auto gap-4 py-2 h-10'>
+            <div className='flex max-w-[200px] sm:max-w-xl md:max-w-3xl lg:max-w-none overflow-y-auto gap-4 py-2 h-10'>
               {NAVS.map((nav) => (
                 <LinkNav key={nav.href} href={nav.href} name={nav.name} />
               ))}
