@@ -300,7 +300,9 @@ async function HomeGrid() {
 export default function Home() {
   return (
     <Suspense fallback={
-      <HomeLayout children={<SplashScreen />} />
+      <HomeLayout>
+        <SplashScreen />
+      </HomeLayout>
     }>
       <main className={"flex min-h-screen flex-col items-center justify-between mx-0 w-full px-0"}>
         <ParticlesBackground />

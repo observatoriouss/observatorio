@@ -14,11 +14,11 @@ function MyRequests() {
     const loading = useRequestStore(state => state.loading)
     const open = useRequestStore(state => state.open)
 
-    if (!user) return <SplashScreen />;
-
     useEffect(() => {
         getRequestsByUser(user.id)
-    }, [])
+    }, [user, getRequestsByUser])
+
+    if (!user) return <SplashScreen />;
 
     return (
         <div className='overflow-x-auto container mx-auto'>

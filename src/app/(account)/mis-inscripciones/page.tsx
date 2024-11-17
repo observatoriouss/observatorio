@@ -12,13 +12,12 @@ function MyInscriptions() {
     const getCertificationsByDNI = useSearchStore(state => state.getCertificationsByDNI)
     const loading = useSearchStore(state => state.loading)
 
-    if (!user) return <SplashScreen />;
-
     useEffect(() => {
         if (!user.documentNumber || !user.documentType) return
         getCertificationsByDNI(user.documentNumber, user.documentType)
-    }, [])
+    }, [user, getCertificationsByDNI])
 
+    if (!user) return <SplashScreen />;
     return (
         <div>
             <h2 className="text-3xl xl:text-4xl font-semibold mb-8">Mis Inscripciones a Eventos</h2>

@@ -16,7 +16,7 @@ function Page() {
 
     const { register, handleSubmit, formState: { errors }, watch, setValue, setError } = useForm({
         values: {
-            documentNumber: '' as unknown as number,
+            documentNumber: '' as unknown as string,
         }
     })
     const { documentNumber } = watch()

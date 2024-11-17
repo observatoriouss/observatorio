@@ -80,7 +80,7 @@ function Sidebar() {
                     </div>
                 )}
                 {conversations.map(conv => (
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between' key={conv.id+'conv'}>
                         <Button
                             key={conv.id}
                             onClick={() => {
