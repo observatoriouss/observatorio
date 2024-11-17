@@ -1,3 +1,6 @@
+import { ProfessorEmploymentType, School } from "@/services/events";
+import { Country } from "@/services/posts";
+
 export interface PayloadLogin {
   email: string;
   password: string;
@@ -7,7 +10,11 @@ export interface PayloadRegister {
     name: string;
     email: string;
     password: string;
-    role: "user";
+    role: "user" | "professor";
+    documentType?: "dni";
+    documentNumber?: string;
+    employmentType?: ProfessorEmploymentType;
+    schoolId?: string;
   };
   verificationCode: string;
 }
@@ -25,16 +32,27 @@ export interface User {
   createdAt: string;
   id: string;
   slug: string;
+  country?: Country;
   countryCode: string;
   biography?: string;
+  documentType?: "dni";
+  documentNumber?: string;
+  employmentType?: ProfessorEmploymentType;
+  schoolId?: string;
+  school?: School;
 }
 export interface UserBodyRequest {
   name: string;
-  password: string | undefined;
+  email?: string;
+  password?: string;
   image: string;
-  role: string;
+  role: "user" | "professor";
   countryCode: string;
   biography?: string;
+  documentType?: "dni";
+  documentNumber?: string;
+  employmentType?: ProfessorEmploymentType;
+  schoolId?: string;
 }
 
 export interface PayloadRecoverAccount {

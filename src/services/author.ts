@@ -1,5 +1,6 @@
 import { API_URL } from "@/config/api";
-import { Post, User } from "./posts";
+import { Post } from "./posts";
+import { User } from "@/stores/session";
 
 export interface Author extends User {
   postsCount: number;

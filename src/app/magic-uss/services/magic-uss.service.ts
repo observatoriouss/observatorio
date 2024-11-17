@@ -29,6 +29,15 @@ export class MagicUssService {
     return data;
   };
 
+  // {{url}}/api/conversations/:id delete
+  static deleteConversation = async (id: string) => {
+    await api.delete(`/conversations/${id}`, {
+      headers: {
+        Authorization: `Bearer ${getCookie("TOKEN")}`,
+      },
+    });
+  }
+
   // Streams
   static baseURLStream = API_URL_STREAMS;
 

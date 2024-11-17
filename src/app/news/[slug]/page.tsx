@@ -49,7 +49,7 @@ export async function generateMetadata(
 async function Post({ slug }: { slug: string }) {
     const post = await getReactCachedPost(slug)
     return (
-        <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
+        <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-12 items-center'>
             <PostSelected post={post} />
             {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
             <div className='flex flex-col gap-1'>
@@ -70,7 +70,7 @@ async function Post({ slug }: { slug: string }) {
             </div>
             <AskToPost />
             {post.contentAudioUrl && <AudioPlayerIA audioBlob={post.contentAudioUrl} />}
-            {!post.contentAudioUrl  && post.content && (post.content.toString().length < 4000) && <GenerateAudio postId={post.id} />}
+            {!post.contentAudioUrl && post.content && (post.content.toString().length < 4000) && <GenerateAudio postId={post.id} />}
             <SocialShareButtons url={categoryMapperLink[Category.NEWS] + '/' + post.slug} title={post.title} />
             {/* informacion de fecha y author */}
             <div className='flex flex-row gap-4 justify-between items-start w-full text-uss-black'>
@@ -118,14 +118,14 @@ async function Post({ slug }: { slug: string }) {
     )
 }
 
-async function New(request: { params: { slug: string } }) {
+function New(request: { params: { slug: string } }) {
 
     return (
         <Suspense
             key={request.params.slug}
             fallback={<SplashScreen />}
         >
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col px-4'>
+            <main className='h-auto flex flex-col px-4'>
                 <Post slug={request.params.slug} />
             </main>
         </Suspense>

@@ -34,7 +34,7 @@ async function Reads() {
 function ReadsPage() {
     return (
         <Suspense fallback={<SplashScreen />}>
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
+            <main className='h-auto flex flex-col'>
                 <HeroSection heroImage='/img/hero/hero-edu-reads.png' title='Lecturas' description='Reportes, eBooks y lecturas sobre innovación educativa y estrategias docentes.' />
 
                 <section className='w-full bg-transparent p-4 lg:py-12'>

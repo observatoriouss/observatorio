@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Button } from '@/components/ui/button'
-import { MessageSquare, PanelRightOpenIcon, PlusCircle } from 'lucide-react'
+import { MessageSquare, PanelRightOpenIcon, PlusCircle, Trash } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useMagicUssStore } from '../store/magic-uss.store'
 import { cn } from '@/lib/utils'
@@ -20,6 +20,7 @@ function Sidebar() {
     const setDummyRef = useMagicUssStore(state => state.setDummyRef)
     const initNewConversation = useMagicUssStore(state => state.initNewConversation)
     const getConversations = useMagicUssStore(state => state.getConversations)
+    const deleteConversation = useMagicUssStore(state => state.deleteConversation)
     const currentConversation = useMagicUssStore(state => state.currentConversation)
     const setCurrentConversation = useMagicUssStore(state => state.setCurrentConversation)
     const dummyRef = React.useRef<HTMLButtonElement>(null)
@@ -31,7 +32,9 @@ function Sidebar() {
     }, [dummyRef, isDummyConversation])
 
     useEffect(() => {
-        getConversations()
+        if (conversations.length === 0) {
+            getConversations()
+        }
     }, [])
 
     return (
@@ -77,22 +80,43 @@ function Sidebar() {
                     </div>
                 )}
                 {conversations.map(conv => (
-                    <Button
-                        key={conv.id}
-                        onClick={() => {
-                            setCurrentConversation(conv)
-                            isMobileSidebarOpen && toggleMobileSidebar()
-                        }}
-                        variant="ghost"
-                        className={cn(
-                            "w-full justify-start mb-2 text-left",
-                            currentConversation?.id === conv.id && "bg-white"
-                        )}
-                        disabled={(isLoadingConversations && !isContinueConversation || isLoading)}
-                    >
-                        <MessageSquare className="mr-2 h-4 w-4" />
-                        {conv.title}
-                    </Button>
+                    <div className='flex justify-between'>
+                        <Button
+                            key={conv.id}
+                            onClick={() => {
+                                setCurrentConversation(conv)
+                                isMobileSidebarOpen && toggleMobileSidebar()
+                            }}
+                            variant="ghost"
+                            className={cn(
+                                "w-44 md:w-44 justify-start mb-2 text-left text-ellipsis overflow-hidden flex-wrap",
+                                currentConversation?.id === conv.id && "bg-white"
+                            )}
+                            disabled={(isLoadingConversations && !isContinueConversation || isLoading)}
+                        >
+                            {/* <MessageSquare className="mr-2 h-4 w-4" /> */}
+                            {conv.title}
+                        </Button>
+
+                        <TooltipProvider>
+                            <Tooltip delayDuration={100}>
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => deleteConversation(conv.id)}
+                                        className="md:flex p-0 mr-3"
+                                        disabled={isLoading}
+                                    >
+                                        <Trash className="h-4 w-4 p-0 m-0" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent side='right'>
+                                    <p>Eliminar conversación</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
                 ))}
             </ScrollArea>
         </div>

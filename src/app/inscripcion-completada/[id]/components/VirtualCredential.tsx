@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 function VirtualCredential({ participant }: { participant: Participant }) {
     const divRef = useRef(null);
-    const [isImageLoaded, setIsImageLoaded] = useState(false);
+    const [isImageLoaded, setIsImageLoaded] = useState(true);
 
     const handleDownload = async () => {
         if (divRef.current && isImageLoaded) {
@@ -52,13 +52,15 @@ function VirtualCredential({ participant }: { participant: Participant }) {
                                 {MapRoleInscription[participant.role]}
                             </p>
                         </div>
-                        <h2 className='text-xl font-medium'> {participant.professor.name} </h2>
-                        <h2 className='text-base font-medium'> {participant.professor.email} </h2>
-                        <h2 className='text-sm font-medium'> DNI: {participant.professor.documentNumber} </h2>
+                        <h2 className='text-xl font-medium'> {participant.user.name} </h2>
+                        <h2 className='text-base font-medium'> {participant.user.email} </h2>
+                        <h2 className='text-sm font-medium'> DNI: {participant.user.documentNumber} </h2>
                         <img
                             src={`https://quickchart.io/qr?text=${participant.id}&size=600`}
                             style={{ padding: '0.75rem' }}
-                            onLoad={() => setIsImageLoaded(true)}
+                            onLoad={() => {
+                                setIsImageLoaded(true)
+                            }}
                             crossOrigin="anonymous"
                         />
                     </div>

@@ -43,6 +43,7 @@ interface StateMagicUss {
   askToPost: (postId: string) => void; //interactua con un EventSource
   getConversations: () => Promise<void>;
   getMessages: () => Promise<void>;
+  deleteConversation: (id: string) => Promise<void>;
   toggleSidebar: () => void;
   toggleMobileSidebar: () => void;
   clearData: () => void;
@@ -443,6 +444,31 @@ export const storeApi: StateCreator<
       console.error(error);
     } finally {
       set({ isLoadingMessages: false });
+    }
+  },
+
+  deleteConversation: async (id) => {
+    if (!id) return;
+    const currentConversation = get().currentConversation;
+    try {
+      set({ isLoading: true });
+      await MagicUssService.deleteConversation(id);
+      set({
+        conversations: get().conversations.filter((conv) => conv.id !== id),
+      });
+
+      if (currentConversation && currentConversation.id === id) {
+        set({
+          currentConversation: undefined,
+          messages: [],
+          isSelectedConversation: false,
+          isContinueConversation: false,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      set({ isLoading: false });
     }
   },
 

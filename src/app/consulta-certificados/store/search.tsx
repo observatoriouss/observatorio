@@ -11,7 +11,7 @@ type State = {
 
 type Actions = {
     setLoading: (loading: boolean) => void;
-    getCertificationsByDNI: (documentNumber: number) => Promise<void>;
+    getCertificationsByDNI: (documentNumber: string, documentType?: string) => Promise<void>;
     downloadCertificate: (certificate: Certificate) => Promise<void>;
 };
 
@@ -19,10 +19,10 @@ export const useSearchStore = create<State & Actions>()((set) => ({
     loading: false,
     trainings: null,
     setLoading: (loading) => set({ loading }),
-    getCertificationsByDNI: async (documentNumber: number) => {
+    getCertificationsByDNI: async (documentNumber: string, documentType = 'dni') => {
         try {
             set({ loading: true });
-            const trainings = await getTrainingByDocument("dni", documentNumber);
+            const trainings = await getTrainingByDocument(documentType, documentNumber);
             set({ trainings });
             toast.success(
                 "Búsqueda realizada con éxito."

@@ -35,7 +35,7 @@ async function Educating() {
 function EducatingPage() {
     return (
         <Suspense fallback={<SplashScreen />}>
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
+            <main className='h-auto flex flex-col'>
                 <HeroSection heroImage='/img/hero/hero-edu-bits.png' title='Educando' description='Experiencias pedagógicas y buenas prácticas en la enseñanza. De profesores para profesores.' />
                 <section className='w-full bg-transparent p-4 lg:py-12'>
                     <Educating />

@@ -1,6 +1,7 @@
 import { getAuthorBySlug } from "@/services/author";
 import { Suspense } from "react";
 import Posts from "./posts";
+import SplashScreen from "@/components/SplashScreen";
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -20,11 +21,7 @@ async function Author({ slug }: { slug: string }) {
     const author = await fetchData({ slug })
     console.log({ author })
     return (
-        <Suspense fallback={
-            <div>
-                <h1>Cargando...</h1>
-            </div>
-        }>
+        <Suspense fallback={<SplashScreen />}>
             <div className="bg-gray-200">
                 <div
                     className="bg-cover bg-center h-[300px] md:h-[200px] lg:h-[300px] xl:h-[400px] 2xl:h-[500px] flex items-center justify-center bg-[url('/img/author-bg.jpeg')] bg-opacity-50 relative"

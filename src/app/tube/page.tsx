@@ -1,8 +1,8 @@
-import { CardArticle, CardVideo } from '@/components';
+import { CardVideo } from '@/components';
 import HeroSection from '@/components/HeroSection';
 import SplashScreen from '@/components/SplashScreen';
 import { getTubes } from '@/services/posts';
-import { Suspense } from 'react'
+import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -37,7 +37,7 @@ function TubesPage() {
 
     return (
         <Suspense fallback={<SplashScreen />}>
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
+            <main className='h-auto flex flex-col'>
                 <HeroSection heroImage='/img/hero/hero-edu-tube.png' title='AudioVisual' description='Lo último en innovación educativa en video, webinars, entrevistas, conferencias y más...' />
 
                 <section className='w-full bg-transparent p-4 lg:py-12'>

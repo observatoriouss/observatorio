@@ -1,23 +1,43 @@
 'use client';
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react'
-import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
+import { Canvas, extend, useThree, useFrame, useLoader } from '@react-three/fiber'
 import { Text, useTexture, Environment, Lightformer } from '@react-three/drei'
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier'
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline'
-import { useControls } from 'leva'
+// import { useControls } from 'leva'
 
 extend({ MeshLineGeometry, MeshLineMaterial })
+export default function Credential({ participant, resources }) {
+  // const { debug } = useControls({ debug: false })
 
-// Preload textura del fondo del ticket
-useTexture.preload('/credential/band.png')
-export default function Credential({ participant }) {
-  const { debug } = useControls({ debug: false })
+  const [textureLoaded, setTextureLoaded] = useState(false)
+  const [newResources, setNewResources] = useState({})
+  useEffect(() => {
+    (
+      async () => {
+        try {
+          const [bg, band] = await Promise.all([fetch(resources.bg), fetch(resources.band)])
+
+          const [bgBlob, bandBlob] = await Promise.all([bg.blob(), band.blob()])
+
+          const bgUrl = URL.createObjectURL(bgBlob)
+          const bandUrl = URL.createObjectURL(bandBlob)
+
+          setNewResources({ bgUrl, bandUrl })
+          setTextureLoaded(true)
+        } catch (error) {
+          console.error(error)
+
+        }
+      }
+    )()
+  }, [resources])
   return (
     <Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
       <ambientLight intensity={Math.PI} />
-      <Physics debug={debug} interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
-        <Band participant={participant} />
+      <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
+        {textureLoaded && <Band participant={participant} resources={newResources} />}
       </Physics>
       <Environment background blur={0.75}>
         <color attach="background" args={['black']} />
@@ -30,16 +50,11 @@ export default function Credential({ participant }) {
   )
 }
 
-function Band({ participant, maxSpeed = 50, minSpeed = 10 }) {
+function Band({ participant, resources, maxSpeed = 50, minSpeed = 10 }) {
+
   const band = useRef(), fixed = useRef(), j1 = useRef(), j2 = useRef(), j3 = useRef(), card = useRef()
   const vec = new THREE.Vector3(), ang = new THREE.Vector3(), rot = new THREE.Vector3(), dir = new THREE.Vector3()
   const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 2, linearDamping: 2 }
-  const texture = useTexture('/credential/band.png')
-  const bg = useTexture('/credential/bg.png');
-  const tick = {
-    id: '410877c5-0a77-4a36-acdc-84637baeb363'
-  }
-  const qrTexture = useTexture(`https://quickchart.io/qr?text=${participant.id}&size=600`);
   const { width, height } = useThree((state) => state.size)
   const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]))
   const [dragged, drag] = useState(false)
@@ -86,21 +101,11 @@ function Band({ participant, maxSpeed = 50, minSpeed = 10 }) {
   })
 
   curve.curveType = 'chordal'
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping
-  bg.wrapS = bg.wrapT = THREE.RepeatWrapping
-
-  // Datos dinámicos del ticket (puedes modificar estos valores según necesites)
-  const ticketData = {
-    role: "ESTUDIANTE", // Ejemplo, ajusta según tus necesidades
-    name: "Juan Pérez",
-    email: "juan.perez@example.com",
-    dni: "12345678"
-  }
-
-  const MapRoleInscription = {
-    assistant: "Asistente",
-    speaker: "Ponente",
-  }
+  const qrTexture = useTexture(`https://quickchart.io/qr?text=${participant.id}&size=600`);
+  const bgTexture = useTexture(resources.bgUrl)
+  const bandTexture = useTexture(resources.bandUrl)
+  bandTexture.wrapS = bandTexture.wrapT = THREE.RepeatWrapping
+  bgTexture.wrapS = bgTexture.wrapT = THREE.RepeatWrapping
 
   return (
     <>
@@ -126,7 +131,7 @@ function Band({ participant, maxSpeed = 50, minSpeed = 10 }) {
             onPointerDown={(e) => (e.target.setPointerCapture(e.pointerId), drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))))}>
             <mesh>
               <planeGeometry args={[0.8, 1.125]} />
-              <meshPhysicalMaterial map={bg} clearcoat={1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.5} />
+              <meshPhysicalMaterial map={bgTexture} clearcoat={1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.5} />
             </mesh>
 
             {/* Contenido dinámico actualizado */}
@@ -138,15 +143,15 @@ function Band({ participant, maxSpeed = 50, minSpeed = 10 }) {
               {/* <Text position={[0, 0.0, 0.001]} fontSize={0.03} color="black">{MapRoleInscription[participant.role]}</Text> */}
 
               <Text position={[0, -0.08, 0]} fontSize={0.05} color="black" font="/fonts/Marselis/Marselis-Pro/MarselisPro.ttf">
-                {participant.professor.name}
+                {participant.user.name}
               </Text>
 
               <Text position={[0, -0.15, 0]} fontSize={0.035} color="black" font="/fonts/Marselis/Marselis-Pro/MarselisPro.ttf">
-                {participant.professor.email}
+                {participant.user.email}
               </Text>
 
               <Text position={[0, -0.19, 0]} fontSize={0.03} color="black" font="/fonts/Marselis/Marselis-Pro/MarselisPro.ttf">
-                DNI: {participant.professor.documentNumber}
+                DNI: {participant.user.documentNumber}
               </Text>
 
               {/* Código QR */}
@@ -160,7 +165,7 @@ function Band({ participant, maxSpeed = 50, minSpeed = 10 }) {
       </group>
       <mesh ref={band}>
         <meshLineGeometry />
-        <meshLineMaterial color="white" depthTest={false} resolution={[width, height]} useMap map={texture} repeat={[-3, 1]} lineWidth={1} />
+        <meshLineMaterial color="white" depthTest={false} resolution={[width, height]} useMap map={bandTexture} repeat={[-3, 1]} lineWidth={1} />
       </mesh>
     </>
   )

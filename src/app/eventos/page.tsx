@@ -5,6 +5,8 @@ import { Toaster } from 'sonner';
 import ChargeData from './components/ChargeData';
 import BtnInscription from './components/BtnInscription';
 import CumbreIberoamericana from './components/CumbreIberoamericana';
+import { Suspense } from 'react';
+import SplashScreen from '@/components/SplashScreen';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -13,14 +15,16 @@ export const fetchCache = 'default-no-store'
 async function fetchData() {
   try {
     const events = await getEvents()
+    console.log({ events })
     return { events }
   } catch (error) {
     console.error(error)
     return { events: [] }
   }
 }
-async function Events() {
+async function FetchEvents() {
   const { events } = await fetchData()
+  console.log({ events })
   return (
     <div className='container mx-auto min-h-[600px] flex flex-col justify-center items-center gap-4 py-5'>
       <ChargeData />
@@ -28,8 +32,8 @@ async function Events() {
         <h1 className='text-4xl font-bold text-uss-black'>Eventos</h1>
       </div>
 
-      <section>
-      <CumbreIberoamericana />
+      <section className='hidden'>
+        <CumbreIberoamericana />
       </section>
 
       <section className='flex flex-col gap-4  min-w-full'>
@@ -65,6 +69,14 @@ async function Events() {
       </section>
       <Toaster />
     </div>
+  )
+}
+
+function Events() {
+  return (
+    <Suspense fallback={<SplashScreen />}>
+      <FetchEvents />
+    </Suspense>
   )
 }
 

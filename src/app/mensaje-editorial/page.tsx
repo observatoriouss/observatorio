@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import SplashScreen from '@/components/SplashScreen';
 import { getEditorials } from '@/services/posts';
 import Link from 'next/link';
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
@@ -16,7 +17,7 @@ async function fetchData() {
         return { editorials: [] }
     }
 }
-async function EditorialMessagePage() {
+async function EditorialFetch() {
     const { editorials } = await fetchData()
     return (
         <div className='pt-3 md:pt-14 pb-12 flex flex-col gap-8'>
@@ -51,4 +52,11 @@ async function EditorialMessagePage() {
     )
 }
 
+function EditorialMessagePage() {
+    return (
+        <Suspense fallback={<SplashScreen />}>
+            <EditorialFetch />
+        </Suspense>
+    )
+}
 export default EditorialMessagePage

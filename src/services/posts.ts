@@ -1,6 +1,7 @@
 import { API_URL } from "@/config/api";
 import { Category } from "./home";
 import { cache } from "react";
+import { User } from "@/stores/session";
 
 export async function getNews(): Promise<Post[]> {
   const response = await fetch(`${API_URL}/posts?category=${Category.NEWS}`);
@@ -84,16 +85,6 @@ export interface Post {
   updatedAt: string;
   tags?: string[];
   reference?: Reference;
-}
-export interface User {
-  id:       string;
-  slug:     string;
-  name:     string;
-  email:    string;
-  role:     string;
-  image:    null | string;
-  isActive: boolean;
-  country: Country;
 }
 export interface Country {
   name: string;

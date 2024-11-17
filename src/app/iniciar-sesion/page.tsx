@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from "@/stores/session";
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 export interface PayloadLogin {
     email: string;
@@ -25,6 +26,7 @@ function Login() {
     const router = useRouter();
     const user = useAuthStore(state => state.user);
     const loading = useAuthStore(state => state.loading)
+    const error = useAuthStore(state => state.error)
     const login = useAuthStore(state => state.login)
     const showPassword = useAuthStore(state => state.showPassword)
     const setShowPassword = useAuthStore(state => state.setShowPassword)
@@ -40,7 +42,9 @@ function Login() {
 
     const onSubmit = handleSubmit(async (data) => {
         await login(data)
-        router.push('/')
+        if (user) {
+            router.push('/')
+        }
     })
     return (
         <div className='container mx-auto py-12'>
@@ -96,6 +100,7 @@ function Login() {
                 >
                     Iniciar Sesión
                 </Button>
+                {error && <p className='text-red-500 text-center mt-2'>{error}</p>}
             </form>
             <br />
             <p className='text-center'>¿Olvidaste tu contraseña? <Link className='text-blue-600' href='/recupera-tu-cuenta'>Recupera tu cuenta</Link></p>

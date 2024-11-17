@@ -8,7 +8,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding-top: 145px;
     padding-bottom: 2rem;
     display: flex;
     justify-content: center;
@@ -16,6 +15,6 @@
 
 @media screen and (max-width: 600px){
     .container {
-        padding-top: 180px;
+        /* padding-top: 180px; */
     }
 }

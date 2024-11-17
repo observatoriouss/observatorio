@@ -49,7 +49,7 @@ export async function generateMetadata(
 async function Post({ slug }: { slug: string }) {
     const post = await getReactCachedPost(slug)
     return (
-        <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-32 items-center'>
+        <div className='container max-w-5xl mx-auto flex flex-col gap-8 py-4 md:py-12 items-center'>
             {/* <pre>{JSON.stringify(post, null, 4)}</pre> */}
             <PostSelected post={post} />
             <div className='flex flex-col gap-1'>
@@ -114,18 +114,18 @@ async function Post({ slug }: { slug: string }) {
         </div>
     )
 }
-async function Tube(request: { params: { slug: string } }) {
+function Podcast(request: { params: { slug: string } }) {
 
     return (
         <Suspense
             key={request.params.slug}
             fallback={<SplashScreen />}
         >
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col px-4'>
+            <main className='h-auto flex flex-col px-4'>
                 <Post slug={request.params.slug} />
             </main>
         </Suspense>
     )
 }
 
-export default Tube
+export default Podcast

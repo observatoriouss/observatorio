@@ -12,6 +12,7 @@ import {
   RoleInscription,
   School,
 } from "@/services/events";
+import { useAuthStore } from "@/stores/session";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
@@ -104,17 +105,16 @@ export const useInscriptionEventStore = create<State & Actions>()((set, get) => 
     }
   },
   completeInscription: async (trainingId, roles): Promise<Participant> => {
-    const professor = get().professor;
-    if (!professor) {
-      toast.error("Por favor, complete el registro del profesor.");
+    const user = useAuthStore.getState().user;
+    if (user && user.role !== 'professor') {
+      toast.error("No eres un docente");
       set({ inscription: null });
-      return Promise.reject("Por favor, complete el registro del profesor.");
+      return Promise.reject("No eres un docente");
     }
     try {
       set({ loading: true });
       const inscription = await addParticipant(trainingId, {
         roles,
-        professorId: professor.id,
       });
       toast.success("Inscripción completada con éxito.");
       set({ inscription });

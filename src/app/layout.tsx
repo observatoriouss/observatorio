@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Script from 'next/script'
-import ClientComponents from '@/components/ClientComponents'
 
 
 export const metadata: Metadata = {
@@ -204,9 +203,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div id='contentRead'>
+        {/* <div id='contentRead'> */}
           {children}
-        </div>
+        {/* </div> */}
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}></Script>
         <Script id="google-analytics">
           {process.env.NODE_ENV !== 'development' && `
@@ -216,7 +215,7 @@ export default function RootLayout({
             gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
           `}
         </Script>
-        <Script src="https://cdn-eu.readspeaker.com/script/13446/webReader/webReader.js?pids=wr" id="rs_req_Init"></Script>
+        {/* <Script src="https://cdn-eu.readspeaker.com/script/13446/webReader/webReader.js?pids=wr" id="rs_req_Init"></Script> */}
       </body>
     </html>
   )

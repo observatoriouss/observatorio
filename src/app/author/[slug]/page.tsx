@@ -36,19 +36,25 @@ export async function generateMetadata(
     }
 }
 
-async function AuthorPage(request: { params: { slug: string } }) {
+async function AuthorFetch(request: { params: { slug: string } }) {
 
     return (
-        <Suspense
-            key={request.params.slug}
-            fallback={<SplashScreen />}
-        >
+        <>
             <RedirectAuthorUndefined params={request.params} />
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
+            <main className='h-auto flex flex-col'>
                 <Author slug={request.params.slug} />
             </main>
-        </Suspense>
+        </>
     )
+}
+
+function AuthorPage(request: { params: { slug: string } }) {
+    return <Suspense
+        key={request.params.slug}
+        fallback={<SplashScreen />}
+    >
+        <AuthorFetch params={request.params} />
+    </Suspense>
 }
 
 export default AuthorPage

@@ -1,8 +1,8 @@
 import { getCookie } from "cookies-next";
 import { api } from "./axios";
-import { User } from "./posts";
 import { RequestPost } from "@/app/upload-content/store/steps.store";
 import { Category } from "./home";
+import { User } from "@/stores/session";
 
 // //pending - approved - rejected
 export enum ApprovalStatus {

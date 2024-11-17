@@ -1,20 +1,17 @@
 import React from "react";
-import { Footer, Header } from "@/components";
-import ClientComponents from "@/components/ClientComponents";
 
-export default function PrincipalLayout({
+export default function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    // relative -> para que splash screen se muestre sobre el footer
     <div className="grid min-h-[100dvh] grid-rows-[auto,1fr] relative w-full">
-      <Header />
+      <div />
       <main className="mx-auto container overflow-auto">
         {children}
       </main>
-      <Footer />
+      <div />
     </div>
   );
 }

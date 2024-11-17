@@ -10,15 +10,9 @@ import { HeaderContext, HeaderProvider } from './header.context';
 import Image from 'next/image';
 import './styles.css';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { ChevronLeft, ChevronRight, LogOut, Search, User } from 'lucide-react';
+import { LogOut, Search, User } from 'lucide-react';
 import { Button } from '../ui/button';
 import { usePathname } from 'next/navigation';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { useAuthStore } from "@/stores/session";
 import { AnimatedGradientText } from '../ui/gradient-text';
 
@@ -93,13 +87,13 @@ function ContentHeader() {
     },
   ]
   return (
-    <>
+    <div className='m-2'>
       <header className={cn(
-        'flex justify-center absolute top-0 w-full pb-4',
+        'flex justify-center top-0 w-full pb-4',
         isOpenSearch ? 'z-10' : 'z-20'
       )}>
-        <div className='container flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between w-full items-center p-0 lg:p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
-          <div className='flex flex-row gap-1 md:gap-3 items-center justify-center w-fit'>
+        <div className='container flex flex-col lg:gap-0 xl:flex-row justify-between w-full items-center p-4 lg:p-8 mt-8 bg-transparent bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-md shadow-lg'>
+          <div className='flex flex-row gap-1 md:gap-3 items-center justify-center w-full mb-6 xl:mb-0'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <Link href='/'>
               <Image
@@ -116,55 +110,24 @@ function ContentHeader() {
               <h1 className='text-lg font-medium'>Observatorio Educativo</h1>
             </div>
           </div>
-          <nav className='hidden lg:flex items-center gap-2 lg:gap-4 text-sm lg:text-base'>
-            {NAVS.map((nav) => (
-              <LinkNav key={nav.href} href={nav.href} name={nav.name} />
-            ))}
-            <MenuAction isOpenSearch={isOpenSearch} setIsOpenSearch={setIsOpenSearch} />
-          </nav>
-          <nav className='flex gap-1 lg:hidden items-center w-full relative px-2 pb-4'>
-            <Swiper
-              spaceBetween={-10}
-              slidesPerView={4}
-              loop={true}
-              modules={[Navigation]}
-              navigation={{
-                nextEl: `.nextMenu`,
-                prevEl: `.prevMenu`,
-              }}
-            >
+          <nav className='flex justify-between xl:justify-end w-full items-center gap-4 text-xs lg:text-base'>
+            <div className='flex max-w-[250px] sm:max-w-xl md:max-w-3xl lg:max-w-none overflow-y-auto gap-4 py-2 h-10'>
               {NAVS.map((nav) => (
-                <SwiperSlide key={nav.href + 'navs'}>
-                  <LinkNav key={nav.href} href={nav.href} name={nav.name} className='text-xs' />
-                </SwiperSlide>
+                <LinkNav key={nav.href} href={nav.href} name={nav.name} />
               ))}
-              <div
-                className={`prevMenu absolute top-2/4 z-20 -mt-[16px] flex h-8 w-8 cursor-pointer items-center justify-center transition-all duration-200 -left-[10px]`}
-                role="button"
-              >
-                <span className="sr-only">Prev</span>
-                <ChevronLeft width={18} height={18} />
-              </div>
-              <div
-                className={`nextMenu absolute top-2/4 z-20 -mt-[16px] flex h-8 w-8 cursor-pointer items-center justify-center transition-all duration-200 -right-[10px]`}
-                role="button"
-              >
-                <span className="sr-only">Next</span>
-                <ChevronRight width={18} height={18} />
-              </div>
-            </Swiper>
-            <MenuAction isOpenSearch={isOpenSearch} setIsOpenSearch={setIsOpenSearch} classNameButton='h-6 w-6 p-[5px]' classNameIcons='' />
+            </div>
+            <MenuAction isOpenSearch={isOpenSearch} setIsOpenSearch={setIsOpenSearch} />
           </nav>
         </div>
       </header>
-      <div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve absolute top-48 md:top-36" style={{
+      {/* <div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve absolute top-52 md:top-60 xl:top-44" style={{
         position: 'absolute',
       }}>
         <a rel="nofollow" className="rsbtn_play" title="Escucha esta p&aacute;gina utilizando ReadSpeaker webReader" href="https://app-eu.readspeaker.com/cgi-bin/rsent?customerid=13446&amp;lang=es_co&amp;readid=contentRead&amp;url=">
           <span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Escuchar</span></span></span>
           <span className="rsbtn_right rsimg rsplay rspart"></span>
         </a>
-      </div>
+      </div> */}
 
       {/* float search input with framer motion */}
       <motion.div
@@ -185,7 +148,7 @@ function ContentHeader() {
           <PostSearch />
         </div>
       </motion.div>
-    </>
+    </div>
   )
 }
 
@@ -270,9 +233,9 @@ export const MenuAction = ({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Link href="/magic-uss" className='h-6 w-6 md:h-full md:w-full'>
+      <Link href="/magic-uss" className=''>
         <AnimatedGradientText
-          className='rounded-md h-6 w-6 md:h-full md:w-full px-3 py-3 md:px-4 md:py-2.5'
+          className='rounded-md h-full w-full px-4 py-2.5'
         >
           <span
             className={cn(

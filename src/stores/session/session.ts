@@ -9,17 +9,26 @@ import {
   User,
   UserBodyRequest,
 } from "./session.model";
-import { getUserByToken, login, register, resetPassword, sendResetPasswordOTP, updateUser } from "@/services/auth";
+import {
+  getUserByToken,
+  login,
+  register,
+  resetPassword,
+  sendResetPasswordOTP,
+  updateUser,
+} from "@/services/auth";
 import { toast } from "sonner";
 import { Country } from "@/services/posts";
 import { getCountries } from "@/services/common";
 import { sendOTP } from "@/app/upload-content/services/steps.service";
+import { AxiosError } from "axios";
 
 export interface SessionState {
   user?: User;
   countries: Country[];
   isSended: boolean;
   loading: boolean;
+  error?: string;
   isSendedToken: boolean;
   isResetPassword: boolean;
   openAuthDialog: boolean;
@@ -75,7 +84,7 @@ const storeApi: StateCreator<
   },
   login: async (body: PayloadLogin) => {
     try {
-      set({ loading: true });
+      set({ loading: true, error: undefined });
       const userData = await login(body);
       set(
         {
@@ -85,10 +94,20 @@ const storeApi: StateCreator<
         "loginSuccess"
       );
       setCookie("TOKEN", userData.token);
-      toast.success("Sesión iniciada con éxito");
-    } catch (error) {
-      toast.error("Error al iniciar sesión");
-      throw new Error("Failed to login");
+      toast.success(`Bienvenido ${userData.user.name}`);
+    } catch (err) {
+      console.log(err)
+      const axiosError: any =
+        (err as any as AxiosError).response?.data || "Error al iniciar sesión";
+        console.log(axiosError)
+      switch (axiosError.code) {
+        case "PASSWORD_INVALID":
+          return set({ error: "La contraseña que ingresaste es incorrecta" });
+        case "USER_NOT_FOUND":
+          return set({ error: "El correo electrónico que ingresaste no está registrado" });
+        default:
+          return set({ error: "Error al iniciar sesión" });
+      }
     } finally {
       set({ loading: false, isSended: false });
     }
@@ -161,6 +180,10 @@ const storeApi: StateCreator<
           password: body.password === "" ? undefined : body.password,
           role: body.role,
           biography: body.biography,
+          documentType: body.documentType,
+          documentNumber: body.documentNumber,
+          employmentType: body.employmentType,
+          schoolId: body.schoolId,
         },
         id,
         token
@@ -186,7 +209,9 @@ const storeApi: StateCreator<
       );
       toast.success("Invitación enviada.");
     } catch (error) {
-      toast.error("Error al enviar código de verificación, intente nuevamente.");
+      toast.error(
+        "Error al enviar código de verificación, intente nuevamente."
+      );
     } finally {
       set({ loading: false });
     }
@@ -236,8 +261,8 @@ export const useAuthStore = create<SessionState>()(
         removeItem: (name) => localStorage?.removeItem(name),
       })),
       onRehydrateStorage: (state) => {
-        return () => state.setHasHydrated(true)
-      }
+        return () => state.setHasHydrated(true);
+      },
     }
   )
 );

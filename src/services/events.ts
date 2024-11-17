@@ -1,5 +1,6 @@
-import { API_URL } from "@/config/api";
 import { api } from "./axios";
+import { getCookie } from "cookies-next";
+import { User } from "@/stores/session";
 
 export enum TrainingStatus {
   ACTIVE = "active",
@@ -30,6 +31,7 @@ export interface Training {
   endDate: string;
   executions: Execution[];
   participants: Participant[];
+  participantsCount: number;
   createdAt: string;
   id: string;
 }
@@ -40,6 +42,7 @@ export interface Execution {
   id: string;
   participantAttend?: boolean;
   place: string;
+  durationInMinutes: number;
 }
 
 export interface School {
@@ -49,8 +52,13 @@ export interface School {
 }
 
 export const getEvents = async (): Promise<Training[]> => {
-  const response = await fetch(`${API_URL}/training`);
-  return response.json();
+  const { data } = await api.get<Training[]>(`/training`, {
+    headers: {
+      Authorization: `Bearer ${getCookie("TOKEN")}`,
+    },
+  });
+  console.log({ data });
+  return data;
 };
 
 export interface Professor {
@@ -81,6 +89,16 @@ export enum ProfessorEmploymentType {
 export const MapProfessorEmploymentType = {
   [ProfessorEmploymentType.FULL_TIME]: "Tiempo completo",
   [ProfessorEmploymentType.PART_TIME]: "Medio tiempo",
+};
+export enum ProfessorDocumentType {
+  DNI = "dni",
+  PASSPORT = "passport",
+  FOREIGNER_CARD = "foreigner_card",
+}
+export const MapProfessorDocumentType: Record<ProfessorDocumentType, string> = {
+  [ProfessorDocumentType.DNI]: "DNI",
+  [ProfessorDocumentType.PASSPORT]: "Pasaporte",
+  [ProfessorDocumentType.FOREIGNER_CARD]: "Carnet de extranjería",
 };
 export interface ProfessorBodyRequest {
   name: string;
@@ -123,16 +141,15 @@ export enum MapRoleInscription {
 
 export interface AddParticipantPayload {
   roles: RoleInscription[];
-  professorId: string;
 }
 export interface Certificate {
-  id:               string;
-  duration:         number;
-  emisionDate:      string;
+  id: string;
+  duration: number;
+  emisionDate: string;
   trainingFromDate: string;
-  trainingToDate:   string;
-  url:              string;
-  role:            RoleInscription;
+  trainingToDate: string;
+  url: string;
+  role: RoleInscription;
 }
 
 export interface Participant {
@@ -140,8 +157,8 @@ export interface Participant {
   foreignId: string;
   role: RoleInscription;
   attendanceStatus: string;
-  professor: Professor;
-  certificates:      Certificate[];
+  user: User;
+  certificates: Certificate[];
 }
 
 // {{url}}/api/training/:id/participants
@@ -151,7 +168,12 @@ export const addParticipant = async (
 ): Promise<Participant> => {
   const { data } = await api.post<Participant>(
     `/training/${trainingId}/participants`,
-    payload
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie("TOKEN")}`,
+      },
+    }
   );
   return data;
 };
@@ -166,31 +188,53 @@ export const confirmRegister = async (code: string): Promise<Professor> => {
 
 // {{url}}/api/training/participants/:participantId/verify
 export interface VerifyParticipant {
-  training:    Training;
-  executions:  Execution[];
+  training: Training & {
+    credentialBackgroungUrl: string;
+    credentialHelpText: string;
+    credentialLogos: string[];
+    credentialTextToShare: string;
+  };
+  executions: Execution[];
   participant: Participant;
 }
 export const verifyParticipant = async (
   participantId: string
 ): Promise<VerifyParticipant> => {
   const { data } = await api.get<VerifyParticipant>(
-    `/training/participants/${participantId}/verify`
+    `/training/participants/${participantId}/verify`,
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie("TOKEN")}`,
+      },
+    }
   );
+  console.log({ data });
   return data;
 };
 
+export interface ResourcesCredential {
+  bg: string;
+  band: string;
+}
+
+// {{url}}/api/app-configuration
+export const getResourcesCredential =
+  async (): Promise<ResourcesCredential> => {
+    const { data } = await api.get<ResourcesCredential>("/app-configuration");
+    return data;
+  };
 export interface SingleTraining extends Training {
   participant: Participant;
 }
 export interface TrainingByDocument {
-  professor: Professor;
+  professor: User;
   trainings: SingleTraining[];
 }
 
 // {{url}}/api/training/by-document/:documentType/:documentNumber
 export const getTrainingByDocument = async (
-  documentType: string = 'dni',
-  documentNumber: number
+  documentType: string = "dni",
+  documentNumber: string
 ): Promise<TrainingByDocument> => {
   const { data } = await api.get<TrainingByDocument>(
     `/training/by-document/${documentType}/${documentNumber}`
@@ -199,14 +243,39 @@ export const getTrainingByDocument = async (
 };
 
 // {{url}}/api/training/participants/:participantId/certificate
-export const getCertificate = async (
-  participantId: string
-): Promise<Blob> => {
+export const getCertificate = async (participantId: string): Promise<Blob> => {
   const { data } = await api.get<Blob>(
     `/training/participants/${participantId}/certificate`,
     {
-      responseType: 'blob',
+      responseType: "blob",
     }
   );
   return data;
+};
+
+// {{url}}/api/training/:id
+export const getTraining = async (id: string): Promise<Training> => {
+  const { data } = await api.get<Training>(`/training/${id}`, {
+    headers: {
+      Authorization: `Bearer ${getCookie("TOKEN")}`,
+    },
+  });
+  return data;
+};
+
+// registerAsistanceToExecution
+// {{url}}/api/training/:id/executions/:executionId/attendances
+export const registerAsistanceToExecution = async (
+  trainingId: string,
+  executionId: string
+): Promise<void> => {
+  await api.post(
+    `/training/${trainingId}/executions/${executionId}/attendances`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie("TOKEN")}`,
+      },
+    }
+  );
 };

@@ -1,6 +1,8 @@
+'use client'
 import { Category, categoryMapper } from '@/services/home'
 import Link from 'next/link'
 import React from 'react'
+import ClientComponents from './ClientComponents'
 
 interface FooterProps {
   alternative?: boolean
@@ -8,6 +10,7 @@ interface FooterProps {
 export default function Footer({ alternative = false }: FooterProps) {
   return (
     <footer className={`${alternative ? 'bg-[--uss-green]' : 'bg-[--uss-green]'} w-full flex justify-center py-10`}>
+      <ClientComponents />
       <div className='max-w-7xl w-full flex flex-col md:flex-row'>
         <div className='w-full md:w-2/8 items-center md:items-start pb-4 md:pb-0 flex flex-col gap-8 px-8'>
           {/* eslint-disable-next-line @next/next/no-img-element */}

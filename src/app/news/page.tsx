@@ -35,7 +35,7 @@ async function Posts() {
 async function News() {
     return (
         <Suspense fallback={<SplashScreen />}>
-            <main className='h-auto pt-[180px] md:pt-[145px] flex flex-col'>
+            <main className='h-auto flex flex-col'>
                 <HeroSection heroImage='/img/hero/hero-edu-news.png' title='Noticias' description='Las notas y artículos más relevantes en el mundo de la educación' />
                 <div>
 
