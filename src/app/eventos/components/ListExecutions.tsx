@@ -72,7 +72,7 @@ export const InfoExecution = ({ executions }: ListExecutionsProps) => {
                 </h3>
                 <h2 className='text-3xl md:text-xl font-semibold m-0 p-0'>{formatHour(executions[0].from)}</h2>
                 <span className='text-xs'>Duración</span>
-                <span className='text-sm font-medium'>{executions[0].durationInMinutes}m</span>
+                <span className='text-sm font-medium'>{executions[0].durationInMinutes}h</span>
             </div>
             {executions.length > 1 && (
                 <>

@@ -53,6 +53,9 @@ export interface School {
 
 export const getEvents = async (): Promise<Training[]> => {
   const { data } = await api.get<Training[]>(`/training`, {
+    params: {
+      onlyActives: true,
+    },
     headers: {
       Authorization: `Bearer ${getCookie("TOKEN")}`,
     },
@@ -189,7 +192,7 @@ export const confirmRegister = async (code: string): Promise<Professor> => {
 // {{url}}/api/training/participants/:participantId/verify
 export interface VerifyParticipant {
   training: Training & {
-    credentialBackgroungUrl: string;
+    credentialBackgroundUrl: string;
     credentialHelpText: string;
     credentialLogos: string[];
     credentialTextToShare: string;

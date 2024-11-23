@@ -7,6 +7,7 @@ import ConfettiPage from './components/Confetti';
 import ShareCredential from './components/ShareCredential';
 import { useEffect, useState } from 'react';
 import SplashScreen from '@/components/SplashScreen';
+import HomeLayout from '@/layouts/home.layout';
 
 export default function Page({ params }: { params: { id: string } }) {
   const [participant, setParticipant] = useState<VerifyParticipant | undefined>(undefined);
@@ -32,7 +33,11 @@ export default function Page({ params }: { params: { id: string } }) {
   }, [])
 
   if (loading || !participant || !resources) {
-    return <SplashScreen />
+    return (
+      <HomeLayout>
+        <SplashScreen />
+      </HomeLayout>
+    )
   }
 
   // Renderizado del componente con los datos

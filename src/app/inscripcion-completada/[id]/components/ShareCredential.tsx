@@ -10,19 +10,13 @@ import { toast, Toaster } from "sonner"
 
 function ShareCredential({ participant }: { participant: VerifyParticipant }) {
     const {
-        credentialBackgroungUrl,
+        credentialBackgroundUrl,
         credentialHelpText,
         credentialLogos,
         credentialTextToShare,
     } = participant.training
     const user = useAuthStore((state) => state.user)
     const arr = credentialLogos
-    // [
-    //     '/credential/1.png',
-    //     '/credential/2.png',
-    //     '/credential/3.png',
-    //     // '/credential/1.png',
-    // ]
 
     const divRef = useRef(null);
     const [imgLoaded, setImgLoaded] = useState(false)
@@ -67,7 +61,7 @@ function ShareCredential({ participant }: { participant: VerifyParticipant }) {
         }
     };
 
-    return credentialBackgroungUrl && imgLoaded && (
+    return credentialBackgroundUrl && imgLoaded && (
         <div className='w-full flex justify-center items-center flex-col gap-4'>
 
             <TooltipProvider delayDuration={100}>
@@ -93,14 +87,16 @@ function ShareCredential({ participant }: { participant: VerifyParticipant }) {
                 ref={divRef}
             >
                 <img
-                    src={credentialBackgroungUrl} alt="template"
+                    src={credentialBackgroundUrl} alt="template"
                     // src="/credential/template.jpeg" alt="template"
                     className='w-[400px] aspect-square object-contain'
                 />
 
                 {user && (
                     <>
-                        <img src={userImg} alt="perfil" className="absolute top-[160px] left-[207px] transform -translate-x-1/2 -translate-y-1/2 w-1/3 rounded-full" />
+                        <img
+                            src={userImg}
+                            alt="perfil" className="absolute top-[160px] left-[207px] transform -translate-x-1/2 -translate-y-1/2 w-1/3 rounded-full aspect-square object-cover" />
                         <div className='absolute top-[265px] h-10 pb-1.5 left-[198px] transform -translate-x-1/2 -translate-y-1/2 font-bold text-center bg-[#fff] max-w-[315px] min-w-[315px] text-sm sm:text-lg text-ellipsis overflow-hidden whitespace-nowrap flex items-center justify-center'
                             style={{
                                 display: 'grid',

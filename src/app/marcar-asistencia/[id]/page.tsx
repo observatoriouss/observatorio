@@ -9,6 +9,7 @@ import { getTraining, MapTrainingModality, MapTrainingStatus, registerAsistanceT
 import { useAuthStore } from '@/stores/session'
 import { CalendarIcon, UsersIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function AssistanceAutomatic({ params }: { params: { id: string } }) {
     const { id } = params
@@ -34,8 +35,14 @@ function AssistanceAutomatic({ params }: { params: { id: string } }) {
             setLoading(true)
             const resp = await registerAsistanceToExecution(id, executionId)
             console.log({ resp })
+            toast.success('Asistencia marcada con éxito')
         } catch (error) {
             console.error(error)
+            const err = error.response?.data
+            console.log(err)
+            if (err.statusCode === 400) {
+                toast.error('Ya has marcado asistencia para esta ejecución')
+            }
         } finally {
             setLoading(false)
         }
@@ -43,7 +50,7 @@ function AssistanceAutomatic({ params }: { params: { id: string } }) {
 
     if (!training) return <SplashScreen />
     return (
-        <div className='w-full h-full flex items-center justify-center'>
+        <div className='w-full h-full flex items-center justify-center pb-6'>
             <Card className="w-full max-w-3xl mx-auto pb-6">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold">{training.name}</CardTitle>
