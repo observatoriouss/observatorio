@@ -5,10 +5,7 @@ import { cn } from "@/lib/cn";
 export default function ContainerLayout({
   children,
   className,
-}: Readonly<{
-  children: React.ReactNode;
-  className?: string;
-}>) {
+}: any) {
   return (
     <div className="grid min-h-[100dvh] grid-rows-[auto,1fr] relative w-full">
       <Header />

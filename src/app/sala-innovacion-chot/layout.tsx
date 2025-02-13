@@ -6,10 +6,7 @@ export const metadata: Metadata = {
 }
 export default function SalaInnovacionChotLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-  className?: string;
-}>) {
+}: any) {
   return (
     <ContainerLayout className="!max-w-full !mx-0 !px-0">
       {children}
