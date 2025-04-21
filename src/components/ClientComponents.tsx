@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import Counter from '@/components/Counter';
-import GoogleTranslate from './GoogleTranslate';
+// import GoogleTranslate from './GoogleTranslate';
 import ToasterContainer from './Toaster';
 import AuthDialog from './AuthDialog';
 import { useAuthStore } from '@/stores/session';
@@ -12,7 +12,7 @@ function ClientComponents() {
         <React.Fragment>
             {openAuthDialog && <AuthDialog />}
             <Counter />
-            <GoogleTranslate />
+            {/* <GoogleTranslate /> */}
             <ToasterContainer />
         </React.Fragment>
     )
