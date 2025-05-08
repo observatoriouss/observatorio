@@ -43,14 +43,16 @@ function VirtualCredential({ participant }: { participant: Participant }) {
                             padding: '4px 8px',
                             lineHeight: 1,
                         }}>
-                            <p style={{
-                                fontSize: '11px',
-                                fontWeight: 500,
-                                margin: 0,
-                                padding: 0,
-                            }}>
-                                {MapRoleInscription[participant.role]}
-                            </p>
+                            {participant.roles.map((role) => (
+                                <p style={{
+                                    fontSize: '11px',
+                                    fontWeight: 500,
+                                    margin: 0,
+                                    padding: 0,
+                                }}>
+                                    {MapRoleInscription[role]}
+                                </p>
+                            ))}
                         </div>
                         <h2 className='text-xl font-medium'> {participant.user.name} </h2>
                         <h2 className='text-base font-medium'> {participant.user.email} </h2>
