@@ -158,7 +158,7 @@ export interface Certificate {
 export interface Participant {
   id: string;
   foreignId: string;
-  role: RoleInscription;
+  roles: RoleInscription[];
   attendanceStatus: string;
   user: User;
   certificates: Certificate[];
@@ -245,10 +245,16 @@ export const getTrainingByDocument = async (
   return data;
 };
 
-// {{url}}/api/training/participants/:participantId/certificate
-export const getCertificate = async (participantId: string): Promise<Blob> => {
-  const { data } = await api.get<Blob>(
-    `/training/participants/${participantId}/certificate`,
+export const generateCertificate = async ({
+  trainingId,
+  participantId,
+  role,
+}): Promise<Blob> => {
+  const { data } = await api.post<Blob>(
+    `/training/${trainingId}/participants/${participantId}/generate-certificate`,
+    {
+      role,
+    },
     {
       responseType: "blob",
     }
