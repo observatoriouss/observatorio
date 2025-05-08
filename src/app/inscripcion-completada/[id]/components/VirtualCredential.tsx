@@ -44,7 +44,9 @@ function VirtualCredential({ participant }: { participant: Participant }) {
                             lineHeight: 1,
                         }}>
                             {participant.roles.map((role) => (
-                                <p style={{
+                                <p
+                                key={role + participant.id}
+                                style={{
                                     fontSize: '11px',
                                     fontWeight: 500,
                                     margin: 0,
