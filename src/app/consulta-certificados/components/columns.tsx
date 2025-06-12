@@ -10,8 +10,6 @@ const CellComponent = ({ row }: { row: Row<SingleTraining> }) => {
     const loading = useSearchStore(state => state.loading)
     const downloadCertificate = useSearchStore(state => state.downloadCertificate)
 
-    if (!participant.certificates?.length) return <></>
-
     return (
         // Descargar certificado
         <>
