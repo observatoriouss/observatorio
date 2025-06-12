@@ -11,7 +11,7 @@ const CellComponent = ({ row }: { row: Row<SingleTraining> }) => {
     const downloadCertificate = useSearchStore(state => state.downloadCertificate)
 
     return (
-        // Descargar certificado
+        // Descargar certificado--
         <>
             {participant.roles && (
                 <div className="flex flex-row gap-1">
