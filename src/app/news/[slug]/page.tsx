@@ -82,7 +82,7 @@ async function Post({ slug }: { slug: string }) {
                             className="w-6 h-6 rounded-lg object-cover"
                             src={
                                 post.user?.country?.icon ||
-                                "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png250px/pe.png"
+                                "https://raw.githubusercontent.com/hampusborgos/country-flags/c09927e63705529bbf59ca6684cd9b23225dddad/svg/pe.svg"
                             }
                             alt={post.user?.country?.name}
                         />
