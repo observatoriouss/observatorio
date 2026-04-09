@@ -10,7 +10,8 @@ export let config: {
 
 if (nodeEnv === "development") {
   config = {
-    apiUrl: "https://observatorio-uss.azurewebsites.net/api",
+    // apiUrl: "https://observatorio-uss.azurewebsites.net/api",
+    apiUrl: "http://localhost:5555/api",
     apiUrlStreams: "https://observatorio-streams.azurewebsites.net",
     gaMeasurementId: "G-8NFR32HVCJ",
     algoliaAppId: "N4AQ3CGJV0",

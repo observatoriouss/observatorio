@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { getReactCachedPost } from '@/services/posts';
-import './styles.css';
+// import './styles.css';
+import styles from './styles.module.css'
 import Link from 'next/link';
 import { Suspense } from 'react';
 import SplashScreen from '@/components/SplashScreen';
